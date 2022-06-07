@@ -43,18 +43,31 @@ const Stack = createNativeStackNavigator();
 
 function App() {
   const [isAuth, setAuth] = React.useState(false);
-
+  const [isNew, setNew] = React.useState(false);
   return (
-    
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {
           isAuth ? (
             <>
-              <Stack.Screen name="Home" component={S.Home} />
-              <Stack.Screen name="Profile" component={S.Profile} />
-              <Stack.Screen name="Support" component={S.Support} />
-              <Stack.Screen name="Calendar" component={S.Calendar} />
+              {
+                isNew ? (
+                  <>
+                    <Stack.Screen name="Introduction" component={S.Introduction} />
+                    <Stack.Screen name="Home" component={S.Home} />
+                    <Stack.Screen name="Profile" component={S.Profile} />
+                    <Stack.Screen name="Support" component={S.Support} />
+                    <Stack.Screen name="Calendar" component={S.Calendar} />
+                  </>
+                ) : (
+                  <>
+                    <Stack.Screen name="Home" component={S.Home} />
+                    <Stack.Screen name="Profile" component={S.Profile} />
+                    <Stack.Screen name="Support" component={S.Support} />
+                    <Stack.Screen name="Calendar" component={S.Calendar} />
+                  </>
+              )
+              }
             </>
             ) : (
             <>
