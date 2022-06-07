@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from "react-native";
 import * as React from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import IntroduccionI from "./components/Introduccion/IntroduccionI";
+import IntroduccionI from "./components/introduccion/IntroduccionI";
 
 export default function App() {
   return <IntroduccionI />;
