@@ -44,7 +44,7 @@ function DetailsScreen({ navigation }) {
 const Stack = createNativeStackNavigator();
 
 function App() {
-  const [isAuth, setAuth] = React.useState(false);
+  const [isAuth, setAuth] = React.useState(true);
   const [isNew, setNew] = React.useState(false);
   return (
     <NavigationContainer>
@@ -63,7 +63,7 @@ function App() {
                   </>
                 ) : (
                   <>
-                    <Stack.Screen name="Home" component={S.Home} />
+                    <Stack.Screen name="Home" component={Supp.Faqs} />
                       <Stack.Screen name="Capacitation" component={H.Capacitation} />
                       <Stack.Screen name="Certification" component={H.Certification} />
                       <Stack.Screen name="Contract" component={H.Contract} />
