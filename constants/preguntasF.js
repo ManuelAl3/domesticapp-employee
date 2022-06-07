@@ -1,21 +1,17 @@
-import servicio from "../assets/servicios.svg";
-import cuenta from "../assets/cuenta.svg";
-import empleados from "../assets/empleados.svg";
-import pagos from "../assets/pagos.svg";
-import covid from "../assets/covid.svg";
-import dotacion from "../assets/dotacion.svg";
-import beneficio from "../assets/beneficios.svg";
-import devoluciones from "../assets/devoluciones.svg";
+import Covid from "../assets/Faqs/Covid.svg";
+import Cuenta from "../assets/Faqs/Cuenta.svg";
+import Deudas from "../assets/Faqs/Deudas.svg";
+import Dotacion from "../assets/Faqs/Dotacion.svg";
+import Ganancias from "../assets/Faqs/Ganancias.svg";
+import Pagos from "../assets/Faqs/Pagos.svg";
 
 export const Preguntas = [
-  { id: 1, nombre: "Mis servicios", img: servicio, ruta: "/preguntas" },
-  { id: 2, nombre: "Mi cuenta", img: cuenta, ruta: "/preguntas" },
-  { id: 3, nombre: "Empleados", img: empleados, ruta: "/preguntas" },
-  { id: 4, nombre: "Pagos", img: pagos, ruta: "/preguntas" },
-  { id: 5, nombre: "COVID-19", img: covid, ruta: "/preguntas" },
-  { id: 6, nombre: "Mi Dotación", img: dotacion, ruta: "/preguntas" },
-  { id: 7, nombre: "Beneficios", img: beneficio, ruta: "/preguntas" },
-  { id: 8, nombre: "Devoluciones", img: devoluciones, ruta: "/preguntas" },
+  { id: 1, nombre: "Mis ganancias", img: Ganancias, ruta: "ganancias" },
+  { id: 2, nombre: "Mis pagos", img: Pagos, ruta: "pagos" },
+  { id: 3, nombre: "Mi cuenta", img: Cuenta, ruta: "cuenta" },
+  { id: 4, nombre: "Deudas", img: Deudas, ruta: "deudas" },
+  { id: 5, nombre: "COVID-19", img: Covid, ruta: "covid" },
+  { id: 6, nombre: "Mi Dotación", img: Dotacion, ruta: "dotacion" },
 ];
 
 export const CategoriasPreguntas = [
