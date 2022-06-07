@@ -5,6 +5,7 @@ import IntroduccionI from "./components/introduccion/IntroduccionI";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as S from "./screen/index-page";
+import * as H from "./screen/Home/index-home";
 
 /*export default function App() {
   return <IntroduccionI />;
@@ -62,6 +63,14 @@ function App() {
                 ) : (
                   <>
                     <Stack.Screen name="Home" component={S.Home} />
+                      <Stack.Screen name="Capacitation" component={H.Capacitation} />
+                      <Stack.Screen name="Certification" component={H.Certification} />
+                      <Stack.Screen name="Contract" component={H.Contract} />
+                      <Stack.Screen name="GoodP" component={H.GoodP} />
+                      <Stack.Screen name="LegalInfo" component={H.LegalInfo} />
+                      <Stack.Screen name="Profit" component={H.Profit} />
+                      <Stack.Screen name="Review" component={H.Review} />
+                      <Stack.Screen name="Skill" component={H.Skill} />
                     <Stack.Screen name="Profile" component={S.Profile} />
                     <Stack.Screen name="Support" component={S.Support} />
                     <Stack.Screen name="Calendar" component={S.Calendar} />
