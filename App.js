@@ -64,7 +64,7 @@ function App() {
                   </>
                 ) : (
                   <>
-                    <Stack.Screen name="Home" component={Supp.Faqs} />
+                    <Stack.Screen name="Home" component={S.Home} />
                       <Stack.Screen name="Capacitation" component={H.Capacitation} />
                       <Stack.Screen name="Certification" component={H.Certification} />
                       <Stack.Screen name="Contract" component={H.Contract} />
