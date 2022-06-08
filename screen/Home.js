@@ -1,10 +1,10 @@
-import { StyleSheet, Text, View, Button, Image } from "react-native";
+import { StyleSheet, Text, View, Button, Image, ScrollView } from "react-native";
 import * as React from "react";
 import { Dashboard } from "../constants/homeDash";
 
 function HomeScreen({ navigation }) {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <ScrollView>
       {
         Dashboard.map((option)=>(
           <View>
@@ -18,7 +18,7 @@ function HomeScreen({ navigation }) {
           </View>
         ))
       }
-    </View>
+    </ScrollView>
   );
 }
 
