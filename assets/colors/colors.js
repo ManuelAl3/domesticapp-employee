@@ -4,6 +4,7 @@ const colors = {
   blue: "#0BBBEF",
   grayFaded: "#B3B3B6",
   backgroundMain: "#FBFBFB",
+  colorTitle: "#585858;",
 };
 
 export default colors;

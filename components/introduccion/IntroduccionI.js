@@ -1,11 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import AppIntroSlider from "react-native-app-intro-slider";
 import { StyleSheet, Text, View, StatusBar } from "react-native";
 import { Image } from "@rneui/themed";
-import AppIntroSlider from "react-native-app-intro-slider";
 import colors from "../../assets/colors/colors";
 import font from "../../assets/fonts/fonts";
+import * as Font from "expo-font";
 
 export default function IntroduccionI() {
+  const [fontsLoaded, setFontsLoaded] = useState(false);
+
+  useEffect(() => {
+    if (!fontsLoaded) {
+      loadFonts();
+    }
+  });
+
+  const loadFonts = async () => {
+    await Font.loadAsync({
+      "SourceSansPro-Regular": require("../../assets/fonts/SourceSansPro-Regular.ttf"),
+    });
+    setFontsLoaded(true);
+  };
+
+  if (!fontsLoaded) {
+    return <View />;
+  }
+
   const data = [
     {
       title: "Bienvenido a Domesticapp",
@@ -55,44 +75,60 @@ export default function IntroduccionI() {
 const styles = StyleSheet.create({
   containerSlider: {
     flex: 1,
-    backgroundColor: colors.backgroundMain,
   },
   container: {
-    marginTop: 100,
     textAlign: "center",
-    flex: 1,
     backgroundColor: colors.backgroundMain,
-    alignItems: "center",
+    height: "100%",
+    width: "100%",
     justifyContent: "center",
+    alignItems: "center",
   },
   titleStyle: {
+    fontWeight: 600,
     fontSize: 24,
-    fontFamily: font.fontMain,
+    fontFamily: "SourceSansPro-Regular",
     lineHeight: 22,
-    letterSpacing: "0.5%",
+    color: colors.colorTitle,
+
+    fontStyle: "normal",
+    fontWeight: 600,
+    fontSize: 24,
+    lineHeight: 22,
+
+    letterSpacing: 0.005,
+    marginTop: 100,
   },
   text: {
-    width: 336,
+    width: "80%",
     height: 146,
-    textAlign: "center",
-    fontFamily: font.fontMain,
+    top: 559.37,
+
+    fontFamily: "SourceSansPro-Regular",
+    fontStyle: "normal",
+    fontWeight: 400,
     lineHeight: 22,
-    letterSpacing: "0.5%",
+    textAlign: "center",
+
     fontSize: 20,
   },
   textFooter: {
-    textAlign: "center",
-    fontSize: 13,
-    fontFamily: font.fontFooter,
+    fontFamily: "SourceSansPro-Regular",
     fontWeight: 600,
+    fontSize: 13,
     lineHeight: 16,
-    marginBottom: 13,
+    textAlign: "center",
+    marginBottom: 20,
     color: colors.grayFaded,
   },
   img: {
-    aspectRatio: 1,
-    width: "70%",
     flex: 1,
+    alignItems: "center",
+    textAlign: "center",
+    aspectRatio: 1,
+    width: "80%",
+    marginBottom: 17,
+    marginTop: 17,
   },
   doStyle: {
     backgroundColor: colors.grayFaded,
