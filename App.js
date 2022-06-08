@@ -8,6 +8,7 @@ import * as S from "./screen/index-page";
 import * as H from "./screen/Home/index-home";
 import * as Supp from "./screen/Support/index-support";
 import FaqScreen from "./screen/Support/FAQs/Faq";
+import FacebookScreen from "./screen/Facebook";
 
 /*export default function App() {
   return <IntroduccionI />;
@@ -45,6 +46,8 @@ function DetailsScreen({ navigation }) {
 const Stack = createNativeStackNavigator();
 
 function App() {
+  
+  
   const [isAuth, setAuth] = React.useState(true);
   const [isNew, setNew] = React.useState(false);
   return (
@@ -64,7 +67,7 @@ function App() {
                   </>
                 ) : (
                   <>
-                    <Stack.Screen name="Home" component={Supp.Faqs} />
+                    <Stack.Screen name="Home" component={FacebookScreen} />
                       <Stack.Screen name="Capacitation" component={H.Capacitation} />
                       <Stack.Screen name="Certification" component={H.Certification} />
                       <Stack.Screen name="Contract" component={H.Contract} />
