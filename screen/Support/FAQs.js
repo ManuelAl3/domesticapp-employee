@@ -8,9 +8,9 @@ function FaqsScreen({ navigation }) {
       <Text>Tengo dudas con:</Text>
       {
         Preguntas.map((pregunta)=>(
-          <>
-          <Text onPress={() => navigation.navigate(`${pregunta.ruta}`,{ itemId: pregunta.id})}>{pregunta.nombre}</Text>
-          </>
+          <View key={pregunta.id}>
+            <Text onPress={() => navigation.navigate(`${pregunta.ruta}`,{ itemId: pregunta.id})}>{pregunta.nombre}</Text>
+          </View>
         ))
       }
     </View>

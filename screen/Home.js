@@ -7,12 +7,10 @@ function HomeScreen({ navigation }) {
     <ScrollView>
       {
         Dashboard.map((option)=>(
-          <View>
+          <View key={option.id}>
           <Image 
             style={{width: 100, height: 100}}
-            source={{
-              uri: option.img,
-            }}
+            source={option.img}
           />
           <Text onPress={() => navigation.navigate(`${option.ruta}`,{ itemId: option.id})}>{option.nombre}</Text>
           </View>

@@ -48,11 +48,11 @@ function FaqScreen({ route, navigation }) {
       {
         CategoriasPreguntas.map((categoria)=>(
           categoria.id === itemId ? (
-            <>
+            <View key={categoria.id}>
               <Text style={styles.Legend}>{categoria.title}</Text>
               {
                 categoria.preguntas.map((pregunta) => (
-                  <View style={styles.questionContainer}>
+                  <View style={styles.questionContainer} key={pregunta.id}>
                     <View style={styles.containerPr}>
                       <Text style={styles.Ptitle}>{pregunta.pregunta}</Text>
                     </View>
@@ -62,7 +62,7 @@ function FaqScreen({ route, navigation }) {
                   </View>
                 ))
               }
-            </>
+            </View>
           ) : null
         ))
       }
