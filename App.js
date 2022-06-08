@@ -8,6 +8,7 @@ import * as S from "./screen/index-page";
 import * as H from "./screen/Home/index-home";
 import * as Supp from "./screen/Support/index-support";
 import FaqScreen from "./screen/Support/FAQs/Faq";
+import BottomNavigation from "./components/BottomNavigation";
 
 /*export default function App() {
   return <IntroduccionI />;
@@ -24,23 +25,7 @@ const styles = StyleSheet.create({
 */
 
 
-function DetailsScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Details Screen</Text>
-      <Button
-        title="Go to Details... again"
-        onPress={() => navigation.push('Details')}
-      />
-      <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
-      <Button title="Go back" onPress={() => navigation.goBack()} />
-      <Button
-        title="Go back to first screen in stack"
-        onPress={() => navigation.popToTop()}
-      />
-    </View>
-  );
-}
+
 
 const Stack = createNativeStackNavigator();
 
@@ -64,6 +49,7 @@ function App() {
                   </>
                 ) : (
                   <>
+                  <Stack.Screen name="Main" component={BottomNavigation} />
                     <Stack.Screen name="Home" component={S.Home} />
                       <Stack.Screen name="Capacitation" component={H.Capacitation} />
                       <Stack.Screen name="Certification" component={H.Certification} />
