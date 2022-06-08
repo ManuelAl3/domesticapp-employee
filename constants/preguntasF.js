@@ -6,12 +6,12 @@ import Ganancias from "../assets/Faqs/Ganancias.svg";
 import Pagos from "../assets/Faqs/Pagos.svg";
 
 export const Preguntas = [
-  { id: 1, nombre: "Mis ganancias", img: Ganancias, ruta: "ganancias" },
-  { id: 2, nombre: "Mis pagos", img: Pagos, ruta: "pagos" },
-  { id: 3, nombre: "Mi cuenta", img: Cuenta, ruta: "cuenta" },
-  { id: 4, nombre: "Deudas", img: Deudas, ruta: "deudas" },
-  { id: 5, nombre: "COVID-19", img: Covid, ruta: "covid" },
-  { id: 6, nombre: "Mi Dotación", img: Dotacion, ruta: "dotacion" },
+  { id: 1, nombre: "Mis ganancias", img: Ganancias, ruta: "Faq" },
+  { id: 2, nombre: "Mis pagos", img: Pagos, ruta: "Faq" },
+  { id: 3, nombre: "Mi cuenta", img: Cuenta, ruta: "Faq" },
+  { id: 4, nombre: "Deudas", img: Deudas, ruta: "Faq" },
+  { id: 5, nombre: "COVID-19", img: Covid, ruta: "Faq" },
+  { id: 6, nombre: "Mi Dotación", img: Dotacion, ruta: "Faq" },
 ];
 
 export const CategoriasPreguntas = [

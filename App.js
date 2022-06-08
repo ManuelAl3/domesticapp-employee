@@ -7,6 +7,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as S from "./screen/index-page";
 import * as H from "./screen/Home/index-home";
 import * as Supp from "./screen/Support/index-support";
+import FaqScreen from "./screen/Support/FAQs/Faq";
 
 /*export default function App() {
   return <IntroduccionI />;
@@ -77,6 +78,7 @@ function App() {
                       <Stack.Screen name="ServiceD" component={Supp.ServiceD} />
                       <Stack.Screen name="Notification" component={Supp.Notification} />
                       <Stack.Screen name="Faqs" component={Supp.Faqs} />
+                        <Stack.Screen name="Faq" component={FaqScreen} />
                     <Stack.Screen name="Calendar" component={S.Calendar} />
                   </>
               )
