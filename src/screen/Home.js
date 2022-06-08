@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, Button, Image, ScrollView } from "react-native";
 import * as React from "react";
 import { Dashboard } from "../constants/homeDash";
+import { indexCategories } from "../services/categories-services";
 
 function HomeScreen({ navigation }) {
   return (

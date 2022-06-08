@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View, Button } from "react-native";
 import * as React from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import IntroduccionI from "./components/introduccion/IntroduccionI";
+import IntroduccionI from "./src/components/introduccion/IntroduccionI";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import * as S from "./screen/index-page";
-import * as H from "./screen/Home/index-home";
-import * as Supp from "./screen/Support/index-support";
-import FaqScreen from "./screen/Support/FAQs/Faq";
-import BottomNavigation from "./components/BottomNavigation";
+import * as S from "./src/screen/index-page";
+import * as H from "./src/screen/Home/index-home";
+import * as Supp from "./src/screen/Support/index-support";
+import FaqScreen from "./src/screen/Support/FAQs/Faq";
+import BottomNavigation from "./src/components/BottomNavigation";
 
 /*export default function App() {
   return <IntroduccionI />;
