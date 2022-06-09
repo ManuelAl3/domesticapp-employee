@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import AppIntroSlider from "react-native-app-intro-slider";
-import { StyleSheet, Text, View, StatusBar } from "react-native";
-import { Image } from "@rneui/themed";
+import { StyleSheet, Text, View, StatusBar, Image } from "react-native";
+// import {  } from "@rneui/themed";
 import colors from "../../assets/colors/colors";
-import font from "../../assets/fonts/fonts";
 import * as Font from "expo-font";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
-export default function IntroduccionI() {
+export default function Introduction() {
   const [fontsLoaded, setFontsLoaded] = useState(false);
 
   useEffect(() => {
@@ -28,32 +28,38 @@ export default function IntroduccionI() {
 
   const data = [
     {
+      index: 1,
       title: "Bienvenido a Domesticapp",
       text: "Creamos un paso a paso para ayudarte a entender qué hacer para recibir tu primer empleo y hacer un mejor uso de la aplicación.",
-      image: require("../../assets/introduccion/prueba1.png"),
+      image: require("../../assets/introduction/prueba1.png"),
     },
     {
+      index: 2,
       title: "Administra tus Horarios",
       text: "Reserva tus horarios, de esta manera estarás organizad Nosotros te avisaremos cuando esten listos los horarios que has reservado.",
-      image: require("../../assets/introduccion/prueba2.png"),
+      image: require("../../assets/introduction/prueba2.png"),
     },
     {
+      index: 3,
       title: "Conoce tus Ganancias",
       text: "Tus ganancias desde la aplicación. Siempre sabrás cuando se ha realizado un pago por ofrecer tus servicios.",
-      image: require("../../assets/introduccion/prueba3.png"),
+      image: require("../../assets/introduction/prueba3.png"),
     },
   ];
   const renderItem = ({ item }) => {
     return (
-      <View style={styles.container}>
-        <Text style={styles.titleStyle}> {item.title} </Text>
-        <Image source={item.image} containerStyle={styles.img} />
-        <Text style={styles.text}> {item.text} </Text>
-      </View>
+      <SafeAreaProvider>
+        <View style={styles.container}>
+          <Text style={styles.titleStyle}> {item.title} </Text>
+          <Image source={item.image} style={styles.img} />
+          <Text style={styles.text}> {item.text} </Text>
+        </View>
+      </SafeAreaProvider>
     );
   };
   const keyExtractor = (item) => {
-    item.title;
+    //console.log("item", item.index);
+    return item.title;
   };
   return (
     <View style={styles.containerSlider}>
@@ -74,61 +80,57 @@ export default function IntroduccionI() {
 
 const styles = StyleSheet.create({
   containerSlider: {
+    backgroundColor: colors.backgroundMain,
     flex: 1,
   },
   container: {
     textAlign: "center",
-    backgroundColor: colors.backgroundMain,
     height: "100%",
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
   },
   titleStyle: {
-    fontWeight: 600,
     fontSize: 24,
     fontFamily: "SourceSansPro-Regular",
+    fontWeight: "600",
     lineHeight: 22,
     color: colors.colorTitle,
 
     fontStyle: "normal",
-    fontWeight: 600,
     fontSize: 24,
     lineHeight: 22,
 
     letterSpacing: 0.005,
-    marginTop: 100,
+    // marginTop: "20%",
   },
   text: {
     width: "80%",
-    height: 146,
-    top: 559.37,
 
     fontFamily: "SourceSansPro-Regular",
     fontStyle: "normal",
-    fontWeight: 400,
+    fontWeight: "400",
     lineHeight: 22,
     textAlign: "center",
-
     fontSize: 20,
+    color: colors.colorTitle,
   },
   textFooter: {
     fontFamily: "SourceSansPro-Regular",
-    fontWeight: 600,
     fontSize: 13,
+    fontWeight: "600",
     lineHeight: 16,
     textAlign: "center",
-    marginBottom: 20,
+    marginBottom: 17,
     color: colors.grayFaded,
   },
   img: {
-    flex: 1,
-    alignItems: "center",
-    textAlign: "center",
+    width: "40%",
+    height: 250,
+
     aspectRatio: 1,
-    width: "80%",
-    marginBottom: 17,
     marginTop: 17,
+    marginBottom: 17,
   },
   doStyle: {
     backgroundColor: colors.grayFaded,
