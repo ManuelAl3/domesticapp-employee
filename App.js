@@ -58,6 +58,7 @@ function App() {
                         <Stack.Screen name="Review" component={H.Review} />
                         <Stack.Screen name="Skill" component={H.Skill} />
                       <Stack.Screen name="Profile" component={S.Profile} />
+                        <Stack.Screen name="MyProfile" component={S.MyProfile} />
                       <Stack.Screen name="Support" component={S.Support} />
                         <Stack.Screen name="ServiceD" component={Supp.ServiceD} />
                         <Stack.Screen name="Notification" component={Supp.Notification} />

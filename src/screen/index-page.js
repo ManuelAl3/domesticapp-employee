@@ -4,6 +4,7 @@ import LoginScreen from "./Login";
 import ProfileScreen from "./Profile";
 import SupportScreen from "./Support";
 import IntroductionScreen from "./Introduction";
+import MyProfileScreen from "./Profile/My-profile"
 
 export {
           HomeScreen as Home,
@@ -12,4 +13,5 @@ export {
           ProfileScreen as Profile,
           SupportScreen as Support,
           IntroductionScreen as Introduction,
+          MyProfileScreen as MyProfile,
         };
