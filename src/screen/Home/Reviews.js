@@ -1,7 +1,9 @@
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
 import * as React from "react";
 import { useAuth } from "../../context/auth-context";
 import { showReviews } from "../../services/reviews-service";
+import BackTitledHeader from "../../components/BackTitleHeader";
+import faStar from "../../assets/Reviews/faStar.svg"
 
 function ReviewsScreen({ navigation }) {
   const { user } = useAuth();
@@ -27,7 +29,7 @@ function ReviewsScreen({ navigation }) {
           <Text>Reseñas(5)</Text>
           {
             reviews.map((review)=>(
-              <>
+              <View key={review.id}>
               <Image 
                 style={{width: 40, height: 40}}
                 source={user.image_url}
@@ -35,7 +37,7 @@ function ReviewsScreen({ navigation }) {
                 <Text>{review.full_name}</Text>
                 <Text>{review.body}</Text>
                 {paintStar(review.score)}
-              </>
+              </View>
             ))
           }
         </>
