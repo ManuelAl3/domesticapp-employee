@@ -12,15 +12,16 @@ function ProfileScreen({ navigation }) {
     showHEmployee(user.id).then(setSkills);
   }, [user.id])
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <>
     <BackTitledHeader title="Menú" />
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
     <ScrollView>
       {
         CategoryLinks.map((option)=>(
-          <View key={option.icon}>
+          <View key={option.id}>
           <Image 
-            style={{width: 100, height: 100}}
-            source={option.img}
+            style={{width: 50, height: 50}}
+            source={option.icon}
           />
           <Text onPress={() => navigation.navigate(`${option.ruta}`,{ itemId: option.id})}>{option.nombre}</Text>
           </View>
@@ -28,6 +29,7 @@ function ProfileScreen({ navigation }) {
       }
       </ScrollView>
     </View>
+    </>
   );
 }
 const styles = StyleSheet.create({

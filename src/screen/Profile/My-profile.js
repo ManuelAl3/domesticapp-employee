@@ -11,8 +11,9 @@ function MyProfileScreen({ navigation }) {
     showHEmployee(user.id).then(setSkills);
   }, [user.id])
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <>
     <BackTitledHeader title="Mi Perfil" />
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Image 
         style={styles.tinyLogo}
         source={user.image_url}
@@ -38,7 +39,7 @@ function MyProfileScreen({ navigation }) {
       <Text>CC {user.document_id}</Text>
 
       <Button title="Ver Reseñas de Clientes" />
-    </View>
+    </View></>
   );
 }
 const styles = StyleSheet.create({
