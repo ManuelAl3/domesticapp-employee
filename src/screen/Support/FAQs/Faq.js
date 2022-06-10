@@ -1,6 +1,7 @@
 import { Text, View, StyleSheet } from "react-native";
 import * as React from "react";
 import { CategoriasPreguntas } from "../../../constants/preguntasF";
+import BackTitledHeader from "../../../components/BackTitleHeader";
 
 function FaqScreen({ route, navigation }) {
   const { itemId } = route.params;
@@ -43,13 +44,14 @@ function FaqScreen({ route, navigation }) {
   });
 
   return (
-    <View style={styles.container}>
-      
+    <>
       {
         CategoriasPreguntas.map((categoria)=>(
           categoria.id === itemId ? (
-            <View key={categoria.id}>
-              <Text style={styles.Legend}>{categoria.title}</Text>
+            <>
+            <BackTitledHeader title={categoria.title} />
+            <View style={styles.container} key={categoria.id}>
+              <Text style={styles.Legend}>{categoria.legend}</Text>
               {
                 categoria.preguntas.map((pregunta) => (
                   <View style={styles.questionContainer} key={pregunta.id}>
@@ -63,10 +65,11 @@ function FaqScreen({ route, navigation }) {
                 ))
               }
             </View>
+            </>
           ) : null
         ))
       }
-    </View>
+    </>
     );
 }
 

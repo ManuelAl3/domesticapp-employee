@@ -20,11 +20,11 @@ function AuthProvider({ children }) {
   function handleLogin(credentials) {
     return login(credentials).then((user) => {
       setUser(user);
-      navigation.navigate("Home");
+      navigation.navigate("Main");
       /*if (user.new) {
         navigation.navigate("introduction");
       } else {
-        navigation.navigate("Home");
+        navigation.navigate("Main");
       }*/
     });
   }
