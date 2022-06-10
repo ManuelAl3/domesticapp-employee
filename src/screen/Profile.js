@@ -13,7 +13,7 @@ function ProfileScreen({ navigation }) {
   }, [user.id])
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-    <BackTitledHeader title="Cupones" />
+    <BackTitledHeader title="Menú" />
     <ScrollView>
       {
         CategoryLinks.map((option)=>(

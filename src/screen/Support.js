@@ -1,9 +1,12 @@
 import { StyleSheet, Text, View, Image, ScrollView } from "react-native";
 import * as React from "react";
 import { supportOptions } from "../constants/supportO";
+import BackTitledHeader from "../components/BackTitleHeader";
 
 function SupportScreen({ navigation }) {
   return (
+    <>
+    <BackTitledHeader title="Centro de Ayuda" />
     <ScrollView>
       {
         supportOptions.map((option)=>(
@@ -16,7 +19,7 @@ function SupportScreen({ navigation }) {
           </View>
         ))
       }
-    </ScrollView>
+    </ScrollView></>
   );
 }
 

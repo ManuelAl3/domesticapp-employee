@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, Image, Button } from "react-native";
 import * as React from "react";
 import { useAuth } from "../../context/auth-context";
 import { showHEmployee } from "../../services/hability-employee-services";
+import BackTitledHeader from "../../components/BackTitleHeader";
 
 function MyProfileScreen({ navigation }) {
   const { user } = useAuth();
@@ -11,6 +12,7 @@ function MyProfileScreen({ navigation }) {
   }, [user.id])
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+    <BackTitledHeader title="Mi Perfil" />
       <Image 
         style={styles.tinyLogo}
         source={user.image_url}

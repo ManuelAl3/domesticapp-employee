@@ -1,19 +1,17 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableHighlight } from "react-native";
 import BackIcon from "../assets/ui/back-button.svg";
 import { useNavigation } from "@react-navigation/native";
 
-export interface BackTitledHeaderProps {
-    title: string;
-}
-
-export default function BackTitledHeader(props: BackTitledHeaderProps) {
+export default function BackTitledHeader(props) {
     const navigation = useNavigation();
     return (
         <View style={styles.headerContainer}>
-            <BackIcon
-                onPress={() => navigation.canGoBack() ? navigation.goBack() : null} 
-            />
+            <TouchableHighlight onPress={() => navigation.canGoBack() ? navigation.goBack() : null}>
+            <Image
+            style={{width: 40, height: 40}}
+            source={BackIcon}
+            /></TouchableHighlight>
             <Text numberOfLines={1} style={styles.title}>{props.title}</Text>
         </View>
     );
