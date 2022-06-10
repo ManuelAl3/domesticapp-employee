@@ -7,10 +7,7 @@ import BackTitledHeader from "../components/BackTitleHeader";
 
 function ProfileScreen({ navigation }) {
   const { user } = useAuth();
-  const [ skills, setSkills] = React.useState(null);
-  React.useEffect(() => {
-    showHEmployee(user.id).then(setSkills);
-  }, [user.id])
+
   return (
     <>
     <BackTitledHeader title="Menú" />
