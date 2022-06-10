@@ -23,7 +23,10 @@ function MyProfileScreen({ navigation }) {
         skills ? (
           skills.map((skills) =>(
             <View key={skills.id}>
-              <Text>{skills.hability}</Text>
+            <Image
+                style={{width: 50, height: 50}}
+                source={skills.icon}
+              />
             </View>
           ))
           ) : (<Text>Sin habilidades</Text>)
