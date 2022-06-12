@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import AppIntroSlider from "react-native-app-intro-slider";
 import { StyleSheet, Text, View, StatusBar, Image } from "react-native";
-// import {  } from "@rneui/themed";
 import colors from "../../assets/colors/colors";
 import * as Font from "expo-font";
 import { SafeAreaProvider } from "react-native-safe-area-context";

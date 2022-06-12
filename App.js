@@ -1,7 +1,6 @@
 import { StyleSheet, Text, View, Button } from "react-native";
 import * as React from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import IntroduccionI from "./src/components/introduccion/IntroduccionI";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as S from "./src/screen/index-page";
@@ -10,10 +9,11 @@ import * as Supp from "./src/screen/Support/index-support";
 import FaqScreen from "./src/screen/Support/FAQs/Faq";
 import BottomNavigation from "./src/components/BottomNavigation";
 import { AuthProvider, useAuth } from "./src/context/auth-context";
+import Dashboard from "./src/components/dashboard/Dashboard";
 
-/* export default function App() {
+export default function App() {
   return <Dashboard />;
-} */
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Stack = createNativeStackNavigator();
+/* const Stack = createNativeStackNavigator();
 
 function App() {
   const [isAuth, setAuth] = React.useState(true);
@@ -81,4 +81,4 @@ function Index() {
     </NavigationContainer>
   );
 }
-export default Index;
+export default Index; */
