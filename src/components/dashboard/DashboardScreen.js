@@ -1,60 +1,67 @@
 import * as React from "react";
-import { StyleSheet, Text, View, SafeAreaView, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  ScrollView,
+  FlatList,
+  Image,
+} from "react-native";
 import { ListItem } from "@rneui/themed";
-import LogoCalendar from "../../assets/svg/Calendar";
-import LogoReview from "../../assets/svg/Review";
 import Colors from "../../assets/colors/colors";
-
-const listButtons = [
-  {
-    id: 1,
-    title: "Calendario",
-    image: LogoCalendar,
-  },
-  {
-    id: 2,
-    title: "Calendario",
-    image: require("../../assets/Home/Calendar.svg"),
-  },
-  {
-    id: 3,
-    title: "Calendario",
-    image: require("../../assets/Home/Calendar.svg"),
-  },
-  {
-    id: 4,
-    title: "Calendario",
-    image: require("../../assets/Home/Calendar.svg"),
-  },
-];
+import { Dashboard } from "../../constants/homeDash";
+import DashboardMain from "../../assets/Home/DashboardMain.svg";
+import RectangleDivider from "../../assets/Home/RectangleDivider.svg";
 
 export default function DashboardScreen({ navigation: { navigate } }) {
-  // const ref = React.useRef(null);
+  const keyExtractor = (item, index) => index.toString();
+  const renderItem = ({ item }) => (
+    <View style={styles.containerB}>
+      <ListItem
+        key={item}
+        containerStyle={styles.listStyle}
+        onPress={() => navigate("Users")}
+      >
+        <View>
+          <View style={styles.containerLogo}>
+            <Image style={{ width: 100, height: 100 }} source={item.img} />
+          </View>
+          <Text style={styles.textStyle}>{item.nombre}</Text>
+        </View>
+      </ListItem>
+    </View>
+  );
   return (
     <SafeAreaView style={styles.containerSafe}>
       <ScrollView style={styles.scrollView}>
         <View>
-          <Text style={styles.textDash}>
-            Ambientes limpios, {"\n"}personas felices.
-          </Text>
-        </View>
-        {listButtons.map((l, i) => (
-          <View style={styles.containerB}>
-            <ListItem
-              numColumns={2}
-              key={i}
-              containerStyle={styles.listStyle}
-              onPress={() => navigate("Users")}
-            >
-              <View>
-                <View style={styles.containerLogo}>
-                  <LogoCalendar />
-                </View>
-                <Text style={styles.textStyle}>{l.title}</Text>
-              </View>
-            </ListItem>
+          <View style={styles.containerTextDash}>
+            <Text style={styles.textDash}>
+              Ambientes limpios, {"\n"}personas felices.
+            </Text>
           </View>
-        ))}
+          <View style={styles.containerImg}>
+            <Image
+              style={{ width: 378, height: 322, backgroundColor: "#0000" }}
+              source={DashboardMain}
+            />
+          </View>
+          <View style={styles.divider}>
+            <Image
+              style={{ width: 350, height: 3 }}
+              source={RectangleDivider}
+            />
+          </View>
+        </View>
+        <View style={styles.stylesFlatList}>
+          <FlatList
+            numColumns={2}
+            keyExtractor={keyExtractor}
+            data={Dashboard}
+            renderItem={renderItem}
+          />
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -68,11 +75,28 @@ const styles = StyleSheet.create({
   containerMain: {
     color: Colors.colorUserName,
   },
+  stylesFlatList: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: Colors.backgroundMain,
+  },
+  containerTextDash: {
+    position: "absolute",
+    zIndex: 1,
+    width: 249,
+    height: 45,
+  },
+  containerImg: {
+    top: -35,
+    left: 36,
+  },
+  divider: {
+    flex: 1,
+    alignItems: "center",
+  },
   containerB: {
     flex: 1,
-    flexDirection: "row",
-    maxHeight: 159,
-    width: 150,
     textAlign: "center",
     backgroundColor: Colors.backgroundMain,
     borderColor: Colors.black,
@@ -82,10 +106,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.backgroundMain,
   },
   textDash: {
-    left: 13,
-    top: 89,
-
-    fontFamily: "Poppins",
+    textAlign: "center",
     fontStyle: "normal",
     fontWeight: "600",
     fontSize: 24,
@@ -98,9 +119,4 @@ const styles = StyleSheet.create({
     fontSize: 15,
     lineHeight: 22,
   },
-  scrollView: {
-    marginHorizontal: 15,
-    backgroundColor: Colors.backgroundMain,
-  },
-  containerLogo: {},
 });
