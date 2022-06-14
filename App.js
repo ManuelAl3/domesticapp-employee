@@ -9,10 +9,11 @@ import * as Supp from "./src/screen/Support/index-support";
 import FaqScreen from "./src/screen/Support/FAQs/Faq";
 import BottomNavigation from "./src/components/BottomNavigation";
 import { AuthProvider, useAuth } from "./src/context/auth-context";
+import MyEarnings from "./src/components/earnings/MyEarnings";
 import Dashboard from "./src/components/dashboard/Dashboard";
 
 export default function App() {
-  return <Dashboard />;
+  return <MyEarnings />;
 }
 
 const styles = StyleSheet.create({

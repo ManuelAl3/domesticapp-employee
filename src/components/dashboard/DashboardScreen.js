@@ -42,10 +42,7 @@ export default function DashboardScreen({ navigation: { navigate } }) {
             </Text>
           </View>
           <View style={styles.containerImg}>
-            <Image
-              style={{ width: 378, height: 322, backgroundColor: "#0000" }}
-              source={DashboardMain}
-            />
+            <Image style={{ width: 378, height: 322 }} source={DashboardMain} />
           </View>
           <View style={styles.divider}>
             <Image
