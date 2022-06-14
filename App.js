@@ -12,7 +12,7 @@ import { AuthProvider, useAuth } from "./src/context/auth-context";
 import MyEarnings from "./src/components/earnings/MyEarnings";
 import Dashboard from "./src/components/dashboard/Dashboard";
 
-export default function App() {
+/* export default function App() {
   return <MyEarnings />;
 }
 
@@ -23,59 +23,54 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
 });
-
-/* const Stack = createNativeStackNavigator();
+ */
+const Stack = createNativeStackNavigator();
 
 function App() {
   const [isAuth, setAuth] = React.useState(true);
   const [isNew, setNew] = React.useState(false);
   const { user } = useAuth();
   return (
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-          {
-            user ? (
-              <>
-                {
-                  isNew ? (
-                    <>
-                      <Stack.Screen name="Introduction" component={S.Introduction} />
-                      <Stack.Screen name="Home" component={S.Home} />
-                      <Stack.Screen name="Profile" component={S.Profile} />
-                      <Stack.Screen name="Support" component={S.Support} />
-                      <Stack.Screen name="Calendar" component={S.Calendar} />
-                    </>
-                  ) : (
-                    <>
-                    <Stack.Screen name="Main" component={BottomNavigation} />
-                      <Stack.Screen name="Home" component={S.Home} />
-                        <Stack.Screen name="Capacitation" component={H.Capacitation} />
-                        <Stack.Screen name="Certification" component={H.Certification} />
-                        <Stack.Screen name="Contract" component={H.Contract} />
-                        <Stack.Screen name="GoodP" component={H.GoodP} />
-                        <Stack.Screen name="LegalInfo" component={H.LegalInfo} />
-                        <Stack.Screen name="Profit" component={H.Profit} />
-                        <Stack.Screen name="Review" component={H.Review} />
-                        <Stack.Screen name="Skill" component={H.Skill} />
-                      <Stack.Screen name="Profile" component={S.Profile} />
-                        <Stack.Screen name="MyProfile" component={S.MyProfile} />
-                      <Stack.Screen name="Support" component={S.Support} />
-                        <Stack.Screen name="ServiceD" component={Supp.ServiceD} />
-                        <Stack.Screen name="Notification" component={Supp.Notification} />
-                        <Stack.Screen name="Faqs" component={Supp.Faqs} />
-                          <Stack.Screen name="Faq" component={FaqScreen} />
-                      <Stack.Screen name="Calendar" component={S.Calendar} />
-                    </>
-                )
-                }
-              </>
-              ) : (
-              <>
-                <Stack.Screen name="Login" component={S.Login} />
-              </>
-            )
-          }
-          
-        </Stack.Navigator>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      {user ? (
+        <>
+          {isNew ? (
+            <>
+              <Stack.Screen name="Introduction" component={S.Introduction} />
+              <Stack.Screen name="Home" component={S.Home} />
+              <Stack.Screen name="Profile" component={S.Profile} />
+              <Stack.Screen name="Support" component={S.Support} />
+              <Stack.Screen name="Calendar" component={S.Calendar} />
+            </>
+          ) : (
+            <>
+              <Stack.Screen name="Main" component={BottomNavigation} />
+              <Stack.Screen name="Home" component={S.Home} />
+              <Stack.Screen name="Capacitation" component={H.Capacitation} />
+              <Stack.Screen name="Certification" component={H.Certification} />
+              <Stack.Screen name="Contract" component={H.Contract} />
+              <Stack.Screen name="GoodP" component={H.GoodP} />
+              <Stack.Screen name="LegalInfo" component={H.LegalInfo} />
+              <Stack.Screen name="Profit" component={H.Profit} />
+              <Stack.Screen name="Review" component={H.Review} />
+              <Stack.Screen name="Skill" component={H.Skill} />
+              <Stack.Screen name="Profile" component={S.Profile} />
+              <Stack.Screen name="MyProfile" component={S.MyProfile} />
+              <Stack.Screen name="Support" component={S.Support} />
+              <Stack.Screen name="ServiceD" component={Supp.ServiceD} />
+              <Stack.Screen name="Notification" component={Supp.Notification} />
+              <Stack.Screen name="Faqs" component={Supp.Faqs} />
+              <Stack.Screen name="Faq" component={FaqScreen} />
+              <Stack.Screen name="Calendar" component={S.Calendar} />
+            </>
+          )}
+        </>
+      ) : (
+        <>
+          <Stack.Screen name="Login" component={S.Login} />
+        </>
+      )}
+    </Stack.Navigator>
   );
 }
 
@@ -88,4 +83,4 @@ function Index() {
     </NavigationContainer>
   );
 }
-export default Index; */
+export default Index;
