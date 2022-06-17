@@ -29,7 +29,6 @@ function AuthProvider({ children }) {
     });
   }
 
-
   function handleLogout() {
     return logout().finally(() => {
       setUser(null);

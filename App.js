@@ -11,9 +11,13 @@ import BottomNavigation from "./src/components/BottomNavigation";
 import { AuthProvider, useAuth } from "./src/context/auth-context";
 import MyEarnings from "./src/components/earnings/MyEarnings";
 import Dashboard from "./src/components/dashboard/Dashboard";
+import DashboardScreen from "./src/components/dashboard/DashboardScreen";
+import Profile from "./src/screen/Profile";
+import Verification from "./src/components/verify/Verification";
+import Introduction from "./src/components/introduction/Introduction";
 
 /* export default function App() {
-  return <MyEarnings />;
+  return <Introduction />;
 }
 
 const styles = StyleSheet.create({
@@ -22,8 +26,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     position: "absolute",
   },
-});
- */
+}); */
+
 const Stack = createNativeStackNavigator();
 
 function App() {

@@ -60,12 +60,30 @@ export default function Introduction() {
     //console.log("item", item.index);
     return item.title;
   };
+  const renderNextButton = () => {
+    return (
+      <View style={styles.containerTxtButton}>
+        <Text style={styles.txtButton}>Siguiente</Text>
+      </View>
+    );
+  };
+  const renderDoneButton = () => {
+    return (
+      <View style={styles.containerTxtButton}>
+        <Text style={styles.txtButton} onPress={() => console.log("press")}>
+          Hecho
+        </Text>
+      </View>
+    );
+  };
   return (
     <View style={styles.containerSlider}>
       <StatusBar translucent backgroundColor="transparent" />
       <AppIntroSlider
         keyExtractor={keyExtractor}
         renderItem={renderItem}
+        renderDoneButton={renderDoneButton}
+        renderNextButton={renderNextButton}
         data={data}
         dotStyle={styles.doStyle}
         activeDotStyle={styles.activeDotStyle}
@@ -136,5 +154,17 @@ const styles = StyleSheet.create({
   },
   activeDotStyle: {
     backgroundColor: colors.blue,
+  },
+  containerTxtButton: {
+    width: 40,
+    height: 40,
+    marginRight: 20,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  txtButton: {
+    color: colors.grayNigth,
+    fontWeight: "500",
+    fontSize: 16,
   },
 });

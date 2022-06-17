@@ -1,23 +1,128 @@
-import { StyleSheet, Text, View, Button, Image, ScrollView } from "react-native";
 import * as React from "react";
 import { Dashboard } from "../constants/homeDash";
+import {
+  StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  ScrollView,
+  FlatList,
+  Image,
+} from "react-native";
+import { ListItem } from "@rneui/themed";
+import Colors from "../assets/colors/colors";
+import DashboardMain from "../assets/Home/DashboardMain.svg";
+import RectangleDivider from "../assets/Home/RectangleDivider.svg";
+import NavBar from "../components/navbar/NavBar";
 
 function HomeScreen({ navigation }) {
-  return (
-    <ScrollView>
-      {
-        Dashboard.map((option)=>(
-          <View key={option.id}>
-          <Image 
-            style={{width: 100, height: 100}}
-            source={option.img}
-          />
-          <Text onPress={() => navigation.navigate(`${option.ruta}`,{ itemId: option.id})}>{option.nombre}</Text>
+  const keyExtractor = (item, index) => index.toString();
+  const renderItem = ({ item }) => (
+    <View style={styles.containerB}>
+      <ListItem
+        key={item}
+        containerStyle={styles.listStyle}
+        onPress={() => navigation.navigate(`${item.ruta}`, { itemId: item.id })}
+      >
+        <View>
+          <View style={styles.containerLogo}>
+            <Image style={{ width: 100, height: 100 }} source={item.img} />
           </View>
-        ))
-      }
-    </ScrollView>
+          <Text style={styles.textStyle}>{item.nombre}</Text>
+        </View>
+      </ListItem>
+    </View>
+  );
+  return (
+    <>
+      <NavBar />
+      <SafeAreaView style={styles.containerSafe}>
+        <ScrollView style={styles.scrollView}>
+          <View>
+            <View style={styles.containerTextDash}>
+              <Text style={styles.textDash}>
+                Ambientes limpios, {"\n"}personas felices.
+              </Text>
+            </View>
+            <View style={styles.containerImg}>
+              <Image
+                style={{ width: 378, height: 322 }}
+                source={DashboardMain}
+              />
+            </View>
+            <View style={styles.divider}>
+              <Image
+                style={{ width: 350, height: 3 }}
+                source={RectangleDivider}
+              />
+            </View>
+          </View>
+          <View style={styles.stylesFlatList}>
+            <FlatList
+              numColumns={2}
+              keyExtractor={keyExtractor}
+              data={Dashboard}
+              renderItem={renderItem}
+            />
+          </View>
+        </ScrollView>
+      </SafeAreaView>
+    </>
   );
 }
 
 export default HomeScreen;
+
+const styles = StyleSheet.create({
+  containerSafe: {
+    flex: 1,
+    backgroundColor: Colors.backgroundMain,
+  },
+  containerMain: {
+    color: Colors.colorUserName,
+  },
+  stylesFlatList: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: Colors.backgroundMain,
+  },
+  containerTextDash: {
+    position: "absolute",
+    zIndex: 1,
+    width: 249,
+    height: 45,
+  },
+  containerImg: {
+    top: -35,
+    left: 36,
+  },
+  divider: {
+    flex: 1,
+    alignItems: "center",
+  },
+  containerB: {
+    flex: 1,
+    textAlign: "center",
+    backgroundColor: Colors.backgroundMain,
+    borderColor: Colors.black,
+  },
+  listStyle: {
+    flex: 1,
+    backgroundColor: Colors.backgroundMain,
+  },
+  textDash: {
+    textAlign: "center",
+    fontStyle: "normal",
+    fontWeight: "600",
+    fontSize: 24,
+    lineHeight: 26,
+    color: Colors.colorTitle,
+  },
+  textStyle: {
+    fontStyle: "normal",
+    fontWeight: "600",
+    fontSize: 15,
+    lineHeight: 22,
+  },
+});
