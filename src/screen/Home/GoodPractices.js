@@ -54,12 +54,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  listStyle: {
-    flex: 1,
-    backgroundColor: " #E5E5E5",
-    width: 367,
-    height: 45,
-  },
   text: {
     fontWeight: "400",
     fontSize: 18,

@@ -27,7 +27,7 @@ export default function BottomNavigation() {
         <Tab.Screen
           name="Home"
           options={{
-            title: "",
+            title: "Inicio",
             tabBarIcon: () => (
               <Image source={HomeIcon} style={{ width: 30, height: 30 }} />
             ),
@@ -37,7 +37,7 @@ export default function BottomNavigation() {
         <Tab.Screen
           name="Skill"
           options={{
-            title: "",
+            title: "Habilidades",
             tabBarIcon: () => (
               <Image source={ConfigIcon} style={{ width: 30, height: 30 }} />
             ),
@@ -47,7 +47,7 @@ export default function BottomNavigation() {
         <Tab.Screen
           name="Calendar"
           options={{
-            title: "",
+            title: "Calendario",
             tabBarIcon: () => (
               <Image source={CalendarIcon} style={{ width: 30, height: 30 }} />
             ),
@@ -57,7 +57,7 @@ export default function BottomNavigation() {
         <Tab.Screen
           name="Support"
           options={{
-            title: "",
+            title: "Soporte",
             tabBarIcon: () => (
               <Image source={ServiceIcon} style={{ width: 30, height: 30 }} />
             ),
@@ -67,7 +67,7 @@ export default function BottomNavigation() {
         <Tab.Screen
           name="Profile"
           options={{
-            title: "",
+            title: "Perfil",
             tabBarIcon: () => (
               <Image source={MenuIcon} style={{ width: 30, height: 30 }} />
             ),

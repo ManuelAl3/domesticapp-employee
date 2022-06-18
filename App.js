@@ -11,16 +11,9 @@ import BottomNavigation from "./src/components/BottomNavigation";
 import { AuthProvider, useAuth } from "./src/context/auth-context";
 import MyEarnings from "./src/components/earnings/MyEarnings";
 import Profile from "./src/screen/Profile";
-import Verification from "./src/components/verify/Verification";
-import Introduction from "./src/components/introduction/Introduction";
-import ButtonUi from "./src/components/ButtonUi";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <ButtonUi />
-    </View>
-  );
+/* export default function App() {
+  return <View></View>;
 }
 
 const styles = StyleSheet.create({
@@ -29,9 +22,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-});
+}); */
 
-/* const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator();
 
 function App() {
   const [isAuth, setAuth] = React.useState(true);
@@ -69,6 +62,10 @@ function App() {
               <Stack.Screen name="Faqs" component={Supp.Faqs} />
               <Stack.Screen name="Faq" component={FaqScreen} />
               <Stack.Screen name="Calendar" component={S.Calendar} />
+              <Stack.Screen name="Report" component={H.Report} />
+              <Stack.Screen name="TermsConditions" component={H.TC} />
+              <Stack.Screen name="DataTreatment" component={H.DT} />
+              <Stack.Screen name="PrivacyPolicy" component={H.PP} />
             </>
           )}
         </>
@@ -90,4 +87,4 @@ function Index() {
     </NavigationContainer>
   );
 }
-export default Index; */
+export default Index;

@@ -13,21 +13,30 @@ function LegalInforationScreen({ navigation }) {
     borderRadius: 10,
     marginBottom: 16,
   };
+  // <Text>Domesticapp Ver.1.01 2022 Derechos Reservados</Text>
+
   return (
     <>
       <BackTitledHeader title="Información legal" />
       <View style={{ flex: 1, alignItems: "center", marginTop: 100 }}>
-        <TouchableOpacity style={btnStyle}>
-          <Text style={styles.textButton}>Termios y Condiciones</Text>
+        <TouchableOpacity
+          style={btnStyle}
+          onPress={() => navigation.navigate("TermsConditions")}
+        >
+          <Text style={styles.textButton}>Términos y condiciones</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={btnStyle}>
-          <Text style={styles.textButton}>Politica de Privacidad</Text>
+        <TouchableOpacity
+          style={btnStyle}
+          onPress={() => navigation.navigate("PrivacyPolicy")}
+        >
+          <Text style={styles.textButton}>Política de Privacidad</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={btnStyle}>
+        <TouchableOpacity
+          style={btnStyle}
+          onPress={() => navigation.navigate("DataTreatment")}
+        >
           <Text style={styles.textButton}>Autorización y Tratamiento</Text>
         </TouchableOpacity>
-
-        <Text>Domesticapp Ver.1.01 2022 Derechos Reservados</Text>
       </View>
     </>
   );

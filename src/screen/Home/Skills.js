@@ -103,7 +103,10 @@ function SkillsScreen({ navigation }) {
           ) : (
             <Text>Sin habilidades</Text>
           )}
-          <TouchableOpacity style={btnStyle}>
+          <TouchableOpacity
+            style={btnStyle}
+            onPress={() => navigation.navigate("GoodP")}
+          >
             <Text style={styles.textButton}>Buenas practicas</Text>
           </TouchableOpacity>
         </View>
