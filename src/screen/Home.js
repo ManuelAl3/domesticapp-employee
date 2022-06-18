@@ -7,11 +7,10 @@ import {
   SafeAreaView,
   ScrollView,
   FlatList,
-  Image,
 } from "react-native";
-import { ListItem } from "@rneui/themed";
+import { ListItem, Image } from "@rneui/themed";
 import Colors from "../assets/colors/colors";
-import DashboardMain from "../assets/Home/DashboardMain.svg";
+import DashboardMain from "../assets/Home/DashboardMain.png";
 import RectangleDivider from "../assets/Home/RectangleDivider.svg";
 import NavBar from "../components/navbar/NavBar";
 
@@ -24,9 +23,9 @@ function HomeScreen({ navigation }) {
         containerStyle={styles.listStyle}
         onPress={() => navigation.navigate(`${item.ruta}`, { itemId: item.id })}
       >
-        <View>
+        <View style={styles.containerLogo}>
           <View style={styles.containerLogo}>
-            <Image style={{ width: 100, height: 100 }} source={item.img} />
+            <Image style={{ width: 50, height: 50 }} source={item.img} />
           </View>
           <Text style={styles.textStyle}>{item.nombre}</Text>
         </View>
@@ -39,14 +38,13 @@ function HomeScreen({ navigation }) {
       <SafeAreaView style={styles.containerSafe}>
         <ScrollView style={styles.scrollView}>
           <View>
-            <View style={styles.containerTextDash}>
-              <Text style={styles.textDash}>
-                Ambientes limpios, {"\n"}personas felices.
-              </Text>
-            </View>
             <View style={styles.containerImg}>
               <Image
-                style={{ width: 378, height: 322 }}
+                containerStyle={{
+                  width: "100%",
+                  aspectRatio: 1,
+                  flex: 1,
+                }}
                 source={DashboardMain}
               />
             </View>
@@ -59,7 +57,7 @@ function HomeScreen({ navigation }) {
           </View>
           <View style={styles.stylesFlatList}>
             <FlatList
-              numColumns={2}
+              numColumns={3}
               keyExtractor={keyExtractor}
               data={Dashboard}
               renderItem={renderItem}
@@ -87,15 +85,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: Colors.backgroundMain,
   },
-  containerTextDash: {
-    position: "absolute",
-    zIndex: 1,
-    width: 249,
-    height: 45,
-  },
-  containerImg: {
-    top: -35,
-    left: 36,
+  containerImg: {},
+  containerLogo: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
   divider: {
     flex: 1,
@@ -111,18 +105,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.backgroundMain,
   },
-  textDash: {
-    textAlign: "center",
-    fontStyle: "normal",
-    fontWeight: "600",
-    fontSize: 24,
-    lineHeight: 26,
-    color: Colors.colorTitle,
-  },
   textStyle: {
     fontStyle: "normal",
     fontWeight: "600",
     fontSize: 15,
     lineHeight: 22,
+    paddingTop: 20,
   },
 });

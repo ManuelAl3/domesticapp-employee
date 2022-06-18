@@ -50,7 +50,9 @@ export default function Introduction() {
       <SafeAreaProvider>
         <View style={styles.container}>
           <Text style={styles.titleStyle}> {item.title} </Text>
-          <Image source={item.image} style={styles.img} />
+          <View style={styles.containerImg}>
+            <Image source={item.image} style={styles.img} />
+          </View>
           <Text style={styles.text}> {item.text} </Text>
         </View>
       </SafeAreaProvider>
@@ -141,13 +143,16 @@ const styles = StyleSheet.create({
     marginBottom: 17,
     color: colors.grayFaded,
   },
+  containerImg: {
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+  },
   img: {
-    width: "40%",
-    height: 250,
-
-    aspectRatio: 1,
+    width: 300,
+    height: 300,
     marginTop: 17,
-    marginBottom: 17,
+    marginBottom: 20,
   },
   doStyle: {
     backgroundColor: colors.grayFaded,
@@ -156,7 +161,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.blue,
   },
   containerTxtButton: {
-    width: 40,
+    width: "100%",
     height: 40,
     marginRight: 20,
     justifyContent: "center",

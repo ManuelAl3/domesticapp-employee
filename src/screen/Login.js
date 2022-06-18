@@ -18,7 +18,7 @@ function LoginScreen({ navigation }) {
   function handleSubmit() {
     login({ email: "employee@mail.com", password: "123456" }).catch((error) => {
       // setErrors(error);
-      console.log("err");
+      console.log(error);
     });
   }
 

@@ -1,9 +1,11 @@
 import FaqsScreen from "./FAQs";
 import NotificationScreen from "./Notifications";
 import ServiceDamageScreen from "./Services-damage";
+import Help from "./Help";
 
 export {
-          ServiceDamageScreen as ServiceD,
-          NotificationScreen as Notification,
-          FaqsScreen as Faqs,
-        };
+  ServiceDamageScreen as ServiceD,
+  NotificationScreen as Notification,
+  FaqsScreen as Faqs,
+  Help as Help,
+};

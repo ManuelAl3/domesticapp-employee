@@ -10,21 +10,25 @@ import FaqScreen from "./src/screen/Support/FAQs/Faq";
 import BottomNavigation from "./src/components/BottomNavigation";
 import { AuthProvider, useAuth } from "./src/context/auth-context";
 import MyEarnings from "./src/components/earnings/MyEarnings";
-import Dashboard from "./src/components/dashboard/Dashboard";
-import DashboardScreen from "./src/components/dashboard/DashboardScreen";
 import Profile from "./src/screen/Profile";
 import Verification from "./src/components/verify/Verification";
 import Introduction from "./src/components/introduction/Introduction";
+import ButtonUi from "./src/components/ButtonUi";
 
-/* export default function App() {
-  return <Introduction />;
+/*
+export default function App() {
+  return (
+    <View style={styles.container}>
+      <ButtonUi />
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    position: "absolute",
   },
 }); */
 

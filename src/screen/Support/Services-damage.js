@@ -3,9 +3,12 @@ import * as React from "react";
 
 function ServiceDamageScreen({ navigation }) {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Services Damage Screen</Text>
-    </View>
+    <>
+      <BackTitleHeader title="Daños y Accidentes" />
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        <Text>Daño en el Servicio o Accidentes Laborales</Text>
+      </View>
+    </>
   );
 }
 
