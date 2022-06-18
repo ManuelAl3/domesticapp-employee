@@ -7,13 +7,12 @@ import {
   FlatList,
 } from "react-native";
 import * as React from "react";
-import { useAuth } from "../context/auth-context";
+import { useAuth } from "../../src/context/auth-context";
 import { showHEmployee } from "../services/hability-employee-services";
 import { CategoryLinks } from "../constants/linksPerfil";
 import BackTitledHeader from "../components/BackTitleHeader";
 import { ListItem } from "@rneui/themed";
 import Colors from "../assets/colors/colors";
-import userProfile from "../assets/earnings/UserProfile.svg";
 import Stars from "react-native-stars";
 import Star from "../assets/earnings/Star.svg";
 import EmptyStar from "../assets/earnings/EmptyStar.svg";
@@ -54,7 +53,7 @@ function ProfileScreen({ navigation }) {
                     width: 70,
                     height: 70,
                   }}
-                  source={userProfile}
+                  source={user.image_url}
                 />
               </View>
               <View
@@ -64,7 +63,7 @@ function ProfileScreen({ navigation }) {
               >
                 <Text style={styles.textUser}>Hola,</Text>
                 <Text style={[styles.textUser, { fontWeight: "600" }]}>
-                  Liliana
+                  {user.full_name}
                 </Text>
               </View>
             </View>
@@ -106,7 +105,7 @@ function ProfileScreen({ navigation }) {
                   color: "#696A6A",
                 }}
               >
-                ID: D0MLI1035BE454SA
+                ID: {user.document_id}
               </Text>
             </View>
             <View

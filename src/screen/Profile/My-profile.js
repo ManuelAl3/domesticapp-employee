@@ -1,5 +1,13 @@
-import { StyleSheet, Text, View, Image, Button } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  FlatList,
+} from "react-native";
 import * as React from "react";
+import { ListItem } from "@rneui/themed";
 import { useAuth } from "../../context/auth-context";
 import { showHEmployee } from "../../services/hability-employee-services";
 import BackTitledHeader from "../../components/BackTitleHeader";
@@ -11,6 +19,35 @@ function MyProfileScreen({ navigation }) {
   React.useEffect(() => {
     showHEmployee(user.id).then(setSkills);
   }, [user.id]);
+  const btnStyle = {
+    height: 55,
+    width: "80%",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: Colors.blue,
+    borderRadius: 10,
+    marginBottom: 16,
+  };
+  const btnTwoStyle = {
+    height: 30,
+    width: 100,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: Colors.blue,
+    borderRadius: 3,
+    marginBottom: 16,
+  };
+  const keyExtractor = (item, index) => index.toString();
+  const renderItem = ({ item }) => (
+    <ListItem key={item} containerStyle={styles.listStyle}>
+      <View key={item.id} style={styles.containerSkills}>
+        <Image style={{ width: 27, height: 27 }} source={item.icon} />
+      </View>
+    </ListItem>
+  );
+
+  // return 5 elements of the array
+  const firstFive = skills?.slice(0, 5);
   return (
     <>
       <BackTitledHeader title="Mi Perfil" />
@@ -27,7 +64,6 @@ function MyProfileScreen({ navigation }) {
               height: 75,
               borderRadius: 6,
               backgroundColor: Colors.white,
-              flex: 2,
               flexDirection: "column",
               paddingLeft: 10,
               justifyContent: "center",
@@ -43,29 +79,35 @@ function MyProfileScreen({ navigation }) {
                 </View>
               </View>
             </View>
-            <Text style={styles.yearText}>3 Años de Experiencia</Text>
+            <Text style={styles.yearText}>
+              {user.experience} de experiencia
+            </Text>
           </View>
           <View>
             {skills ? (
-              skills.map((skills) => (
-                <View style={styles.containerSkills} key={skills.id}>
-                  <Image
-                    style={{ width: 27, height: 27 }}
-                    source={skills.icon}
-                  />
-                </View>
-              ))
+              <View style={styles.stylesFlatList}>
+                <FlatList
+                  keyExtractor={keyExtractor}
+                  data={firstFive}
+                  renderItem={renderItem}
+                  numColumns={5}
+                />
+              </View>
             ) : (
               <Text>Sin habilidades</Text>
             )}
+            <View style={{ width: "100%", alignItems: "flex-end" }}>
+              <TouchableOpacity
+                style={btnTwoStyle}
+                onPress={() => navigation.navigate("Skill")}
+              >
+                <Text style={styles.textButton}>Ver más</Text>
+              </TouchableOpacity>
+            </View>
             <View>
               <View>
                 <Text style={styles.textTitle}>Mi Biografía</Text>
-                <Text style={styles.text}>
-                  Liliana es una mujer de 40 años de edad que destaca por su
-                  buena dispocición, diligencia, educación y celeridad
-                  constante.
-                </Text>
+                <Text style={styles.text}>{user.biografy}</Text>
               </View>
               <View>
                 <Text style={styles.textTitle}>Mis Datos Personales</Text>
@@ -97,13 +139,14 @@ function MyProfileScreen({ navigation }) {
               </View>
             </View>
 
-            <Button
-              title="Ver Reseñas de Clientes"
-              buttonStyle={{
-                backgroundColor: Colors.blue,
-                borderRadius: 10,
-              }}
-            />
+            <View style={styles.containerButton}>
+              <TouchableOpacity
+                style={btnStyle}
+                onPress={() => navigation.navigate("Review")}
+              >
+                <Text style={styles.textButton}>Ver Reseñas de Clientes</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </View>
@@ -148,9 +191,8 @@ const styles = StyleSheet.create({
     color: Colors.grayFade,
   },
   containerSkills: {
-    flex: 1,
+    width: 30,
     justifyContent: "center",
-    borderRadius: 6,
     marginTop: 20,
     marginBottom: 20,
     backgroundColor: Colors.white,
@@ -171,6 +213,24 @@ const styles = StyleSheet.create({
     marginBottom: 13,
     color: Colors.grayFade,
   },
+  textButton: {
+    fontStyle: "normal",
+    fontWeight: "400",
+    fontSize: 17,
+    lineHeight: 26,
+    color: "#ffff",
+  },
+  containerButton: {
+    alignItems: "center",
+    marginTop: 30,
+  },
+  listStyle: {
+    height: 30,
+    width: 30,
+    marginVertical: 10,
+    backgroundColor: Colors.white,
+  },
+  stylesFlatList: {},
 });
 
 export default MyProfileScreen;

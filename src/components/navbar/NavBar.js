@@ -1,20 +1,21 @@
 import React from "react";
 import { StyleSheet, Text, View, SafeAreaView, Image } from "react-native";
-import userProfile from "../../assets/earnings/UserProfile.svg";
+import { useAuth } from "../../context/auth-context";
 
 export default function NavBar() {
+  const { user } = useAuth();
   return (
     <SafeAreaView style={{ height: 75 }}>
       <View style={styles.headerContainer}>
-        <Image style={{ width: 40, height: 40 }} source={userProfile} />
+        <Image style={{ width: 40, height: 40 }} source={user.image_url} />
         <View style={{ paddingLeft: 10 }}>
           <View style={styles.containerUserData}>
             <Text style={styles.title}>Hola, </Text>
             <Text style={[styles.title, { fontWeight: "600" }]}>
-              Juana Hdz !
+              {user.full_name} !
             </Text>
           </View>
-          <Text style={styles.gmailText}>juana_hdez@gmail.com</Text>
+          <Text style={styles.gmailText}>{user.email}</Text>
         </View>
       </View>
     </SafeAreaView>

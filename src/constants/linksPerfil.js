@@ -18,37 +18,22 @@ export const CategoryLinks = [
     id: 2,
     icon: Reviews,
     nombre: "Reseñas del Cliente",
-    ruta: "Reviews",
+    ruta: "Review",
   },
-  { id: 3,
+  {
+    id: 3,
     icon: Capacitation,
     nombre: "Mis Capacitaciones",
-    ruta: "Capacitation"
+    ruta: "Capacitation",
   },
-  { id: 4,
-    icon: Contract,
-    nombre: "Mi Contrato",
-    ruta: "Contract"
-  },
-  { id: 5,
+  { id: 4, icon: Contract, nombre: "Mi Contrato", ruta: "Contract" },
+  {
+    id: 5,
     icon: Certify,
     nombre: "Certificado Laboral",
-    ruta: "Certification"
+    ruta: "Certification",
   },
-  { id: 6,
-    icon: Notify,
-    nombre: "Notificaciones",
-    ruta: "Notification"
-  },
-  { id: 7,
-    icon: Legal,
-    nombre: "Información Legal",
-    ruta: "LegalInfo"
-  },
-  { id: 8,
-    icon: Support,
-    nombre: "Chat de Soporte",
-    ruta: ""
-  },
-]
-
+  { id: 6, icon: Notify, nombre: "Notificaciones", ruta: "Notification" },
+  { id: 7, icon: Legal, nombre: "Información Legal", ruta: "LegalInfo" },
+  { id: 8, icon: Support, nombre: "Chat de Soporte", ruta: "" },
+];
