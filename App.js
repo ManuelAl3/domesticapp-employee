@@ -15,7 +15,6 @@ import Verification from "./src/components/verify/Verification";
 import Introduction from "./src/components/introduction/Introduction";
 import ButtonUi from "./src/components/ButtonUi";
 
-/*
 export default function App() {
   return (
     <View style={styles.container}>
@@ -30,9 +29,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-}); */
+});
 
-const Stack = createNativeStackNavigator();
+/* const Stack = createNativeStackNavigator();
 
 function App() {
   const [isAuth, setAuth] = React.useState(true);
@@ -91,4 +90,4 @@ function Index() {
     </NavigationContainer>
   );
 }
-export default Index;
+export default Index; */

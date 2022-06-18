@@ -7,6 +7,7 @@ import {
   ScrollView,
   FlatList,
   Button,
+  TouchableOpacity,
 } from "react-native";
 import { ListItem } from "@rneui/themed";
 import BackTitledHeader from "../../components/BackTitleHeader";
@@ -15,6 +16,7 @@ import { showHEmployee } from "../../services/hability-employee-services";
 import Stars from "react-native-stars";
 import StarSkill from "../../assets/skills/StarSkill.png";
 import StarSkillTwo from "../../assets/skills/StarSkillTwo.png";
+import colors from "../../assets/colors/colors";
 
 function SkillsScreen({ navigation }) {
   const { user } = useAuth();
@@ -25,7 +27,7 @@ function SkillsScreen({ navigation }) {
 
   const keyExtractor = (item, index) => index.toString();
   const renderItem = ({ item }) => (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+    <View style={styles.containerListItem}>
       <ListItem key={item} bottomDivider containerStyle={styles.listStyle}>
         <View key={item.id} style={styles.list}>
           <Image style={{ width: 37, height: 37 }} source={item.icon} />
@@ -33,11 +35,17 @@ function SkillsScreen({ navigation }) {
             <Text style={styles.textList}>{item.hability}</Text>
             <Text style={styles.textDescription}>{item.body}</Text>
           </View>
-          <View style={{ width: "40%", marginTop: 20 }}>
+          <View
+            style={{
+              marginHorizontal: 5,
+              marginTop: 45,
+              alignItems: "center",
+            }}
+          >
             <Stars
               display={item.score}
               spacing={8}
-              count={3}
+              count={5}
               starSize={15}
               fullStar={StarSkill}
               emptyStar={StarSkillTwo}
@@ -47,9 +55,19 @@ function SkillsScreen({ navigation }) {
       </ListItem>
     </View>
   );
+  const btnStyle = {
+    height: 55,
+    width: "80%",
+    paddingHorzontal: 16,
+    paddingVertical: 8,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: colors.blue,
+    borderRadius: 10,
+  };
   return (
     <>
-      <BackTitledHeader title="Menú" />
+      <BackTitledHeader title="Mis Habilidades" />
       <ScrollView>
         <View>
           <View
@@ -68,7 +86,10 @@ function SkillsScreen({ navigation }) {
             }}
           >
             <Text style={styles.title}>
-              ... Habilidades Actuales <Button title="+ Agregar" />
+              ... Habilidades Actuales{" "}
+              <View>
+                <Button title="+ Agregar" containerStyle={{ width: 20 }} />
+              </View>
             </Text>
           </View>
         </View>
@@ -82,6 +103,9 @@ function SkillsScreen({ navigation }) {
           ) : (
             <Text>Sin habilidades</Text>
           )}
+          <TouchableOpacity style={btnStyle}>
+            <Text style={styles.textButton}>Buenas practicas</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </>
@@ -94,10 +118,16 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#E5E5E5",
   },
+  containerListItem: {
+    margin: "1rem 0",
+    padding: "1rem",
+  },
   listStyle: {
     backgroundColor: "#ffff",
-    width: "90%",
+    boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
     borderRadius: 10,
+    margin: "1rem 0",
+    padding: "1rem",
   },
   text: {
     fontWeight: "400",
@@ -124,6 +154,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   containerTextList: {
+    width: "55%",
     paddingLeft: 14,
   },
   textList: {
@@ -138,7 +169,17 @@ const styles = StyleSheet.create({
     fontWeight: "300",
     fontSize: 11,
     lineHeight: 22,
-    width: "60%",
     color: "#82868D",
+  },
+  textButton: {
+    fontStyle: "normal",
+    fontWeight: "400",
+    fontSize: 17,
+    lineHeight: 26,
+    color: "#ffff",
+  },
+  containerButton: {
+    flex: 1,
+    alignItems: "center",
   },
 });
