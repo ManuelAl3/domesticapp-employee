@@ -9,6 +9,5 @@ export async function showHEmployee(HEmployeeID) {
 }
 
 export async function createHEmployee(newHEmployee) {
-  return await apiFetch('hability_employees/', { body: newHEmployee });
-   
+  return await apiFetch("hability_employees/", { body: newHEmployee });
 }

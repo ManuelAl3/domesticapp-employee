@@ -66,6 +66,7 @@ function App() {
               <Stack.Screen name="TermsConditions" component={H.TC} />
               <Stack.Screen name="DataTreatment" component={H.DT} />
               <Stack.Screen name="PrivacyPolicy" component={H.PP} />
+              <Stack.Screen name="Help" component={Supp.Help} />
             </>
           )}
         </>

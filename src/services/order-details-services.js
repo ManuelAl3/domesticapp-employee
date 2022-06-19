@@ -9,6 +9,9 @@ export async function showOrderDetail(OrderDetailID) {
 }
 
 export async function createOrderDetail(newOrderDetail) {
-  return await apiFetch('order_details/', { body: newOrderDetail });
-   
+  return await apiFetch("order_details/", { body: newOrderDetail });
+}
+
+export async function showOrderEmployee(OrderEmployeeID) {
+  return await apiFetch(`order_employee/${OrderEmployeeID}`);
 }
