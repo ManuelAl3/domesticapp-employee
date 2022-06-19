@@ -11,6 +11,8 @@ import { ListItem } from "@rneui/themed";
 import { supportOptions } from "../constants/supportO";
 import BackTitledHeader from "../components/BackTitleHeader";
 import Colors from "../assets/colors/colors";
+import * as Linking from "expo-linking";
+import Sup from "../assets/Support/Sup.svg";
 
 function SupportScreen({ navigation }) {
   const keyExtractor = (item, index) => index.toString();
@@ -34,6 +36,10 @@ function SupportScreen({ navigation }) {
       </View>
     </ListItem>
   );
+  const URL_ROUTE_SOPORT = () => {
+    Linking.openURL("https://wa.me/52618237533");
+  };
+
   return (
     <>
       <BackTitledHeader title="Centro de Ayuda" />
@@ -58,6 +64,18 @@ function SupportScreen({ navigation }) {
           </View>
         </View>
         <View style={styles.stylesFlatList}>
+          <ListItem
+            bottomDivider
+            containerStyle={styles.listStyle}
+            onPress={URL_ROUTE_SOPORT}
+          >
+            <View style={styles.list}>
+              <Image style={{ width: 58, height: 58 }} source={Sup} />
+              <Text style={styles.textList} onPress={URL_ROUTE_SOPORT}>
+                Chat de Soporte
+              </Text>
+            </View>
+          </ListItem>
           <FlatList
             keyExtractor={keyExtractor}
             data={supportOptions}

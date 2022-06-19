@@ -2,10 +2,10 @@ import Damagee from "../assets/Support/Damagee.svg";
 import Faqs from "../assets/Support/Faqs.svg";
 import Helpe from "../assets/Support/Help.svg";
 import Notify from "../assets/Support/Notify.svg";
-import Sup from "../assets/Support/Sup.svg";
+// import Sup from "../assets/Support/Sup.svg";
 
 export const supportOptions = [
-  { id: 1, nombre: "Chat de Soporte", img: Sup, ruta: "" },
+  // { id: 1, nombre: "Chat de Soporte", img: Sup, ruta: "" },
   {
     id: 2,
     nombre: "Necesitas ayuda con tu último servicio?",

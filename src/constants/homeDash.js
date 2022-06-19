@@ -18,7 +18,7 @@ export const Dashboard = [
     img: Certification,
     ruta: "Certification",
   },
-  { id: 4, nombre: "Capacitaciones", img: Capacitation, ruta: "Capacitation" },
+  // { id: 4, nombre: "Capacitaciones", img: Capacitation, ruta: "Capacitation" },
   { id: 5, nombre: "Ganancias", img: Profit, ruta: "Profit" },
   { id: 6, nombre: "Contrato", img: Contract, ruta: "Contract" },
   { id: 7, nombre: "Información legal", img: Legal, ruta: "LegalInfo" },

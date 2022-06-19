@@ -9,10 +9,13 @@ import {
 } from "react-native";
 import Colors from "../../assets/colors/colors";
 import BackTitledHeader from "../../components/BackTitleHeader";
+import * as Linking from "expo-linking";
 
 function ReportReview({ navigation }) {
   const [text, onChangeText] = React.useState("");
-
+  const URL_ROUTE_SOPORT = () => {
+    Linking.openURL("https://wa.me/52618237533");
+  };
   // Styles component UI Button
   const btnStyle = {
     height: 55,
@@ -52,7 +55,7 @@ function ReportReview({ navigation }) {
           <TouchableOpacity style={btnStyle}>
             <Text style={styles.textButton}>Enviar</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={btnStyle}>
+          <TouchableOpacity style={btnStyle} onPress={URL_ROUTE_SOPORT}>
             <Text style={styles.textButton}>Contactar con soporte</Text>
           </TouchableOpacity>
         </View>

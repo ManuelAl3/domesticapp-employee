@@ -17,6 +17,8 @@ import Stars from "react-native-stars";
 import Star from "../assets/earnings/Star.svg";
 import EmptyStar from "../assets/earnings/EmptyStar.svg";
 import Rectangle from "../assets/Profile/Rectangle.png";
+import * as Linking from "expo-linking";
+import Sup from "../assets/Support/Sup.svg";
 
 function ProfileScreen({ navigation }) {
   const { user } = useAuth();
@@ -34,6 +36,9 @@ function ProfileScreen({ navigation }) {
       </View>
     </ListItem>
   );
+  const URL_ROUTE_SOPORT = () => {
+    Linking.openURL("https://wa.me/52618237533");
+  };
   return (
     <>
       <BackTitledHeader title="Menú" />
@@ -151,6 +156,16 @@ function ProfileScreen({ navigation }) {
             data={CategoryLinks}
             renderItem={renderItem}
           />
+          <ListItem
+            bottomDivider
+            containerStyle={styles.listStyle}
+            onPress={URL_ROUTE_SOPORT}
+          >
+            <View style={styles.list}>
+              <Image style={{ width: 30, height: 30 }} source={Sup} />
+              <Text style={styles.textList}>Chat de soporte</Text>
+            </View>
+          </ListItem>
         </ScrollView>
       </View>
     </>

@@ -17,13 +17,19 @@ import Stars from "react-native-stars";
 import StarSkill from "../../assets/skills/StarSkill.png";
 import StarSkillTwo from "../../assets/skills/StarSkillTwo.png";
 import colors from "../../assets/colors/colors";
+import * as Linking from "expo-linking";
 
 function SkillsScreen({ navigation }) {
   const { user } = useAuth();
   const [skills, setSkills] = React.useState(null);
+
   React.useEffect(() => {
     showHEmployee(user.id).then(setSkills);
   }, [user.id]);
+
+  const URL_ROUTE = () => {
+    Linking.openURL("https://www.google.com/");
+  };
 
   const keyExtractor = (item, index) => index.toString();
   const renderItem = ({ item }) => (
@@ -65,6 +71,16 @@ function SkillsScreen({ navigation }) {
     backgroundColor: colors.blue,
     borderRadius: 10,
   };
+  const btnStyleAdd = {
+    height: 30,
+    width: 89,
+    paddingHorzontal: 10,
+    paddingVertical: 5,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: colors.blue,
+    borderRadius: 2,
+  };
   return (
     <>
       <BackTitledHeader title="Mis Habilidades" />
@@ -87,8 +103,10 @@ function SkillsScreen({ navigation }) {
           >
             <Text style={styles.title}>
               ... Habilidades Actuales{" "}
-              <View>
-                <Button title="+ Agregar" containerStyle={{ width: 20 }} />
+              <View style={{ marginLeft: 50 }}>
+                <TouchableOpacity style={btnStyleAdd} onPress={URL_ROUTE}>
+                  <Text style={styles.textButtonAdd}>+ Agregar</Text>
+                </TouchableOpacity>
               </View>
             </Text>
           </View>
@@ -179,6 +197,13 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     fontSize: 17,
     lineHeight: 26,
+    color: "#ffff",
+  },
+  textButtonAdd: {
+    fontStyle: "normal",
+    fontWeight: "600",
+    fontSize: 13,
+    lineHeight: 20,
     color: "#ffff",
   },
   containerButton: {

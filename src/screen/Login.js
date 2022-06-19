@@ -47,14 +47,14 @@ function LoginScreen({ navigation }) {
         style={{
           width: "100%",
           alignItems: "center",
-          marginBottom: 40,
+          marginBottom: 60,
         }}
       >
         <Image source={loginHome} style={{ width: 280, height: 276 }} />
       </View>
       <View
         style={{
-          width: "90%",
+          width: "75%",
           backgroundColor: colors.blue,
         }}
       >

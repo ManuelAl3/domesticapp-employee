@@ -67,7 +67,7 @@ export default function BottomNavigation() {
         <Tab.Screen
           name="Profile"
           options={{
-            title: "Perfil",
+            title: "Menú",
             tabBarIcon: () => (
               <Image source={MenuIcon} style={{ width: 30, height: 30 }} />
             ),

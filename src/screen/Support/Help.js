@@ -14,6 +14,7 @@ import BackTitledHeader from "../../components/BackTitleHeader";
 import colors from "../../assets/colors/colors";
 import BottomNavigation from "../../components/BottomNavigation";
 import Perfil from "../../assets/Profile/Perfil.png";
+import * as Linking from "expo-linking";
 
 const currentService = [
   {
@@ -52,6 +53,9 @@ const lastService = [
 ];
 
 function Help({ navigation }) {
+  const URL_ROUTE_SOPORT = () => {
+    Linking.openURL("https://wa.me/52618237533");
+  };
   const keyExtractor = (item, index) => index.toString();
   const renderItem = ({ item }) => (
     <ListItem key={item} bottomDivider containerStyle={styles.listStyle}>
@@ -110,7 +114,7 @@ function Help({ navigation }) {
         </View>
 
         <View style={styles.containerButton}>
-          <TouchableOpacity style={btnStyle}>
+          <TouchableOpacity style={btnStyle} onPress={URL_ROUTE_SOPORT}>
             <Text style={styles.textButton}>Contacta con soporte</Text>
           </TouchableOpacity>
         </View>
