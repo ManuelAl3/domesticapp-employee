@@ -28,28 +28,60 @@ function DataTreatment({ navigation }) {
             <Text
               style={{
                 fontStyle: "normal",
+                fontWeight: "600",
+                fontSize: 14,
+                lineHeight: 26,
+                color: "#000000",
+              }}
+            >
+              GARANTÍA Y PROTECCIÓN DE DATOS{" "}
+            </Text>
+            <Text
+              style={{
+                fontStyle: "normal",
                 fontWeight: "300",
                 fontSize: 14,
                 lineHeight: 22,
                 color: "#000000",
               }}
             >
-              1 - CONDICIONES GENERALES DE USO El presente documento tiene por
-              objeto establecer las Condiciones Generales de Uso de las
-              aplicaciones móviles y el servicio web a titularidad de
-              DOMESTICAPP S.A.S. (en adelante DOMESTICAPP) con domicilio social
-              en Medellín Colombia, dirección Calle 9 sur #79C-151 e inscrito en
-              la Cámara de Comercio de Medellín. DOMESTICAPP se reserva el
-              derecho a modificar las presentes Condiciones de Uso con el objeto
-              de adecuarlas a la legislación vigente aplicable en cada momento.
-              Las presentes Condiciones de Uso no excluyen la posibilidad de que
-              determinados Servicios de las aplicaciones, por sus
-              características particulares, sean sometidos, además de a las
-              Condiciones Generales de Uso, a sus propias condiciones
-              particulares de uso (en adelante las Condiciones Particulares). La
-              Empresa podrá, en cualquier momento y sin necesidad de previo
-              aviso, realizar cambios y actualizaciones de las presentes
-              Condiciones de Uso y de la Política de Privacidad...
+              En el tratamiento de los datos de carácter personal, DOMESTICAPP
+              se compromete a garantizar y proteger las libertades públicas y
+              los derechos fundamentales de las personas físicas de los ficheros
+              y, especialmente, su honor y su intimidad familiar y personal,
+              obligándose en este sentido, a efectuar el correspondiente
+              tratamiento de datos de acuerdo con la normativa vigente en cada
+              momento y a guardar el más absoluto secreto en relación con la
+              información entregada por los clientes y usuarios.
+            </Text>
+            <Text
+              style={{
+                fontStyle: "normal",
+                fontWeight: "600",
+                fontSize: 14,
+                lineHeight: 26,
+                color: "#000000",
+              }}
+            >
+              CALIDAD DE LOS DATOS{" "}
+            </Text>
+            <Text
+              style={{
+                fontStyle: "normal",
+                fontWeight: "300",
+                fontSize: 14,
+                lineHeight: 22,
+                color: "#000000",
+              }}
+            >
+              Los usuarios y clientes deberán velar por el cumplimiento de todas
+              las medidas técnicas y organizativas necesarias con la finalidad
+              de garantizar la seguridad de los datos de carácter personal,
+              evitando su alteración, pérdida, tratamiento o acceso no
+              autorizado. Los datos que se comuniquen a través de la aplicación
+              tendrán que ser exactos y puestos al día siendo de exclusiva
+              responsabilidad de los clientes y usuarios la actualización de
+              estos datos.
             </Text>
           </View>
           <View style={{ alignItems: "center", marginTop: 30 }}>

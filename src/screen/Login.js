@@ -3,19 +3,24 @@ import {
   Text,
   View,
   SafeAreaView,
-  ScrollView,
   Image,
-  Button,
   TouchableOpacity,
 } from "react-native";
-import * as React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useAuth } from "../context/auth-context";
 import { Input, Icon } from "@rneui/themed";
 import loginHome from "../assets/login/loginHome.png";
 import colors from "../assets/colors/colors";
+import { Picker } from "@react-native-picker/picker";
 
 function LoginScreen({ navigation }) {
   const { login } = useAuth();
+  const [country, setCountry] = useState("col");
+
+  const changeCountry = async (country) => {
+    setCountry(country);
+    // await AsyncStorage.setItem('country', country);
+  };
 
   const btnStyle = {
     height: 55,
@@ -43,6 +48,32 @@ function LoginScreen({ navigation }) {
         backgroundColor: colors.blue,
       }}
     >
+      <View style={styles.countrySelect}>
+        <Picker
+          selectedValue={country}
+          onValueChange={changeCountry}
+          dropdownIconColor="#000"
+        >
+          <Picker.Item
+            fontFamily="Poppins_400Regular"
+            style={styles.countrySelectText}
+            label="Colombia"
+            value="col"
+          />
+          <Picker.Item
+            fontFamily="Poppins_400Regular"
+            style={styles.countrySelectText}
+            label="España"
+            value="es"
+          />
+          <Picker.Item
+            fontFamily="Poppins_400Regular"
+            style={styles.countrySelectText}
+            label="Canadá"
+            value="ca"
+          />
+        </Picker>
+      </View>
       <View
         style={{
           width: "100%",
@@ -109,5 +140,15 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginBottom: 17,
     color: "#FBFBFB",
+  },
+  countrySelect: {
+    backgroundColor: "rgba(0, 0, 0, 0.2)",
+    width: "60%",
+    borderRadius: 5,
+  },
+  countrySelectText: {
+    fontSize: 17,
+    color: "#000",
+    textAlign: "center",
   },
 });

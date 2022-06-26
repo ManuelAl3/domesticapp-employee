@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     fontSize: 18,
     lineHeight: 19,
-    color: "#35435E;",
+    color: "#35435E",
   },
   title: {
     fontWeight: "600",
