@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, ScrollView } from "react-native";
 import * as React from "react";
 import { CategoriasPreguntas } from "../../../constants/preguntasF";
 import BackTitledHeader from "../../../components/BackTitleHeader";
@@ -12,29 +12,29 @@ function FaqScreen({ route, navigation }) {
       backgroundColor: "#fff",
       alignItems: "center",
       justifyContent: "center",
-      fontFamily: "Poppins"
+      fontFamily: "Poppins",
     },
     questionContainer: {
       width: "90%",
-      margin: "0 auto 3rem auto"
-  },
+      margin: "0 auto 3rem auto",
+    },
     containerPr: {
       boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
       borderRadius: "1rem",
       margin: "1rem 0",
       padding: "1rem",
     },
-    Ptitle:{
+    Ptitle: {
       textAlign: "center",
       fontSize: "14px",
       fontWeight: "bold",
     },
-    Ptext:{
+    Ptext: {
       textAlign: "Justified",
       fontSize: "14px",
       letterSpacing: "1px",
     },
-    Legend:{
+    Legend: {
       textAlign: "center",
       fontSize: "14px",
       fontWeight: "bold",
@@ -45,15 +45,14 @@ function FaqScreen({ route, navigation }) {
 
   return (
     <>
-      {
-        CategoriasPreguntas.map((categoria)=>(
-          categoria.id === itemId ? (
-            <>
+      {CategoriasPreguntas.map((categoria) =>
+        categoria.id === itemId ? (
+          <>
             <BackTitledHeader title={categoria.title} />
-            <View style={styles.container} key={categoria.id}>
-              <Text style={styles.Legend}>{categoria.legend}</Text>
-              {
-                categoria.preguntas.map((pregunta) => (
+            <ScrollView>
+              <View style={styles.container} key={categoria.id}>
+                <Text style={styles.Legend}>{categoria.legend}</Text>
+                {categoria.preguntas.map((pregunta) => (
                   <View style={styles.questionContainer} key={pregunta.id}>
                     <View style={styles.containerPr}>
                       <Text style={styles.Ptitle}>{pregunta.pregunta}</Text>
@@ -62,15 +61,14 @@ function FaqScreen({ route, navigation }) {
                       <Text style={styles.Ptext}>{pregunta.respuesta}</Text>
                     </View>
                   </View>
-                ))
-              }
-            </View>
-            </>
-          ) : null
-        ))
-      }
+                ))}
+              </View>
+            </ScrollView>
+          </>
+        ) : null
+      )}
     </>
-    );
+  );
 }
 
 export default FaqScreen;
