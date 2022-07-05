@@ -67,6 +67,7 @@ function App() {
               <Stack.Screen name="DataTreatment" component={H.DT} />
               <Stack.Screen name="PrivacyPolicy" component={H.PP} />
               <Stack.Screen name="Help" component={Supp.Help} />
+              <Stack.Screen name="ReportCalendar" component={S.ReportCalendar} />
               <Stack.Screen
                 name="InsurancePolicy"
                 component={Supp.InsurancePolicy}

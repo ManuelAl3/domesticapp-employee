@@ -1,6 +1,6 @@
 import * as React from "react";
 import { login, logout } from "../services/session-service";
-import { getUser } from "../services/users-service";
+import { getUser, updateUser } from "../services/users-service";
 import { useNavigation } from "@react-navigation/native";
 import { tokenKey } from "../../config";
 
@@ -35,6 +35,12 @@ function AuthProvider({ children }) {
       navigation.navigate("");
     });
   }
+  function handleUpdateCustomer(userData) {
+    return updateUser(userData).then((user) => {
+      setUser(user);
+      navigation.navigate("Main");
+    });
+  }
 
   return (
     <AuthContext.Provider
@@ -42,6 +48,7 @@ function AuthProvider({ children }) {
         user,
         login: handleLogin,
         logout: handleLogout,
+        update: handleUpdateCustomer,
       }}
     >
       {children}

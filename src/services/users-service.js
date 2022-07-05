@@ -34,3 +34,12 @@ export async function showEmployee(CategoryID) {
 export async function showEmploye() {
   return await apiFetch(`employee`);
 }
+
+export async function updateEmployee(data, userId) {
+
+  return await apiFetch(`employees/${userId}`, {
+    body: JSON.stringify(data),
+    method: "PATCH",
+    headers: { 'Content-Type': 'application/json' },
+  });
+}

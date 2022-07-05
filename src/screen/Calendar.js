@@ -15,6 +15,8 @@ import { useAuth } from "../context/auth-context";
 import { Calendar } from "react-native-calendars";
 import colors from "../../src/assets/colors/colors";
 import ModalCal from "../components/calendar/Modal";
+import * as Linking from 'expo-linking';
+import { useNavigation } from "@react-navigation/native";
 
 function CalendarScreen({ navigation }) {
   /* const { user } = useAuth();
@@ -95,9 +97,10 @@ export default CalendarScreen;
 export function DayCard() {
     const { user } = useAuth();
   const [orders, setOrders] = React.useState(null);
+  const [lastTime, setlastTime] = React.useState(null);
   const [count, setCount] = React.useState(0);
   const [modalVisible, setModalVisible] = React.useState(false);
-
+  const navigation = useNavigation();
    React.useEffect(() => {
     showOrderEmployee(user.id).then(setOrders);
   }, [user.id]); 
@@ -110,7 +113,14 @@ export function DayCard() {
     if(count+1 < orders.length){
     setCount(count+1)}}
   }
+  function GoogleAddres(address){
+    Linking.openURL(`http://maps.google.com/?q=1200 ${address}`);
+  }
 
+  function goReport() {
+    setModalVisible(!modalVisible)
+    navigation.navigate("ReportCalendar")
+  }
   return (
     <>
     <View style={style.card}>
@@ -140,32 +150,53 @@ export function DayCard() {
         }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-          orders ? (
+          {orders ? (
         <>
         <Text style={style.cardTitle}>{orders[count].start_date}</Text>
+        {
+          orders[count].workday === "Completa" ? (
+            <Text style={style.cardTitle}>{orders[count].service_time} - {parseInt((orders[count].service_time.split(":")[0]))+9+":"+(orders[count].service_time.split(":")[1])}</Text>
+          ) : orders[count].workday === "Media" ? (
+            <Text style={style.cardTitle}>{orders[count].service_time} - {(parseInt((orders[count].service_time.split(":")[0]))+4)+":"+(parseInt((orders[count].service_time.split(":")[1]))+30)}</Text>
+          ) : orders[count].workday === "Hora" ? (
+            <Text style={style.cardTitle}>{orders[count].service_time} - {(parseInt((orders[count].service_time.split(":")[0]))+parseInt(orders[count].hours))+":"+(orders[count].service_time.split(":")[1])}</Text>
+          ) : null
+        }
         <Text style={style.cardTitle}>Jornada: {orders[count].workday}</Text>
         <Image style={{ width: 30, height: 30 }} source={orders[count].customer.image_url} />
         <Text style={style.text}>{orders[count].customer.full_name}</Text>
-
-         
-       </>
-       ) : (
-        <Text style={styles.modalText}>Hello World asdasdadasdasdadadasdasda!</Text>
-      )
-           
+        <Text style={style.text}>{orders[count].category.category_name}</Text>
+        <Text style={style.text}>{orders[count].address}</Text>
+        <Pressable
+              style={[styles.button, styles.buttonClose]}
+              onPress={() => GoogleAddres(orders[count].address)}>
+              <Text style={styles.textStyle}>Ver Dirección en el Mapa</Text>
+            </Pressable>
             <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={() => setModalVisible(!modalVisible)}>
-              <Text style={styles.textStyle}>Hide Modal</Text>
+              <Text style={styles.textStyle}>Regresar a Calendario</Text>
             </Pressable>
+            <Pressable
+              style={[styles.button, styles.buttonClose]}
+              onPress={() => goReport()}>
+              <Text style={styles.textStyle}>Reportar Incapacidad</Text>
+            </Pressable>
+       </>
+       ) : (
+        <Text style={styles.modalText}>No hay más información</Text>
+      )}
+           
+            
+            
           </View>
         </View>
       </Modal>
       <Pressable style={[styles.button, styles.buttonOpen]} onPress={() => setModalVisible(true)}>
-        <Text style={styles.textStyle}>Show Modal</Text>
+        <Text style={styles.textStyle}>Ver más detalles</Text>
       </Pressable>
     </View>
-    <Button title="Ver detalles del servicio" onPress={()=>ModalCal()}/></>
+    </>
   );
 }
 
