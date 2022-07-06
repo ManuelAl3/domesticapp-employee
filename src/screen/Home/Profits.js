@@ -19,49 +19,183 @@ import Speedometer from "react-native-speedometer-chart";
 import Stars from "react-native-stars";
 import * as Progress from "react-native-progress";
 import CircularProgress from "react-native-circular-progress-indicator";
+import { showOrderEmployee } from "../../services/order-details-services";
+import { showReviews } from "../../services/reviews-service";
+import faStar from "../../assets/Reviews/faStar.svg";
 
-const dataList = [
-  {
-    id: 1,
-    titulo: "PERIODO:",
-    texto: "21/05/2022 - 05/06/2022",
-  },
-  {
-    id: 2,
-    titulo: "JORDNADAS COMPLETAS:",
-    texto: "8 Jornadas",
-  },
-  {
-    id: 3,
-    titulo: "MEDIAS JORNADAS:",
-    texto: "6 Medias Jornadas",
-  },
-  {
-    id: 4,
-    titulo: "GANANCIA BRUTA JORNADA COMPLETA:",
-    texto: "40.000 COP",
-  },
-  {
-    id: 5,
-    titulo: "GANANCIA BRUTA MEDIA JORNADA:",
-    texto: "30.000 COP",
-  },
-  {
-    id: 6,
-    titulo: "FECHAS DE CORTE:",
-    texto: "(5) y (20) de cada mes",
-  },
-  {
-    id: 7,
-    titulo: "AUXILIO TRANSPORTE POR JORNADA:",
-    texto: "4.687 COP",
-  },
-];
-
-function ProfitsScreen({ navigation }) {
+function ProfitsScreen() {
   const { user } = useAuth();
-  const dataChart = 565.618;
-  const textChart = dataChart + "COP";
+  const [orders, setOrders] = React.useState(null);
+  const [star, setStar] = React.useState(null);
+  const [reviews, setReviews] = React.useState(null);
+
+  const date = new Date()
+  const periodoMin = date.getMonth()+"/"+date.getFullYear()
+  const periodoMax = date.getMonth()+1+"/"+date.getFullYear()
+
+  React.useEffect(() => {
+    showOrderEmployee(user.id).then(setOrders)
+    showReviews(user.id).then(setReviews)
+  }, [user])
+
+  let completas = []
+  let Ganancias = 0
+  let Medias = []
+  let Hora = 0
+  let totalCompletas= 0
+  let totalMedias= 0
+  if(orders){
+    orders.forEach((order)=>{
+      if(order.workday === 'Completa'){
+        completas.push(order)
+        Ganancias += 44687
+      }
+      if(order.workday === 'Hora'){
+        if(order.hours !== "")
+        Hora += parseInt(order.hours)
+        Ganancias += 7.82
+      }
+      if(order.workday === 'Media'){
+        Medias.push(order)
+        Ganancias += 34687
+      }
+    })
+    
+    if(completas.length < 5){
+      totalCompletas = 5;
+    }
+    if(completas.length < 10 && completas.length >= 5){
+      totalCompletas = 10;
+    }
+    if(completas.length < 15 && completas.length >= 10){
+      totalCompletas = 15;
+    }
+    if(completas.length < 20 && completas.length >= 15){
+      totalCompletas = 20;
+    }
+    if(completas.length < 25 && completas.length >= 20){
+      totalCompletas = 25;
+    }
+    if(completas.length < 30 && completas.length >= 25){
+      totalCompletas = 30;
+    }
+    if(completas.length < 35 && completas.length >= 30){
+      totalCompletas = 35;
+    }
+    if(completas.length < 40 && completas.length >= 35){
+      totalCompletas = 40;
+    }
+    if(completas.length < 45 && completas.length >= 40){
+      totalCompletas = 45;
+    }
+    if(completas.length < 50 && completas.length >= 45){
+      totalCompletas = 50;
+    }
+    if(completas.length < 55 && completas.length >= 50){
+      totalCompletas = 55;
+    }
+    if(completas.length < 60 && completas.length >= 55){
+      totalCompletas = 60;
+    }
+    if(completas.length < 65 && completas.length >= 60){
+      totalCompletas = 65;
+    }
+    if(completas.length < 70 && completas.length >= 65){
+      totalCompletas = 70;
+    }
+    if(completas.length < 75 && completas.length >= 70){
+      totalCompletas = 75;
+    }
+    if(completas.length < 80 && completas.length >= 75){
+      totalCompletas = 80;
+    }
+    if(completas.length < 85 && completas.length >= 80){
+      totalCompletas = 85;
+    }
+    if(completas.length < 90 && completas.length >= 85){
+      totalCompletas = 90;
+    }
+    if(completas.length < 95 && completas.length >= 90){
+      totalCompletas = 95;
+    }
+    if(completas.length < 100 && completas.length >= 95){
+      totalCompletas = 100;
+    }
+
+    if(Medias.length < 5){
+      totalMedias = 5;
+    }
+    if(Medias.length < 10 && Medias.length >= 5){
+      totalMedias = 10;
+    }
+    if(Medias.length < 15 && Medias.length >= 10){
+      totalMedias = 15;
+    }
+    if(Medias.length < 20 && Medias.length >= 15){
+      totalMedias = 20;
+    }
+    if(Medias.length < 25 && Medias.length >= 20){
+      totalMedias = 25;
+    }
+    if(Medias.length < 30 && Medias.length >= 25){
+      totalMedias = 30;
+    }
+    if(Medias.length < 35 && Medias.length >= 30){
+      totalMedias = 35;
+    }
+    if(Medias.length < 40 && Medias.length >= 35){
+      totalMedias = 40;
+    }
+    if(Medias.length < 45 && Medias.length >= 40){
+      totalMedias = 45;
+    }
+    if(Medias.length < 50 && Medias.length >= 45){
+      totalMedias = 50;
+    }
+    if(Medias.length < 55 && Medias.length >= 50){
+      totalMedias = 55;
+    }
+    if(Medias.length < 60 && Medias.length >= 55){
+      totalMedias = 60;
+    }
+    if(Medias.length < 65 && Medias.length >= 60){
+      totalMedias = 65;
+    }
+    if(Medias.length < 70 && Medias.length >= 65){
+      totalMedias = 70;
+    }
+    if(Medias.length < 75 && Medias.length >= 70){
+      totalMedias = 75;
+    }
+    if(Medias.length < 80 && Medias.length >= 75){
+      totalMedias = 80;
+    }
+    if(Medias.length < 85 && Medias.length >= 80){
+      totalMedias = 85;
+    }
+    if(Medias.length < 90 && Medias.length >= 85){
+      totalMedias = 90;
+    }
+    if(Medias.length < 95 && Medias.length >= 90){
+      totalMedias = 95;
+    }
+    if(Medias.length < 100 && Medias.length >= 95){
+      totalMedias = 100;
+    }
+    
+  }
+
+  let score=0
+  if(reviews){
+    reviews.forEach((review)=>{
+      score += review.score;
+    })
+    
+    score = parseInt(score/reviews.length);
+    if(!star){
+      setStar(score)
+    }
+  }
   return (
     <>
       <BackTitledHeader title="Mis ganancias" />
@@ -145,18 +279,107 @@ function ProfitsScreen({ navigation }) {
                 </Text>
               </View>
               <View>
-                {dataList.map((item, index) => (
-                  <View key={index} style={styles.containerHorizontal}>
-                    <View
+              {
+                orders ? (
+                  <>
+                  <View  style={styles.containerHorizontal}>
+                    <View 
+                        style={{
+                          width: 16,
+                          height: 16,
+                        }}
+                      />
+                    <Text style={styles.textList}>PERIODO: </Text>
+                    <Text>{"21/"+periodoMin.toString()+ " - 05/"+periodoMax.toString()}</Text>
+                  </View>
+
+                  <View  style={styles.containerHorizontal}>
+                    <View 
+                        style={{
+                          width: 16,
+                          height: 16,
+                        }}
+                      />
+                    <Text style={styles.textList}>FECHA DE CORTE: </Text>
+                    <Text>(5) y (20) de cada mes</Text>
+                  </View>
+                  {
+                    user ? (
+                      user.country == "Colombia" ? (
+                        <>
+                        <View  style={styles.containerHorizontal}>
+                    <View 
                       style={{
                         width: 16,
                         height: 16,
-                      }}
-                    ></View>
-                    <Text style={styles.textList}>{item.titulo}</Text>
-                    <Text>{item.texto}</Text>
+                    }}/>
+                    <Text style={styles.textList}>JORNADAS COMPLETAS:</Text>
+                    <Text>{completas.length + " Jornadas"}</Text>
                   </View>
-                ))}
+
+                  <View  style={styles.containerHorizontal}>
+                    <View 
+                      style={{
+                        width: 16,
+                        height: 16,
+                    }}/>
+                    <Text style={styles.textList}>MEDIAS JORNADAS:</Text>
+                    <Text>{Medias.length + " Medias Jornadas"}</Text>
+                  </View>
+
+                  <View  style={styles.containerHorizontal}>
+                    <View 
+                      style={{
+                        width: 16,
+                        height: 16,
+                    }}/>
+                    <Text style={styles.textList}>GANANCIA BRUTA JORNADA COMPLETA:</Text>
+                    <Text>40.000 COP</Text>
+                  </View>
+
+                  <View  style={styles.containerHorizontal}>
+                    <View 
+                      style={{
+                        width: 16,
+                        height: 16,
+                    }}/>
+                    <Text style={styles.textList}>GANANCIA BRUTA MEDIA JORNADA: </Text>
+                    <Text>30.000 COP</Text>
+                  </View>
+
+                  <View  style={styles.containerHorizontal}>
+                    <View 
+                      style={{
+                        width: 16,
+                        height: 16,
+                    }}/>
+                    <Text style={styles.textList}>AUXILIO TRANSPORTE POR JORNADA: </Text>
+                    <Text>4.687 COP</Text>
+                  </View>
+                        </>
+                      ) : (
+                        <>
+                        <View  style={styles.containerHorizontal}>
+                    <View 
+                      style={{
+                        width: 16,
+                        height: 16,
+                    }}/>
+                    <Text style={styles.textList}>HORAS LABORADAS: </Text>
+                    <Text>{Hora + " Horas"}</Text>
+                  </View>
+
+                        </>
+                      )
+                    ) : null
+                  }
+                 
+
+                </>)
+                  
+                : (<Text>Aún no tienes jornadas</Text>)
+              }
+                
               </View>
             </View>
             <View style={styles.divider}>
@@ -183,26 +406,11 @@ function ProfitsScreen({ navigation }) {
                   alignItems: "center",
                 }}
               >
-                <Speedometer
-                  value={100}
-                  totalValue={150}
-                  size={320}
-                  outerColor={Colors.colorTitle}
-                  internalColor={Colors.blue}
-                  showText
-                  text={textChart}
-                  showPercent
-                  valueSuffix={"X"}
-                  textStyle={{
-                    color: Colors.blue,
-                    fontSize: 30,
-                    fontWeight: "600",
-                    lineHeight: 22,
-                  }}
-                  labelStyle={{ color: "blue" }}
-                  labelFormatter={(number) => `${number}%`}
-                  percentStyle={{ color: Colors.blue }}
-                />
+               <Text
+                style={[styles.titleStyle, { marginBottom: 20, marginTop: 20 }]}
+              >
+                {Ganancias + " COP"}
+              </Text>
                 <View
                   style={{
                     flex: 1,
@@ -240,24 +448,29 @@ function ProfitsScreen({ navigation }) {
                   }}
                 >
                   <View style={{ alignItems: "center" }}>
-                    <Stars
-                      display={4}
+                  {
+                    star ? (
+                      <Stars
+                      display={star}
                       spacing={10}
                       count={5}
                       starSize={20}
                       fullStar={Star}
                       emptyStar={EmptyStar}
                     />
-                    <Text style={styles.textStart}>4/5 Reseñas</Text>
+                    ) :null
+                  }
+
+                    <Text style={styles.textStart}>{score+"/5 Reseñas"}</Text>
                   </View>
                   <View style={{ alignItems: "center" }}>
-                    <Progress.Bar progress={0.3} width={80} />
-                    <Text style={styles.progressText}>64/100 J. Completas</Text>
+                    <Progress.Bar progress={completas.length/10} width={80} />
+                    <Text style={styles.progressText}>{completas.length+"/"+totalCompletas+ " +J. Completas"}</Text>
                   </View>
                   <View style={{ alignItems: "center" }}>
-                    <Progress.Bar progress={0.3} width={80} />
+                    <Progress.Bar progress={Medias.length/10} width={80} />
                     <Text style={styles.progressText}>
-                      48/100 Medias Jornada
+                      {Medias.length+"/"+totalMedias +"Medias Jornada"}
                     </Text>
                   </View>
                 </View>
@@ -282,6 +495,7 @@ function ProfitsScreen({ navigation }) {
                   <View>
                     <CircularProgress
                       value={60}
+                      maxValue={200}
                       progressValueColor={Colors.blue}
                       inActiveStrokeColor={"#2ecc71"}
                       inActiveStrokeOpacity={0.2}
