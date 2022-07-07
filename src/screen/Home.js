@@ -13,12 +13,11 @@ import Colors from "../assets/colors/colors";
 import DashboardMain from "../assets/Home/DashboardMain.png";
 import RectangleDivider from "../assets/Home/RectangleDivider.svg";
 import NavBar from "../components/navbar/NavBar";
-import { vw, vh, vmin, vmax } from 'react-native-expo-viewport-units';
-import ServiceTypesCatalog from "../components/TypesCatalog";
+import { vw, vh} from 'react-native-expo-viewport-units';
 
 function HomeScreen({ navigation }) {
   
-  const keyExtractor = (item, index) => index.toString();
+  const keyExtractor = (index) => index.toString();
   const renderItem = ({ item }) => (
     <View style={styles.containerB}>
       <ListItem
