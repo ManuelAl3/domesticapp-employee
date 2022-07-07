@@ -48,7 +48,10 @@ function ProfileScreen({ navigation }) {
       <View style={styles.container}>
         <ScrollView>
           <View>
-            <View
+          {
+            user ? (
+              <>
+                 <View
               style={{
                 flex: 2,
                 flexDirection: "row",
@@ -74,7 +77,7 @@ function ProfileScreen({ navigation }) {
                   {user.full_name}
                 </Text>
               </View>
-            </View>
+            </View>           
             <View
               style={{
                 flex: 2,
@@ -116,6 +119,8 @@ function ProfileScreen({ navigation }) {
                 ID: {user.document_id}
               </Text>
             </View>
+            </>) : null
+          }
             <View
               style={{
                 height: 100,

@@ -9,9 +9,7 @@ export default function NavBar() {
   React.useEffect(() => {
     setUser(auth.getState().user.data)
   },[]);
-  if(user){
-    console.log(user);
-  }
+
   return (
      <SafeAreaView style={{ height: 75 }}>
       <View style={styles.headerContainer}>

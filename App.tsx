@@ -35,10 +35,7 @@ const Stack: any = createNativeStackNavigator();
 function App() {
 
   const [state, functions] = useAuth();
-  if(state){
 
-    console.log(state.user)
-  }
   return (
     <Provider 
       url={BASE_URI} 

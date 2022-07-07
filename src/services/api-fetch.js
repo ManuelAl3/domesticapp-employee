@@ -5,8 +5,8 @@ export default async function apiFetch(
   endpoint,
   { method, headers, body } = {}
 ) {
-  const token = AsyncStorage.getItem(tokenKey);
-
+  const token = await AsyncStorage.getItem('token');
+  console.log("TOKEN DE USUARIO: ", token);
   if (token) {
     headers = {
       Authorization: `Token token=${token}`,

@@ -4,7 +4,7 @@ export const saveToken = async (token) => {
   try {
     await AsyncStorage.setItem("token", token);
   } catch (err) {
-    console.log(err);
+    //console.log(err);
   }
 };
 
@@ -12,7 +12,7 @@ export const retrieveToken = async () => {
   try {
     return await AsyncStorage.getItem("token");
   } catch (err) {
-    console.log(err);
+    //console.log(err);
   }
 };
 
@@ -24,7 +24,7 @@ export const deleteToken = async () => {
   try {
     await AsyncStorage.removeItem("token");
   } catch (err) {
-    console.log(err);
+    //console.log(err);
   }
 };
 const login = async () => {

@@ -5,7 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 export async function getUser() {
   
   const { _token, ...user } = await apiFetch("profile");
-  console.log(user);
+  //console.log(user);
   return user;
 }
 
