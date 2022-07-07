@@ -13,15 +13,31 @@ import Colors from "../assets/colors/colors";
 import DashboardMain from "../assets/Home/DashboardMain.png";
 import RectangleDivider from "../assets/Home/RectangleDivider.svg";
 import NavBar from "../components/navbar/NavBar";
-import { vw, vh} from 'react-native-expo-viewport-units';
+import { vw, vh } from "react-native-expo-viewport-units";
 
 function HomeScreen({ navigation }) {
-  
   const keyExtractor = (index) => index.toString();
   const renderItem = ({ item }) => (
     <View style={styles.containerB}>
       <ListItem
         key={item}
+        containerStyle={styles.listStyle}
+        onPress={() => navigation.navigate(`${item.ruta}`, { itemId: item.id })}
+      >
+        <View style={styles.containerLogo}>
+          <View style={styles.containerLogo}>
+            <Image style={{ width: 50, height: 50 }} source={item.img} />
+          </View>
+          <Text style={styles.textStyle}>{item.nombre}</Text>
+        </View>
+      </ListItem>
+    </View>
+  );
+
+  const Menu = ({ item }) => (
+    <View style={styles.containerB}>
+      <ListItem
+        key={item.id}
         containerStyle={styles.listStyle}
         onPress={() => navigation.navigate(`${item.ruta}`, { itemId: item.id })}
       >
@@ -53,23 +69,24 @@ function HomeScreen({ navigation }) {
             </View>
             <View style={styles.divider}>
               <RectangleDivider
-                style={{ width: 350, height: 3, marginTop: 20, marginBottom: 20 }}
+                style={{
+                  width: 350,
+                  height: 3,
+                  marginTop: 20,
+                  marginBottom: 20,
+                }}
               />
             </View>
           </View>
           <View style={styles.row}>
-          <View style={styles.stylesFlatList}>
-      
-    </View>
- <FlatList
-        numColumns={3}
-        keyExtractor={keyExtractor}
-        data={Dashboard}
-        renderItem={renderItem}
-      />
+            <FlatList
+              numColumns={3}
+              keyExtractor={keyExtractor}
+              data={Dashboard}
+              renderItem={renderItem}
+            />
           </View>
         </ScrollView>
-       
       </SafeAreaView>
     </>
   );
@@ -90,11 +107,11 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   row: {
-    flexWrap: 'wrap',
-    flexDirection: 'row',
-    width: '85%',
-    justifyContent: 'space-between',
-    marginLeft: 30
+    flexWrap: "wrap",
+    flexDirection: "row",
+    width: "90%",
+    justifyContent: "space-between",
+    marginLeft: 20,
   },
   containerLogo: {
     flex: 1,

@@ -17,7 +17,7 @@ export default function BackTitledHeader(props) {
       <TouchableHighlight
         onPress={() => (navigation.canGoBack() ? navigation.goBack() : null)}
       >
-        <Image style={{ width: 35, height: 35 }} source={BackIcon} />
+        <BackIcon style={{ width: 35, height: 35, marginTop: 10, }}/>
       </TouchableHighlight>
       <Text numberOfLines={1} style={styles.title}>
         {props.title}
@@ -33,6 +33,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   title: {
+    marginTop: 10,
     color: "#82868D",
     fontSize: 24,
     fontWeight: "600",

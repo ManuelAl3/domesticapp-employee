@@ -24,6 +24,7 @@ function ReviewsScreen({ navigation }) {
   const auth = React.useContext(AuthContext);
   React.useEffect(() => {
     setUser(auth.getState().user.data)
+    showReviews(auth.getState().user.data).then(setReviews);
   },[]);
   const [reviews, setReviews] = React.useState(null);
 
@@ -34,9 +35,6 @@ function ReviewsScreen({ navigation }) {
     }
     return starts;
   }; */
-  React.useEffect(() => {
-    showReviews(user.id).then(setReviews);
-  }, [user.id]);
 
   // Styles component UI Button
   const btnStyle = {
@@ -51,7 +49,7 @@ function ReviewsScreen({ navigation }) {
     borderRadius: 15,
   };
 
-  const keyExtractor = (item, index) => index.toString();
+  const keyExtractor = (index) => index.toString();
   const renderItem = ({ item }) => (
     <ListItem key={item} bottomDivider containerStyle={styles.listStyle}>
       <View key={item.id} style={styles.list}>
@@ -95,16 +93,24 @@ function ReviewsScreen({ navigation }) {
               marginLeft: 25,
             }}
           >
-            <Text style={styles.title}>Reseñas(5)</Text>
+          {
+            reviews ? (
+              <Text style={styles.title}>Reseñas({reviews.length})</Text>
+            ) : null
+          }
+            
           </View>
         </View>
         <View style={styles.stylesFlatList}>
           {reviews ? (
-            <FlatList
+            reviews.length > 0 ? (
+              <FlatList
               keyExtractor={keyExtractor}
               data={reviews}
               renderItem={renderItem}
             />
+            ) : <Text>No tienes reseñas aún</Text>
+            
           ) : (
             <Text>No tienes reseñas aún</Text>
           )}

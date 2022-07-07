@@ -28,6 +28,8 @@ function ProfitsScreen() {
   const auth = React.useContext(AuthContext);
   React.useEffect(() => {
     setUser(auth.getState().user.data)
+    showOrderEmployee(auth.getState().user.data.id).then(setOrders);
+    showReviews(auth.getState().user.data.id).then(setReviews);
   },[]);
  
   const [orders, setOrders] = React.useState(null);
@@ -38,17 +40,13 @@ function ProfitsScreen() {
   const periodoMin = date.getMonth() + "/" + date.getFullYear();
   const periodoMax = date.getMonth() + 1 + "/" + date.getFullYear();
 
-  React.useEffect(() => {
-    showOrderEmployee(user.id).then(setOrders);
-    showReviews(user.id).then(setReviews);
-  }, [user]);
-
   let completas = [];
   let Ganancias = 0;
   let Medias = [];
   let Hora = 0;
   let totalCompletas = 0;
   let totalMedias = 0;
+  let totalHoras = 0;
   if (orders) {
     orders.forEach((order) => {
       if (order.workday === "Completa") {
@@ -71,60 +69,28 @@ function ProfitsScreen() {
     if (completas.length < 10 && completas.length >= 5) {
       totalCompletas = 10;
     }
-    if (completas.length < 15 && completas.length >= 10) {
-      totalCompletas = 15;
-    }
-    if (completas.length < 20 && completas.length >= 15) {
+    if (completas.length < 20 && completas.length >= 10) {
       totalCompletas = 20;
     }
-    if (completas.length < 25 && completas.length >= 20) {
-      totalCompletas = 25;
-    }
-    if (completas.length < 30 && completas.length >= 25) {
-      totalCompletas = 30;
-    }
-    if (completas.length < 35 && completas.length >= 30) {
-      totalCompletas = 35;
-    }
-    if (completas.length < 40 && completas.length >= 35) {
-      totalCompletas = 40;
-    }
-    if (completas.length < 45 && completas.length >= 40) {
-      totalCompletas = 45;
-    }
-    if (completas.length < 50 && completas.length >= 45) {
+    if (completas.length < 50 && completas.length >= 20) {
       totalCompletas = 50;
     }
-    if (completas.length < 55 && completas.length >= 50) {
-      totalCompletas = 55;
-    }
-    if (completas.length < 60 && completas.length >= 55) {
-      totalCompletas = 60;
-    }
-    if (completas.length < 65 && completas.length >= 60) {
-      totalCompletas = 65;
-    }
-    if (completas.length < 70 && completas.length >= 65) {
-      totalCompletas = 70;
-    }
-    if (completas.length < 75 && completas.length >= 70) {
-      totalCompletas = 75;
-    }
-    if (completas.length < 80 && completas.length >= 75) {
-      totalCompletas = 80;
-    }
-    if (completas.length < 85 && completas.length >= 80) {
-      totalCompletas = 85;
-    }
-    if (completas.length < 90 && completas.length >= 85) {
-      totalCompletas = 90;
-    }
-    if (completas.length < 95 && completas.length >= 90) {
-      totalCompletas = 95;
-    }
-    if (completas.length < 100 && completas.length >= 95) {
+    if (completas.length < 100 && completas.length >= 50) {
       totalCompletas = 100;
     }
+    if (completas.length < 200 && completas.length >= 100) {
+      totalCompletas = 200;
+    }
+    if (completas.length < 500 && completas.length >= 200) {
+      totalCompletas = 500;
+    }
+    if (completas.length < 1000 && completas.length >= 500) {
+      totalCompletas = 1000;
+    }
+    if (completas.length < 2000 && completas.length >= 1000) {
+      totalCompletas = 2000;
+    }
+
 
     if (Medias.length < 5) {
       totalMedias = 5;
@@ -132,79 +98,88 @@ function ProfitsScreen() {
     if (Medias.length < 10 && Medias.length >= 5) {
       totalMedias = 10;
     }
-    if (Medias.length < 15 && Medias.length >= 10) {
-      totalMedias = 15;
-    }
-    if (Medias.length < 20 && Medias.length >= 15) {
+    if (Medias.length < 20 && Medias.length >= 10) {
       totalMedias = 20;
     }
-    if (Medias.length < 25 && Medias.length >= 20) {
-      totalMedias = 25;
-    }
-    if (Medias.length < 30 && Medias.length >= 25) {
-      totalMedias = 30;
-    }
-    if (Medias.length < 35 && Medias.length >= 30) {
-      totalMedias = 35;
-    }
-    if (Medias.length < 40 && Medias.length >= 35) {
-      totalMedias = 40;
-    }
-    if (Medias.length < 45 && Medias.length >= 40) {
-      totalMedias = 45;
-    }
-    if (Medias.length < 50 && Medias.length >= 45) {
+    if (Medias.length < 50 && Medias.length >= 20) {
       totalMedias = 50;
     }
-    if (Medias.length < 55 && Medias.length >= 50) {
-      totalMedias = 55;
-    }
-    if (Medias.length < 60 && Medias.length >= 55) {
-      totalMedias = 60;
-    }
-    if (Medias.length < 65 && Medias.length >= 60) {
-      totalMedias = 65;
-    }
-    if (Medias.length < 70 && Medias.length >= 65) {
-      totalMedias = 70;
-    }
-    if (Medias.length < 75 && Medias.length >= 70) {
-      totalMedias = 75;
-    }
-    if (Medias.length < 80 && Medias.length >= 75) {
-      totalMedias = 80;
-    }
-    if (Medias.length < 85 && Medias.length >= 80) {
-      totalMedias = 85;
-    }
-    if (Medias.length < 90 && Medias.length >= 85) {
-      totalMedias = 90;
-    }
-    if (Medias.length < 95 && Medias.length >= 90) {
-      totalMedias = 95;
-    }
-    if (Medias.length < 100 && Medias.length >= 95) {
+    if (Medias.length < 100 && Medias.length >= 50) {
       totalMedias = 100;
     }
+    if (Medias.length < 200 && Medias.length >= 100) {
+      totalMedias = 200;
+    }
+    if (Medias.length < 500 && Medias.length >= 200) {
+      totalMedias = 500;
+    }
+    if (Medias.length < 1000 && Medias.length >= 500) {
+      totalMedias = 1000;
+    }
+    if (Medias.length < 2000 && Medias.length >= 1000) {
+      totalMedias = 2000;
+    }
+
+
+    if (Hora.length < 50) {
+      totalHoras = 50;
+    }
+    if (Hora.length < 100 && Hora.length >= 50) {
+      totalHoras = 100;
+    }
+    if (Hora.length < 200 && Hora.length >= 100) {
+      totalHoras = 200;
+    }
+    if (Hora.length < 500 && Hora.length >= 200) {
+      totalHoras = 500;
+    }
+    if (Hora.length < 1000 && Hora.length >= 500) {
+      totalHoras = 1000;
+    }
+    if (Hora.length < 2000 && Hora.length >= 1000) {
+      totalHoras = 2000;
+    }
+    if (Hora.length < 5000 && Hora.length >= 2000) {
+      totalHoras = 5000;
+    }
+    if (Hora.length < 10000 && Hora.length >= 5000) {
+      totalHoras = 10000;
+    }
+    if (Hora.length < 20000 && Hora.length >= 10000) {
+      totalHoras = 20000;
+    }
+    
   }
 
-  let score = 0;
-  if (reviews) {
-    reviews.forEach((review) => {
+  let score = null;
+  if (reviews && score) {
+    if(reviews.length > 0) {
+       reviews.forEach((review) => {
       score += review.score;
     });
-
+    }
+    
+   
+    if(reviews.length > 0) {
     score = parseInt(score / reviews.length);
     if (!star) {
       setStar(score);
+
+    }}
+    if(reviews.length === 0) {
+      if (!star) {
+        setStar(0);
+      }}
     }
-  }
+
   return (
     <>
       <BackTitledHeader title="Mis ganancias" />
       <ScrollView style={{ marginHorizontal: 0 }}>
         <SafeAreaView style={styles.container}>
-          <View>
+        {
+          user ? (
+            <View>
             <View style={styles.containerHorizontal}>
               <View style={{ width: "57%" }}>
                 <Text style={styles.titleStyle}>{user.full_name}</Text>
@@ -217,9 +192,8 @@ function ProfitsScreen() {
                         styles.containerTextIcon,
                       ]}
                     >
-                      <Image
+                      <IconPlanet
                         style={{ width: 16, height: 16, marginRight: 10 }}
-                        source={IconPlanet}
                       />
                       <Text style={styles.textIcon}>{user.country}</Text>
                     </View>
@@ -229,9 +203,8 @@ function ProfitsScreen() {
                         styles.containerTextIcon,
                       ]}
                     >
-                      <Image
+                      <IconCard
                         style={{ width: 16, height: 16, marginRight: 10 }}
-                        source={IconCard}
                       />
                       <Text style={styles.textIcon}>
                         ID: {user.document_id}
@@ -259,15 +232,15 @@ function ProfitsScreen() {
                   style={{
                     width: 120,
                     height: 120,
+                    borderRadius: 90,
                   }}
-                  source={user.image_url}
+                  source={{uri: user.image_url}}
                 />
               </View>
             </View>
             <View style={styles.divider}>
-              <Image
-                style={{ width: 350, height: 3 }}
-                source={RectangleDivider}
+              <RectangleDivider
+                
               />
             </View>
             <View>
@@ -283,7 +256,8 @@ function ProfitsScreen() {
               </View>
               <View>
                 {orders ? (
-                  <>
+                  orders.length > 0 ? (
+                    <>
                     <View style={styles.containerHorizontal}>
                       <View
                         style={{
@@ -310,8 +284,8 @@ function ProfitsScreen() {
                       <Text style={styles.textList}>FECHA DE CORTE: </Text>
                       <Text>(5) y (20) de cada mes</Text>
                     </View>
-                    {user ? (
-                      user.country == "Colombia" ? (
+                    
+                      {user.country == "Colombia" ? (
                         <>
                           <View style={styles.containerHorizontal}>
                             <View
@@ -405,18 +379,17 @@ function ProfitsScreen() {
                             <Text>7.82 €</Text>
                           </View>
                         </>
-                      )
-                    ) : null}
+                      )}
                   </>
+                  ) : null
+                 
                 ) : (
                   <Text>Aún no tienes jornadas</Text>
                 )}
               </View>
             </View>
             <View style={styles.divider}>
-              <Image
-                style={{ width: 350, height: 3 }}
-                source={RectangleDivider}
+              <RectangleDivider
               />
             </View>
             <View
@@ -522,35 +495,15 @@ function ProfitsScreen() {
                               emptyStar={EmptyStar}
                             />
                           ) : null}
-
-                          <Text style={styles.textStart}>
-                            {score + "/5 Reseñas"}
+                            {
+                              reviews ? (
+                                 <Text style={styles.textStart}>
+                            {reviews.length + " Reseñas"}
                           </Text>
-                        </View>
-                        <View style={{ alignItems: "center" }}>
-                          <Progress.Bar
-                            progress={completas.length / 10}
-                            width={80}
-                          />
-                          <Text style={styles.progressText}>
-                            {completas.length +
-                              "/" +
-                              totalCompletas +
-                              " +J. Completas"}
-                          </Text>
-                        </View>
-                        <View style={{ alignItems: "center" }}>
-                          <Progress.Bar
-                            progress={Medias.length / 10}
-                            width={80}
-                          />
-                          <Text style={styles.progressText}>
-                            {Medias.length +
-                              "/" +
-                              totalMedias +
-                              "Medias Jornada"}
-                          </Text>
-                        </View>
+                              ) : null
+                            }
+                         
+                        </View>            
                       </View>
                       <View
                         style={{
@@ -558,54 +511,113 @@ function ProfitsScreen() {
                           flexDirection: "row",
                           alignItems: "center",
                           marginTop: 100,
+                          marginBottom: 10,
                         }}
                       >
-                        <View>
+                        <View style={{ marginRight: 10,}}>
                           <CircularProgress
-                            value={60}
-                            progressValueColor={Colors.blue}
-                            inActiveStrokeColor={"#2ecc71"}
-                            inActiveStrokeOpacity={0.2}
-                            activeStrokeWidth={40}
+                            value={completas.length}
+                            maxValue={totalCompletas}
+                            activeStrokeColor={"#0BBBEF"}
+                            inActiveStrokeColor={"#000"}
+                            inActiveStrokeOpacity={0.5}
+                            inActiveStrokeWidth={20}
+                            activeStrokeWidth={20}
                           />
                           <Text style={styles.progressText}>
                             Jornadas Completas
                           </Text>
                         </View>
-                        <View>
-                          <CircularProgress
-                            value={60}
-                            maxValue={200}
-                            progressValueColor={Colors.blue}
-                            inActiveStrokeColor={"#2ecc71"}
-                            inActiveStrokeOpacity={0.2}
-                            activeStrokeWidth={40}
+                        <View style={{ marginLeft: 10,}}>
+                        <CircularProgress
+                            value={Medias.length}
+                            maxValue={totalMedias}
+                            activeStrokeColor={"#0BBBEF"}
+                            inActiveStrokeColor={"#000"}
+                            inActiveStrokeOpacity={0.5}
+                            inActiveStrokeWidth={20}
+                            activeStrokeWidth={20}
                           />
                           <Text style={styles.progressText}>
                             Medias Jornadas
-                          </Text>
-                        </View>
-                        <View>
-                          <CircularProgress
-                            value={60}
-                            progressValueColor={Colors.blue}
-                            inActiveStrokeColor={"#2ecc71"}
-                            inActiveStrokeOpacity={0.2}
-                            activeStrokeWidth={40}
-                          />
-                          <Text style={styles.progressText}>
-                            Auxilios de Transporte
                           </Text>
                         </View>
                       </View>
                     </View>
                   </>
                 ) : (
-                  <></>
+                  <>
+                    <View
+                      style={{
+                        flex: 2,
+                        flexDirection: "column",
+                        alignItems: "center",
+                        marginTop: 25,
+                        marginBottom: 25,
+                      }}
+                    >
+                      <View
+                        style={{
+                          flex: 3,
+                          flexDirection: "row",
+                          alignItems: "center",
+                          marginTop: 120,
+                        }}
+                      >
+                        <View style={{ alignItems: "center" }}>
+                          {star ? (
+                            <Stars
+                              display={star}
+                              spacing={10}
+                              count={5}
+                              starSize={20}
+                              fullStar={Star}
+                              emptyStar={EmptyStar}
+                            />
+                          ) : null}
+                            {
+                              reviews ? (
+                                 <Text style={styles.textStart}>
+                            {reviews.length + " Reseñas"}
+                          </Text>
+                              ) : null
+                            }
+                         
+                        </View>            
+                      </View>
+                      <View
+                        style={{
+                          flex: 3,
+                          flexDirection: "row",
+                          alignItems: "center",
+                          marginTop: 100,
+                          marginBottom: 10,
+                        }}
+                      >
+                        <View style={{ marginRight: 10,}}>
+                          <CircularProgress
+                            value={Hora}
+                            maxValue={totalHoras}
+                            activeStrokeColor={"#0BBBEF"}
+                            inActiveStrokeColor={"#000"}
+                            inActiveStrokeOpacity={0.5}
+                            inActiveStrokeWidth={20}
+                            activeStrokeWidth={20}
+                          />
+                          <Text style={styles.progressText}>
+                            HORAS
+                          </Text>
+                        </View>
+                      </View>
+                    </View>
+                  </>
                 )
               ) : null}
             </View>
           </View>
+          ) : null
+        }
+          
         </SafeAreaView>
       </ScrollView>
     </>
@@ -617,7 +629,7 @@ export default ProfitsScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 80,
+    marginTop: 20,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -646,7 +658,7 @@ const styles = StyleSheet.create({
   },
   textSubtitle: {
     fontStyle: "normal",
-    fontWeight: 600,
+    fontWeight: "600",
     fontSize: 11,
     lineHeight: 19,
     color: Colors.colorUserName,
@@ -678,6 +690,8 @@ const styles = StyleSheet.create({
   divider: {
     flex: 1,
     alignItems: "center",
+    marginTop: 15,
+    marginBottom: 15,
   },
   textEarnings: {
     fontStyle: "normal",

@@ -109,7 +109,7 @@ export const useAuth = () => {
                     console.log('Checking token.')
                     retrieveToken().then(async (token) => {
                         try {
-                            console.log('Token: ', token)
+                           
                             if (!token) return dispatch({ type: 'SIGN_OUT' });
                             const result = await httpClient.get('/profile',
                                 { headers: { Authorization: await retrieveTokenHeader() } }
