@@ -11,16 +11,20 @@ import {
 } from "react-native";
 import { ListItem } from "@rneui/themed";
 import BackTitledHeader from "../../components/BackTitleHeader";
-import { useAuth } from "../../context/auth-context";
 import { showHEmployee } from "../../services/hability-employee-services";
 import Stars from "react-native-stars";
 import StarSkill from "../../assets/skills/StarSkill.png";
 import StarSkillTwo from "../../assets/skills/StarSkillTwo.png";
 import colors from "../../assets/colors/colors";
 import * as Linking from "expo-linking";
+import { AuthContext } from "../../context/auth-context";
 
 function SkillsScreen({ navigation }) {
-  const { user } = useAuth();
+  const [user, setUser] = React.useState(null);
+  const auth = React.useContext(AuthContext);
+  React.useEffect(() => {
+    setUser(auth.getState().user.data)
+  },[]);
   const [skills, setSkills] = React.useState(null);
 
   React.useEffect(() => {

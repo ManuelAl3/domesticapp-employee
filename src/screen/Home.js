@@ -13,8 +13,11 @@ import Colors from "../assets/colors/colors";
 import DashboardMain from "../assets/Home/DashboardMain.png";
 import RectangleDivider from "../assets/Home/RectangleDivider.svg";
 import NavBar from "../components/navbar/NavBar";
+import { vw, vh, vmin, vmax } from 'react-native-expo-viewport-units';
+import ServiceTypesCatalog from "../components/TypesCatalog";
 
 function HomeScreen({ navigation }) {
+  
   const keyExtractor = (item, index) => index.toString();
   const renderItem = ({ item }) => (
     <View style={styles.containerB}>
@@ -36,34 +39,38 @@ function HomeScreen({ navigation }) {
     <>
       <NavBar />
       <SafeAreaView style={styles.containerSafe}>
-        <ScrollView style={styles.scrollView}>
+        <ScrollView>
           <View>
-            <View style={styles.containerImg}>
+            <View>
               <Image
-                containerStyle={{
-                  width: "100%",
-                  aspectRatio: 1,
+                style={{
+                  width: vw(100),
+                  height: vh(40),
+                  aspectRatio: 2,
                   flex: 1,
                 }}
                 source={DashboardMain}
               />
             </View>
             <View style={styles.divider}>
-              <Image
-                style={{ width: 350, height: 3 }}
-                source={RectangleDivider}
+              <RectangleDivider
+                style={{ width: 350, height: 3, marginTop: 20, marginBottom: 20 }}
               />
             </View>
           </View>
+          <View style={styles.row}>
           <View style={styles.stylesFlatList}>
-            <FlatList
-              numColumns={3}
-              keyExtractor={keyExtractor}
-              data={Dashboard}
-              renderItem={renderItem}
-            />
+      
+    </View>
+ <FlatList
+        numColumns={3}
+        keyExtractor={keyExtractor}
+        data={Dashboard}
+        renderItem={renderItem}
+      />
           </View>
         </ScrollView>
+       
       </SafeAreaView>
     </>
   );
@@ -80,16 +87,23 @@ const styles = StyleSheet.create({
     color: Colors.colorUserName,
   },
   stylesFlatList: {
-    flex: 1,
-    justifyContent: "center",
     alignItems: "center",
-    backgroundColor: Colors.backgroundMain,
+    marginBottom: 10,
   },
-  containerImg: {},
+  row: {
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    width: '85%',
+    justifyContent: 'space-between',
+    marginLeft: 30
+  },
   containerLogo: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+  },
+  logoContainer: {
+    height: "30vh",
   },
   divider: {
     flex: 1,

@@ -7,8 +7,6 @@ import {
   FlatList,
 } from "react-native";
 import * as React from "react";
-import { useAuth } from "../../src/context/auth-context";
-import { showHEmployee } from "../services/hability-employee-services";
 import { CategoryLinks } from "../constants/linksPerfil";
 import BackTitledHeader from "../components/BackTitleHeader";
 import { ListItem } from "@rneui/themed";
@@ -19,9 +17,14 @@ import EmptyStar from "../assets/earnings/EmptyStar.svg";
 import Rectangle from "../assets/Profile/Rectangle.png";
 import * as Linking from "expo-linking";
 import Sup from "../assets/Support/Sup.svg";
+import { AuthContext } from "../context/auth-context";
 
 function ProfileScreen({ navigation }) {
-  const { user } = useAuth();
+  const [user, setUser] = React.useState(null);
+  const auth = React.useContext(AuthContext);
+  React.useEffect(() => {
+    setUser(auth.getState().user.data)
+  },[]);
   const keyExtractor = (item, index) => index.toString();
   const renderItem = ({ item }) => (
     <ListItem

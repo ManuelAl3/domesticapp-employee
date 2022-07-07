@@ -8,9 +8,15 @@ import * as H from "./src/screen/Home/index-home";
 import * as Supp from "./src/screen/Support/index-support";
 import FaqScreen from "./src/screen/Support/FAQs/Faq";
 import BottomNavigation from "./src/components/BottomNavigation";
-import { AuthProvider, useAuth } from "./src/context/auth-context";
 import MyEarnings from "./src/components/earnings/MyEarnings";
 import Profile from "./src/screen/Profile";
+import { AuthProvider } from "./src/context/auth-context";
+import { Provider } from 'use-http';
+import { BASE_URI } from "./config";
+import { retrieveToken } from "./src/controllers/tokens";
+import { useAuth } from "./src/services/use-auth";
+import { LocaleConfig } from 'react-native-calendars';
+
 
 /* export default function App() {
   return <View></View>;
@@ -24,17 +30,36 @@ const styles = StyleSheet.create({
   },
 }); */
 
-const Stack = createNativeStackNavigator();
+const Stack: any = createNativeStackNavigator();
 
 function App() {
-  const [isAuth, setAuth] = React.useState(true);
-  const [isNew, setNew] = React.useState(false);
-  const { user } = useAuth();
+
+  const [state, functions] = useAuth();
+  if(state){
+
+    console.log(state.user)
+  }
   return (
+    <Provider 
+      url={BASE_URI} 
+      options={{
+        interceptors: {
+          request: async (data) => {
+            const token = await retrieveToken();
+
+            if (token) {
+              (data.options.headers as any)['Authorization'] = `Token token=${await retrieveToken()}`;
+            }
+
+            return data.options;
+          }
+        }
+      }}
+    >
+    <AuthProvider value={functions}>
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      {user ? (
-        <>
-          {isNew ? (
+      { state.user ? (
+              state.user.new ? (
             <>
               <Stack.Screen name="Introduction" component={S.Introduction} />
               <Stack.Screen name="Home" component={S.Home} />
@@ -74,24 +99,24 @@ function App() {
               />
               <Stack.Screen name="JobSecurity" component={Supp.JobSecurity} />
             </>
-          )}
-        </>
+          )
+       
       ) : (
         <>
           <Stack.Screen name="Login" component={S.Login} />
         </>
       )}
     </Stack.Navigator>
+    </AuthProvider>
+    </Provider>
   );
 }
 
-function Index() {
+export default function ApplicationWrapper() {
   return (
     <NavigationContainer>
-      <AuthProvider>
-        <App />
-      </AuthProvider>
+      <App />
     </NavigationContainer>
   );
 }
-export default Index;
+

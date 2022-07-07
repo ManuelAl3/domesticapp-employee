@@ -1,10 +1,11 @@
 import { tokenKey, BASE_URI } from "../../config";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default async function apiFetch(
   endpoint,
   { method, headers, body } = {}
 ) {
-  const token = sessionStorage.getItem(tokenKey);
+  const token = AsyncStorage.getItem(tokenKey);
 
   if (token) {
     headers = {

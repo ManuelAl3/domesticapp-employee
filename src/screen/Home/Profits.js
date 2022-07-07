@@ -1,6 +1,5 @@
 import * as React from "react";
 import BackTitledHeader from "../../components/BackTitleHeader";
-import { useAuth } from "../../context/auth-context";
 import {
   StyleSheet,
   Text,
@@ -15,16 +14,22 @@ import IconPlanet from "../../assets/earnings/IconPlanet.svg";
 import IconCard from "../../assets/earnings/IconCard.svg";
 import EmptyStar from "../../assets/earnings/EmptyStar.svg";
 import Star from "../../assets/earnings/Star.svg";
-import Speedometer from "react-native-speedometer-chart";
 import Stars from "react-native-stars";
 import * as Progress from "react-native-progress";
 import CircularProgress from "react-native-circular-progress-indicator";
 import { showOrderEmployee } from "../../services/order-details-services";
 import { showReviews } from "../../services/reviews-service";
-import faStar from "../../assets/Reviews/faStar.svg";
+import { AuthContext } from "../../context/auth-context";
+
+
 
 function ProfitsScreen() {
-  const { user } = useAuth();
+  const [user, setUser] = React.useState(null);
+  const auth = React.useContext(AuthContext);
+  React.useEffect(() => {
+    setUser(auth.getState().user.data)
+  },[]);
+ 
   const [orders, setOrders] = React.useState(null);
   const [star, setStar] = React.useState(null);
   const [reviews, setReviews] = React.useState(null);

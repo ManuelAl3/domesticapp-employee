@@ -8,13 +8,17 @@ import {
 } from "react-native";
 import * as React from "react";
 import { ListItem } from "@rneui/themed";
-import { useAuth } from "../../context/auth-context";
 import { showHEmployee } from "../../services/hability-employee-services";
 import BackTitledHeader from "../../components/BackTitleHeader";
 import Colors from "../../assets/colors/colors";
+import { AuthContext } from "../../context/auth-context";
 
 function MyProfileScreen({ navigation }) {
-  const { user } = useAuth();
+  const [user, setUser] = React.useState(null);
+  const auth = React.useContext(AuthContext);
+  React.useEffect(() => {
+    setUser(auth.getState().user.data)
+  },[]);
   const [skills, setSkills] = React.useState(null);
   React.useEffect(() => {
     showHEmployee(user.id).then(setSkills);

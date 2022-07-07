@@ -11,16 +11,20 @@ import {
 } from "react-native";
 import { ListItem } from "@rneui/themed";
 import Stars from "react-native-stars";
-import { useAuth } from "../../context/auth-context";
 import { showReviews } from "../../services/reviews-service";
 import BackTitledHeader from "../../components/BackTitleHeader";
 import faStar from "../../assets/Reviews/faStar.svg";
 import Colors from "../../assets/colors/colors";
 import StarSkill from "../../assets/stars/review.png";
 import StarSkillTwo from "../../assets/stars/reviewTwo.png";
+import { AuthContext } from "../../context/auth-context";
 
 function ReviewsScreen({ navigation }) {
-  const { user } = useAuth();
+  const [user, setUser] = React.useState(null);
+  const auth = React.useContext(AuthContext);
+  React.useEffect(() => {
+    setUser(auth.getState().user.data)
+  },[]);
   const [reviews, setReviews] = React.useState(null);
 
   /* const paintStar = (cantidad) => {

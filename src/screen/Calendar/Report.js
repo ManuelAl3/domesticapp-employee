@@ -6,13 +6,16 @@ import {
   Animated,
 } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import { useAuth } from '../../context/auth-context';
-import { updateEmployee, updateUser } from '../../services/users-service';
 import { BASE_URI } from '../../../config';
 import axios, {patch} from 'axios';
+import { AuthContext } from '../../context/auth-context';
 
 const ReportScreen = () => {
-const {user}= useAuth();
+  const [user, setUser] = React.useState(null);
+  const auth = React.useContext(AuthContext);
+  React.useEffect(() => {
+    setUser(auth.getState().user.data)
+  },[]);
   useEffect( async ()=>{
     if(Platform.OS !== 'web'){
       const {status} = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -31,7 +34,7 @@ const {user}= useAuth();
   }
 const PickImage = async () =>{
   
-  const url = `${BASE_URI}/employees/1`
+  const url = `${BASE_URI}/employees/${user.id}`
 
   
   const config = {
@@ -93,7 +96,7 @@ class FloatingLabelInput extends Component {
 
   componentDidUpdate() {
     Animated.timing(this._animatedIsFocused, {
-      toValue: (this.state.isFocused || this.props.value !== '') ? 1 : 0,
+      toValue: (this.isFocused || this.props.value !== '') ? 1 : 0,
       duration: 200,
     }).start();
   }

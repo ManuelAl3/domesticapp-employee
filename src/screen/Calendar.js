@@ -11,24 +11,16 @@ import {
 import * as React from "react";
 import BackTitledHeader from "../components/BackTitleHeader";
 import { showOrderEmployee } from "../../src/services/order-details-services";
-import { useAuth } from "../context/auth-context";
+
 import { Calendar } from "react-native-calendars";
 import colors from "../../src/assets/colors/colors";
 import ModalCal from "../components/calendar/Modal";
 import * as Linking from 'expo-linking';
 import { useNavigation } from "@react-navigation/native";
+import { AuthContext } from "../context/auth-context";
 
 function CalendarScreen({ navigation }) {
-  /* const { user } = useAuth();
-  const [orders, setOrders] = React.useState(null); */
 
-  /* React.useEffect(() => {
-    showOrderEmployee(user.id).then(setOrders);
-  }, [user.id]); */
-  //console.log(orders);
-  /* {orders.map((item) => (
-        <Text>{item.orders}</Text>
-      ))} */
   const btnStyle = {
     height: 55,
     width: "80%",
@@ -95,15 +87,17 @@ function CalendarScreen({ navigation }) {
 export default CalendarScreen;
 
 export function DayCard() {
-    const { user } = useAuth();
+  const auth = React.useContext(AuthContext);
+  React.useEffect(() => {
+    console.log(auth.getState().user.data.id)
+    showOrderEmployee(auth.getState().user.data.id).then(setOrders);
+  },[]);
   const [orders, setOrders] = React.useState(null);
   const [lastTime, setlastTime] = React.useState(null);
   const [count, setCount] = React.useState(0);
   const [modalVisible, setModalVisible] = React.useState(false);
   const navigation = useNavigation();
-   React.useEffect(() => {
-    showOrderEmployee(user.id).then(setOrders);
-  }, [user.id]); 
+   
   function backDate() {
     if(count > 0){
     setCount(count-1)}

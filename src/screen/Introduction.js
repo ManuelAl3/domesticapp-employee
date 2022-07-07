@@ -1,19 +1,28 @@
 import React, { useState, useEffect } from "react";
 import AppIntroSlider from "react-native-app-intro-slider";
-import { StyleSheet, Text, View, StatusBar, Image } from "react-native";
+import { StyleSheet, Text, View, StatusBar, Image, TouchableOpacity } from "react-native";
 import colors from "../assets/colors/colors";
 import * as Font from "expo-font";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import { updateEmployee } from "../services/users-service";
+import { AuthContext } from "../context/auth-context";
 
 export default function IntroductionScreen({ navigation }) {
   const [fontsLoaded, setFontsLoaded] = useState(false);
-
+  const [user, setUser] = React.useState(null);
+  const auth = React.useContext(AuthContext);
+  React.useEffect(() => {
+    setUser(auth.getState().user.data)
+  },[]);
   useEffect(() => {
     if (!fontsLoaded) {
       loadFonts();
     }
   });
 
+  function handleSubmit() {
+    updateEmployee({new: false}, user.user_id)
+  }
   const loadFonts = async () => {
     await Font.loadAsync({
       "SourceSansPro-Regular": require("../assets/fonts/SourceSansPro-Regular.ttf"),
@@ -69,8 +78,10 @@ export default function IntroductionScreen({ navigation }) {
   };
   const renderDoneButton = () => {
     return (
-      <View style={styles.containerTxtButton} onPress={console.log("press")}>
+      <View style={styles.containerTxtButton}>
+      <TouchableOpacity onPress={handleSubmit}>
         <Text style={styles.txtButton}>Hecho</Text>
+        </TouchableOpacity>
       </View>
     );
   };

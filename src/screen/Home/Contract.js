@@ -1,11 +1,9 @@
 import * as React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import BackTitledHeader from "../../components/BackTitleHeader";
-import { useAuth } from "../../context/auth-context";
 import colors from "../../assets/colors/colors";
 
 function ContractScreen({ navigation }) {
-  const { user } = useAuth();
   const btnStyle = {
     height: 55,
     width: 300,
@@ -16,8 +14,6 @@ function ContractScreen({ navigation }) {
     marginBottom: 16,
   };
 
-  // <Image style={styles.tinyLogo} source={user.image_url} />
-  // <Text>{user.full_name}</Text>
   return (
     <>
       <BackTitledHeader title="Mi Contrato" />

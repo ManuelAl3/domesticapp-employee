@@ -2,7 +2,6 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as Supp from "../../screen/Support/index-support";
 import * as S from "../../screen/index-page";
-import { CategoriasPreguntas, Preguntas } from "../../constants/preguntasF";
 import FaqsScreen from "../../screen/Support/FAQs/Faq";
 
 const Stack = createNativeStackNavigator();

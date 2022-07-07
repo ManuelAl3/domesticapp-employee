@@ -10,7 +10,6 @@ import { ListItem } from "@rneui/themed";
 import * as React from "react";
 import { Preguntas } from "../../constants/preguntasF";
 import BackTitledHeader from "../../components/BackTitleHeader";
-import Colors from "../../assets/colors/colors";
 import BottomNavigation from "../../components/BottomNavigation";
 
 function FaqsScreen({ navigation }) {

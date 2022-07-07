@@ -11,7 +11,7 @@ import ServiceIcon from "../assets/bottomTab/service.svg";
 import MenuIcon from "../assets/bottomTab/menu.svg";
 import MyProfileStack from "../components/stacks/MyProfileStack";
 import HomeStacks from "../components/stacks/HomeStacks";
-import SupportStack from "../components/stacks/SupportStack";
+//import SupportStack from "../components/stacks/SupportStack";
 import SkillStack from "../components/stacks/SkillStack";
 
 const Tab = createBottomTabNavigator();
@@ -33,7 +33,7 @@ export default function BottomNavigation() {
           options={{
             title: "Inicio",
             tabBarIcon: () => (
-              <Image source={HomeIcon} style={{ width: 30, height: 30 }} />
+              <HomeIcon style={{ width: 30, height: 30 }} />
             ),
           }}
           component={S.Home}
@@ -43,7 +43,7 @@ export default function BottomNavigation() {
           options={{
             title: "Habilidades",
             tabBarIcon: () => (
-              <Image source={ConfigIcon} style={{ width: 30, height: 30 }} />
+              <ConfigIcon style={{ width: 30, height: 30 }} />
             ),
           }}
           component={SkillStack}
@@ -53,12 +53,14 @@ export default function BottomNavigation() {
           options={{
             title: "Calendario",
             tabBarIcon: () => (
-              <Image source={CalendarIcon} style={{ width: 30, height: 30 }} />
+              <CalendarIcon style={{ width: 30, height: 30 }} />
             ),
           }}
           component={S.Calendar}
         />
-        <Tab.Screen
+        {
+          /*
+          <Tab.Screen
           name="Support"
           options={{
             title: "Soporte",
@@ -68,12 +70,14 @@ export default function BottomNavigation() {
           }}
           component={SupportStack}
         />
+          */
+        }
         <Tab.Screen
           name="Profile"
           options={{
             title: "Menú",
             tabBarIcon: () => (
-              <Image source={MenuIcon} style={{ width: 30, height: 30 }} />
+              <MenuIcon style={{ width: 30, height: 30 }} />
             ),
           }}
           component={MyProfileStack}
