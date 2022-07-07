@@ -25,7 +25,7 @@ function ProfileScreen({ navigation }) {
   React.useEffect(() => {
     setUser(auth.getState().user.data)
   },[]);
-  const keyExtractor = (item, index) => index.toString();
+  const keyExtractor = (index) => index.toString();
   const renderItem = ({ item }) => (
     <ListItem
       key={item}
@@ -34,7 +34,7 @@ function ProfileScreen({ navigation }) {
       onPress={() => navigation.navigate(`${item.ruta}`, { itemId: item.id })}
     >
       <View key={item.id} style={styles.list}>
-        <Image style={{ width: 30, height: 30 }} source={item.icon} />
+        <item.icon style={{ width: 30, height: 30 }}/>
         <Text style={styles.textList}>{item.nombre}</Text>
       </View>
     </ListItem>
@@ -61,10 +61,12 @@ function ProfileScreen({ navigation }) {
               <View>
                 <Image
                   style={{
+                    marginTop: 10,
                     width: 70,
                     height: 70,
+                    borderRadius: 50,
                   }}
-                  source={user.image_url}
+                  source={{uri: user.image_url}}
                 />
               </View>
               <View
@@ -142,7 +144,7 @@ function ProfileScreen({ navigation }) {
                 </View>
                 <View
                   style={{
-                    width: "350",
+                    width: 350,
                     height: 50,
                     flex: 1,
                     justifyContent: "center",
@@ -170,7 +172,9 @@ function ProfileScreen({ navigation }) {
             onPress={URL_ROUTE_SOPORT}
           >
             <View style={styles.list}>
-              <Image style={{ width: 30, height: 30 }} source={Sup} />
+              
+              <Sup height="30
+              " width="30"/>
               <Text style={styles.textList}>Chat de soporte</Text>
             </View>
           </ListItem>
@@ -194,7 +198,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.backgroundMain,
     width: 367,
-    height: 45,
+    height: 60,
   },
   textUser: {
     fontStyle: "normal",

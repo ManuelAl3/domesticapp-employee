@@ -20,22 +20,20 @@ import * as Linking from "expo-linking";
 import { AuthContext } from "../../context/auth-context";
 
 function SkillsScreen({ navigation }) {
-  const [user, setUser] = React.useState(null);
+
   const auth = React.useContext(AuthContext);
-  React.useEffect(() => {
-    setUser(auth.getState().user.data)
-  },[]);
+ 
   const [skills, setSkills] = React.useState(null);
 
   React.useEffect(() => {
-    showHEmployee(user.id).then(setSkills);
-  }, [user.id]);
+    showHEmployee(auth.getState().user.data).then(setSkills);
+  }, []);
 
   const URL_ROUTE = () => {
     Linking.openURL("https://www.google.com/");
   };
 
-  const keyExtractor = (item, index) => index.toString();
+  const keyExtractor = (index) => index.toString();
   const renderItem = ({ item }) => (
     <View style={styles.containerListItem}>
       <ListItem key={item} bottomDivider containerStyle={styles.listStyle}>
@@ -100,13 +98,14 @@ function SkillsScreen({ navigation }) {
               trabajo.
             </Text>
           </View>
-          <View
+          {skills ? (
+            <View
             style={{
               marginLeft: 25,
             }}
           >
             <Text style={styles.title}>
-              ... Habilidades Actuales{" "}
+              {skills.length} Habilidades Actuales{" "}
               <View style={{ marginLeft: 50 }}>
                 <TouchableOpacity style={btnStyleAdd} onPress={URL_ROUTE}>
                   <Text style={styles.textButtonAdd}>+ Agregar</Text>
@@ -114,6 +113,8 @@ function SkillsScreen({ navigation }) {
               </View>
             </Text>
           </View>
+          ): null} 
+          
         </View>
         <View style={styles.stylesFlatList}>
           {skills ? (

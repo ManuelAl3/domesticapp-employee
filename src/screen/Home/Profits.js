@@ -481,7 +481,7 @@ function ProfitsScreen() {
                           flex: 3,
                           flexDirection: "row",
                           alignItems: "center",
-                          marginTop: 120,
+                          marginTop: 40,
                         }}
                       >
                         <View style={{ alignItems: "center" }}>
@@ -561,7 +561,7 @@ function ProfitsScreen() {
                           flex: 3,
                           flexDirection: "row",
                           alignItems: "center",
-                          marginTop: 120,
+                          marginTop: 40,
                         }}
                       >
                         <View style={{ alignItems: "center" }}>

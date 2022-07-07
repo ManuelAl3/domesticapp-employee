@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import BackTitledHeader from "../../components/BackTitleHeader";
 import colors from "../../assets/colors/colors";
 
-function ContractScreen({ navigation }) {
+function ContractScreen() {
   const btnStyle = {
     height: 55,
     width: 300,
