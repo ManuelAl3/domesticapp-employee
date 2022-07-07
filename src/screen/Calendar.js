@@ -4,7 +4,6 @@ import {
   View,
   Button,
   ScrollView,
-  TouchableOpacity,
   SafeAreaView,
   Image, Alert, Modal, Pressable,
 } from "react-native";
@@ -89,11 +88,9 @@ export default CalendarScreen;
 export function DayCard() {
   const auth = React.useContext(AuthContext);
   React.useEffect(() => {
-    console.log(auth.getState().user.data.id)
-    showOrderEmployee(auth.getState().user.data.id).then(setOrders);
+    showOrderEmployee(49).then(setOrders)
   },[]);
   const [orders, setOrders] = React.useState(null);
-  const [lastTime, setlastTime] = React.useState(null);
   const [count, setCount] = React.useState(0);
   const [modalVisible, setModalVisible] = React.useState(false);
   const navigation = useNavigation();
@@ -115,12 +112,15 @@ export function DayCard() {
     setModalVisible(!modalVisible)
     navigation.navigate("ReportCalendar")
   }
+
+ 
   return (
     <>
     <View style={style.card}>
     {
       orders ? (
-        <>
+        orders.length > 0 ? (
+          <>
         <Button title="<" onPress={()=>backDate()}/>
         <Button title=">" onPress={()=>nextDate()}/>
         <Text style={style.cardTitle}>{orders[count].start_date}</Text>
@@ -130,6 +130,8 @@ export function DayCard() {
 
         
        </>
+        ) : <Text style={style.text}>No se han añadido servicios</Text>
+        
        ) : (
         <Text style={style.text}>No se han añadido servicios</Text>
       )
@@ -145,7 +147,8 @@ export function DayCard() {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
           {orders ? (
-        <>
+            orders.length > 0 ? (
+           <>
         <Text style={style.cardTitle}>{orders[count].start_date}</Text>
         {
           orders[count].workday === "Completa" ? (
@@ -176,7 +179,9 @@ export function DayCard() {
               onPress={() => goReport()}>
               <Text style={styles.textStyle}>Reportar Incapacidad</Text>
             </Pressable>
-       </>
+       </>   
+            ) : <Text style={styles.modalText}>No hay más información</Text>
+        
        ) : (
         <Text style={styles.modalText}>No hay más información</Text>
       )}
