@@ -2,6 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios, { AxiosError } from "axios";
 import { useEffect, useMemo, useReducer } from "react"
 import { Alert } from "react-native";
+import { tokenKey } from "../../config";
 import { httpClient } from "../controllers/http-client";
 import { deleteToken, retrieveToken, retrieveTokenHeader, saveToken } from "../controllers/tokens";
 
@@ -22,8 +23,8 @@ export const useAuth = () => {
                         '/login',
                         credentials
                     );
-                    console.log(token);
                     await saveToken(token);
+                   
                     dispatch({ type: 'SIGN_IN', user });
                 } catch (err) {
                     Alert.alert('Error', ((err as AxiosError).response?.data as any).errors);
@@ -49,8 +50,8 @@ export const useAuth = () => {
 
                     dispatch({ type: 'SIGN_IN', user });
                 } catch (err) {
-                    console.log(err);
-                    console.log((err as any).message);
+                    //console.log(err);
+                    //console.log((err as any).message);
                     Alert.alert('Error', ((err as AxiosError).response?.data as any).errors);
                 }
             },
@@ -113,7 +114,7 @@ export const useAuth = () => {
                             const result = await httpClient.get('/profile',
                                 { headers: { Authorization: await retrieveTokenHeader() } }
                             );
-                            console.log(result);
+                            //console.log(result);
                             dispatch({ type: 'SIGN_IN', user: result });
                         } catch (err) {
                             console.log(err);
