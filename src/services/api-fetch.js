@@ -1,4 +1,4 @@
-import { tokenKey, BASE_URI } from "../../config";
+import { BASE_URI } from "../../config";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default async function apiFetch(

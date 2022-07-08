@@ -1,14 +1,9 @@
 import React from "react";
 import { StyleSheet, Text, View, SafeAreaView, Image } from "react-native";
-import { AuthContext } from "../../context/auth-context";
-
+import { useAuth } from "../../context/auth-context";
 
 export default function NavBar() {
-  const [user, setUser] = React.useState(null);
-  const auth = React.useContext(AuthContext);
-  React.useEffect(() => {
-    setUser(auth.getState().user.data)
-  },[]);
+  const {user} = useAuth();
 
   return (
      <SafeAreaView style={{ height: 75 }}>

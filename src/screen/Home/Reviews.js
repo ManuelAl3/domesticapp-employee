@@ -17,14 +17,13 @@ import faStar from "../../assets/Reviews/faStar.svg";
 import Colors from "../../assets/colors/colors";
 import StarSkill from "../../assets/stars/review.png";
 import StarSkillTwo from "../../assets/stars/reviewTwo.png";
-import { AuthContext } from "../../context/auth-context";
+import { useAuth } from "../../context/auth-context";
 
 function ReviewsScreen({ navigation }) {
-  const [user, setUser] = React.useState(null);
-  const auth = React.useContext(AuthContext);
+  const { user } = useAuth();
+ 
   React.useEffect(() => {
-    setUser(auth.getState().user.data)
-    showReviews(auth.getState().user.data).then(setReviews);
+    showReviews(user.id).then(setReviews);
   },[]);
   const [reviews, setReviews] = React.useState(null);
 
@@ -53,7 +52,7 @@ function ReviewsScreen({ navigation }) {
   const renderItem = ({ item }) => (
     <ListItem key={item} bottomDivider containerStyle={styles.listStyle}>
       <View key={item.id} style={styles.list}>
-        <Image style={{ width: 40, height: 40 }} source={user.image_url} />
+        <Image style={{ width: 50, height: 50, borderRadius: 50 }} source={{uri: user.image_url}} />
         <View style={styles.containerTextList}>
           <Text style={styles.textList}>{item.full_name}</Text>
           <Text style={styles.textDescription}>{item.body}</Text>

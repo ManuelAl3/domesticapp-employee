@@ -1,4 +1,3 @@
-import { tokenKey } from "../../config";
 import apiFetch from "./api-fetch";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -11,12 +10,12 @@ export async function getUser() {
 
 export async function createUser(newUser) {
   const { token, ...user } = await apiFetch('users', { body: newUser });
-  AsyncStorage.setItem(tokenKey, token);
+  AsyncStorage.setItem('token', token);
   return user;
 }
 
 export async function updateUser(data) {
-  const { _token, ...user } = await apiFetch("profile", {
+  const { _token, ...user } = await apiFetch("employee_profile", {
     body: data,
     method: "PATCH",
   });
@@ -25,7 +24,7 @@ export async function updateUser(data) {
 
 export async function deleteUser() {
   await apiFetch("users", { method: "DELETE" });
-  AsyncStorage.removeItem(tokenKey);
+  AsyncStorage.removeItem('token');
 }
 
 export async function showEmployee(CategoryID) {

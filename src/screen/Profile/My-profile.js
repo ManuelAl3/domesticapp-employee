@@ -5,22 +5,21 @@ import {
   Image,
   TouchableOpacity,
   FlatList,
+  ScrollView,
 } from "react-native";
 import * as React from "react";
 import { ListItem } from "@rneui/themed";
 import { showHEmployee } from "../../services/hability-employee-services";
 import BackTitledHeader from "../../components/BackTitleHeader";
 import Colors from "../../assets/colors/colors";
-import { AuthContext } from "../../context/auth-context";
+import { useAuth } from "../../context/auth-context";
 import { vw, vh } from "react-native-expo-viewport-units";
 import getAge from "get-age"
 
 function MyProfileScreen({ navigation }) {
-  const [user, setUser] = React.useState(null);
-  const auth = React.useContext(AuthContext);
+  const { user } = useAuth();
   React.useEffect(() => {
-    setUser(auth.getState().user.data)
-    showHEmployee(auth.getState().user.data.id).then(setSkills);
+    showHEmployee(user.id).then(setSkills);
   },[]);
   const [skills, setSkills] = React.useState(null);
 
@@ -46,15 +45,16 @@ function MyProfileScreen({ navigation }) {
   const renderItem = ({ item }) => (
     <ListItem key={item} containerStyle={styles.listStyle}>
       <View key={item.id} style={styles.containerSkills}>
-        <Image style={{ width: 27, height: 27 }} source={item.icon} />
+        <Image style={{ width: 27, height: 27 }} source={{uri: item.icon}} />
       </View>
     </ListItem>
   );
   
   // return 5 elements of the array
   const firstFive = skills?.slice(0, 5);
+
   return (
-    <>
+    <ScrollView>
       <BackTitledHeader title="Mi Perfil" />
       <View
         style={{
@@ -87,7 +87,7 @@ function MyProfileScreen({ navigation }) {
               </View>
             </View>
             <Text style={styles.yearText}>
-              {user.experience} de experiencia
+              {user.experience} años de experiencia
             </Text>
           </View>
           <View>
@@ -99,11 +99,9 @@ function MyProfileScreen({ navigation }) {
                   renderItem={renderItem}
                   numColumns={5}
                 />
-              </View>
-            ) : (
-              <Text>Sin habilidades</Text>
-            )}
-            <View style={{ width: "100%", alignItems: "flex-end" }}>
+
+                
+                <View style={{ width: "90%", alignItems: "flex-end" }}>
               <TouchableOpacity
                 style={btnTwoStyle}
                 onPress={() => navigation.navigate("Skill")}
@@ -111,6 +109,11 @@ function MyProfileScreen({ navigation }) {
                 <Text style={styles.textButton}>Ver más</Text>
               </TouchableOpacity>
             </View>
+              </View>
+            ) : (
+              <Text>Sin habilidades</Text>
+            )}
+            
             <View>
               <View>
                 <Text style={styles.textTitle}>Mi Biografía</Text>
@@ -159,7 +162,7 @@ function MyProfileScreen({ navigation }) {
       }
         
       </View>
-    </>
+    </ScrollView>
   );
 }
 const styles = StyleSheet.create({
@@ -238,9 +241,13 @@ const styles = StyleSheet.create({
     height: 30,
     width: 30,
     marginVertical: 10,
+    marginRight: 10,
     backgroundColor: Colors.white,
   },
-  stylesFlatList: {},
+  stylesFlatList: {
+    flexDirection: "column",
+    alignItems: "flex-end"
+  },
 });
 
 export default MyProfileScreen;

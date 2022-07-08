@@ -24,13 +24,15 @@ export default function BottomNavigation() {
           tabBarStyle: { height: 55 },
           border: 1,
         }}
-        tabBarShowLabel={false}
+        tabBarOptions={{
+          showLabel: false
+        }}
         barStyle={{ backgroundColor: "#FFFFFF" }}
       >
         <Tab.Screen
           name="Home"
           options={{
-            title: "Inicio",
+            
             tabBarIcon: () => (
               <HomeIcon height="30" width="30"/>
             ),
@@ -40,7 +42,7 @@ export default function BottomNavigation() {
         <Tab.Screen
           name="Skill"
           options={{
-            title: "Habilidades",
+            
             tabBarIcon: () => (
               <ConfigIcon height="30" width="30" />
             ),
@@ -50,7 +52,7 @@ export default function BottomNavigation() {
         <Tab.Screen
           name="Calendar"
           options={{
-            title: "Calendario",
+          
             tabBarIcon: () => (
               <CalendarIcon height="30" width="30" />
             ),
@@ -62,7 +64,7 @@ export default function BottomNavigation() {
           <Tab.Screen
           name="Support"
           options={{
-            title: "Soporte",
+           
             tabBarIcon: () => (
               <ServiceIcon height="30" width="30" />
             ),
@@ -74,7 +76,7 @@ export default function BottomNavigation() {
         <Tab.Screen
           name="Profile"
           options={{
-            title: "Menú",
+            
             tabBarIcon: () => (
               <MenuIcon height="30" width="30" />
             ),

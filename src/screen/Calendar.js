@@ -10,13 +10,12 @@ import {
 import * as React from "react";
 import BackTitledHeader from "../components/BackTitleHeader";
 import { showOrderEmployee } from "../../src/services/order-details-services";
-
 import { Calendar } from "react-native-calendars";
 import colors from "../../src/assets/colors/colors";
-import ModalCal from "../components/calendar/Modal";
 import * as Linking from 'expo-linking';
 import { useNavigation } from "@react-navigation/native";
-import { AuthContext } from "../context/auth-context";
+import { vw, vh } from "react-native-expo-viewport-units";
+import { useAuth } from "../context/auth-context";
 
 function CalendarScreen({ navigation }) {
 
@@ -86,9 +85,9 @@ function CalendarScreen({ navigation }) {
 export default CalendarScreen;
 
 export function DayCard() {
-  const auth = React.useContext(AuthContext);
+  const { user } = useAuth();
   React.useEffect(() => {
-    showOrderEmployee(auth.getState().user.data.id).then(setOrders)
+    showOrderEmployee(user.id).then(setOrders)
   },[]);
   const [orders, setOrders] = React.useState(null);
   const [count, setCount] = React.useState(0);
@@ -120,13 +119,28 @@ export function DayCard() {
       orders ? (
         orders.length > 0 ? (
           <>
-        <Button title="<" onPress={()=>backDate()}/>
-        <Button title=">" onPress={()=>nextDate()}/>
+          <View style = {{flexDirection: "row", flexWrap: "wrap", marginBottom: 5, height:50}}>
+
+        <Pressable style={{ marginRight: 5, borderRadius: 10,padding: 10, elevation: 2, backgroundColor: '#2196F3', width: 50}} onPress={()=>backDate()}>
+        <Text style={styles.textStyle}>{"<"} </Text>
+        </Pressable>
+        <Pressable style={{ marginLeft: 5, borderRadius: 10,padding: 10, elevation: 2, backgroundColor: '#2196F3', width: 50}} onPress={()=>nextDate()}>
+        <Text style={styles.textStyle}>{">"} </Text>
+        </Pressable>
+        
+        <View style = {{justifyContent: "flex-end", alignItems: "flex-end",flexDirection: "column", marginTop: 15, width: vw(45)}}>
         <Text style={style.cardTitle}>{orders[count].start_date}</Text>
-        <Text style={style.cardTitle}>Jornada: {orders[count].workday}</Text>
-        <Image style={{ width: 30, height: 30 }} source={{uri: orders[count].customer.image_url}} />
+        <Text style={style.text}>Jornada: {orders[count].workday}</Text>
+        </View>
+        </View>
+
+        <View style = {{flexDirection: "row", flexWrap: "wrap", marginBottom: 5, marginTop: 10}}>
+        <Image style={{ width: 64, height: 64, borderRadius: 50, marginTop: 10}} source={{uri: orders[count].customer.image_url}} />
+
+        
         <Text style={style.text}>{orders[count].customer.full_name}</Text>
 
+        </View>
         
        </>
         ) : <Text style={style.text}>No se han añadido servicios</Text>
@@ -184,9 +198,7 @@ export function DayCard() {
        ) : (
         <Text style={styles.modalText}>No hay más información</Text>
       )}
-           
-            
-            
+         
           </View>
         </View>
       </Modal>
@@ -205,14 +217,19 @@ const style = StyleSheet.create({
     borderBottomWidth: 1,
     padding: 20,
     marginVertical: 15,
+    marginBottom: 120,
+    marginHorizontal: 20,
   },
   cardTitle: {
     fontSize: 21,
+    fontWeight: "bold",
+    textAlign: "right",
     marginBottom: 10,
+
   },
   text: {
     fontSize: 18,
-    textAlign: "center",
+    textAlign: "left",
     color: "#787B82",
     marginBottom: 10,
   },
@@ -257,7 +274,7 @@ const styles = StyleSheet.create({
   },
   modalView: {
     margin: 20,
-    backgroundColor: 'white',
+    backgroundColor: '#F0FCFF',
     borderRadius: 20,
     padding: 35,
     alignItems: 'center',
@@ -271,15 +288,16 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   button: {
-    borderRadius: 20,
+    borderRadius: 10,
     padding: 10,
+    marginVertical: 10,
     elevation: 2,
   },
   buttonOpen: {
-    backgroundColor: '#F194FF',
+    backgroundColor: '#0BBBEF',
   },
   buttonClose: {
-    backgroundColor: '#2196F3',
+    backgroundColor: '#0BBBEF',
   },
   textStyle: {
     color: 'white',

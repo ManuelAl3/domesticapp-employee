@@ -18,15 +18,12 @@ import Rectangle from "../assets/Profile/Rectangle.png";
 import * as Linking from "expo-linking";
 import Sup from "../assets/Support/Sup.svg";
 import Logout from "../assets/Profile/logout.png";
-import { AuthContext } from "../context/auth-context";
-import {deleteToken} from "../services/tokens"
+import { useAuth } from "../context/auth-context";
+
 
 function ProfileScreen({ navigation }) {
-  const [user, setUser] = React.useState(null);
-  const auth = React.useContext(AuthContext);
-  React.useEffect(() => {
-    setUser(auth.getState().user.data);
-  }, []);
+  const {user, logout} = useAuth();
+
   const keyExtractor = (index) => index.toString();
   const renderItem = ({ item }) => (
     <ListItem
@@ -45,9 +42,8 @@ function ProfileScreen({ navigation }) {
     Linking.openURL("https://wa.me/52618237533");
   };
 
-  function logout() {
-    deleteToken()
-    navigation.navigate("Home")
+  function handleLogout() {
+    logout();
 }
   return (
     <>
@@ -190,7 +186,7 @@ function ProfileScreen({ navigation }) {
           <ListItem
             bottomDivider
             containerStyle={styles.listStyle}
-            onPress={logout}
+            onPress={handleLogout}
           >
             <View style={styles.list}>
               <Image style={{ width: 30, height: 30 }}

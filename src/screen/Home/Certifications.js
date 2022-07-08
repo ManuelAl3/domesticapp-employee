@@ -2,7 +2,7 @@ import * as React from "react";
 import BackTitledHeader from "../../components/BackTitleHeader";
 import { View, Text, StyleSheet, TouchableOpacity, SafeAreaView } from "react-native";
 import colors from "../../assets/colors/colors";
-import { AuthContext } from "../../context/auth-context";
+import { useAuth } from "../../context/auth-context";
 
 const btnStyle = {
   height: 55,
@@ -15,15 +15,8 @@ const btnStyle = {
 };
 
 function CertificationScreen({ navigation }) {
-  const [user, setUser] = React.useState(null);
-  const auth = React.useContext(AuthContext);
-  React.useEffect(() => {
-    setUser(auth.getState().user.data)
-  },[]);
+  const { user } = useAuth();
 
-  if(user) {
-    console.log(user)
-  }
   return (
     <SafeAreaView>
       <BackTitledHeader title="Mi Certificado Laboral" />

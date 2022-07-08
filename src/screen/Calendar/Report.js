@@ -8,14 +8,11 @@ import {
 import * as ImagePicker from 'expo-image-picker';
 import { BASE_URI } from '../../../config';
 import axios, {patch} from 'axios';
-import { AuthContext } from '../../context/auth-context';
+import { useAuth } from '../../context/auth-context';
 
 const ReportScreen = () => {
-  const [user, setUser] = React.useState(null);
-  const auth = React.useContext(AuthContext);
-  React.useEffect(() => {
-    setUser(auth.getState().user.data)
-  },[]);
+  const { user } = useAuth();
+
   useEffect( async ()=>{
     if(Platform.OS !== 'web'){
       const {status} = await ImagePicker.requestMediaLibraryPermissionsAsync();

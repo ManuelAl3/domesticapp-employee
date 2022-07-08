@@ -7,16 +7,16 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
-import { Input, Icon } from "@rneui/themed";
+import { Input } from "@rneui/themed";
 import loginHome from "../assets/login/loginHome.png";
 import colors from "../assets/colors/colors";
 import { Picker } from "@react-native-picker/picker";
 import { COLORS } from "../../config";
-import { AuthContext } from "../context/auth-context";
+import { useAuth } from "../context/auth-context";
 
 function LoginScreen() {
   const [country, setCountry] = useState("col");
-  const auth = useContext(AuthContext);
+  const { login } = useAuth();
   const changeCountry = async (country) => {
     setCountry(country);
     // await AsyncStorage.setItem('country', country);
@@ -31,10 +31,12 @@ function LoginScreen() {
     borderRadius: 10,
     marginBottom: 16,
   };
-    const login = async () => {
-      await auth.signIn({email: "data@mail.com", password: "123456"});
+  function handleSubmit() {
+  
+    login({email: "data@mail.com", password: "123456"}).catch((error) => {
+        console.log(error.message);
+    })
   }
-
 
   return (
 
@@ -97,7 +99,7 @@ function LoginScreen() {
             <Input placeholder="password" />
           </View>
           <View style={styles.containerButton}>
-            <TouchableOpacity style={btnStyle} onPress={login}>
+            <TouchableOpacity style={btnStyle} onPress={handleSubmit}>
               <Text style={styles.textButton}>Iniciar Sesión</Text>
             </TouchableOpacity>
           </View>

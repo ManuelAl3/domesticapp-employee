@@ -15,22 +15,19 @@ import IconCard from "../../assets/earnings/IconCard.svg";
 import EmptyStar from "../../assets/earnings/EmptyStar.svg";
 import Star from "../../assets/earnings/Star.svg";
 import Stars from "react-native-stars";
-import * as Progress from "react-native-progress";
 import CircularProgress from "react-native-circular-progress-indicator";
 import { showOrderEmployee } from "../../services/order-details-services";
 import { showReviews } from "../../services/reviews-service";
-import { AuthContext } from "../../context/auth-context";
+import { useAuth } from "../../context/auth-context";
 
 
 
 function ProfitsScreen() {
-  const [user, setUser] = React.useState(null);
-  const auth = React.useContext(AuthContext);
+  const { user } = useAuth();
   React.useEffect(() => {
-    setUser(auth.getState().user.data)
-    showOrderEmployee(auth.getState().user.data.id).then(setOrders);
-    showReviews(auth.getState().user.data.id).then(setReviews);
-  },[]);
+    showOrderEmployee(user.id).then(setOrders);
+    showReviews(user.id).then(setReviews);
+  },[user]);
  
   const [orders, setOrders] = React.useState(null);
   const [star, setStar] = React.useState(null);
@@ -151,20 +148,20 @@ function ProfitsScreen() {
     
   }
 
-  let score = null;
-  if (reviews && score) {
+  let score = 0;
+  if (reviews) {
+    console.log(score)
     if(reviews.length > 0) {
        reviews.forEach((review) => {
       score += review.score;
     });
     }
-    
-   
+
     if(reviews.length > 0) {
     score = parseInt(score / reviews.length);
     if (!star) {
       setStar(score);
-
+      
     }}
     if(reviews.length === 0) {
       if (!star) {
@@ -615,7 +612,7 @@ function ProfitsScreen() {
               ) : null}
             </View>
           </View>
-          ) : null
+          ) : <Text style={styles.textSubtitle}>assa</Text>
         }
           
         </SafeAreaView>

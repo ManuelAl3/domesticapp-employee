@@ -5,18 +5,13 @@ import colors from "../assets/colors/colors";
 import * as Font from "expo-font";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { updateEmployee } from "../services/users-service";
-import { AuthContext } from "../context/auth-context";
-import { useAuth } from "../services/use-auth";
+import { useAuth } from "../context/auth-context";
+import { useNavigation } from "@react-navigation/native";
 
-export default function IntroductionScreen({ navigation }) {
+export default function IntroductionScreen() {
+  const navigation = useNavigation();
   const [fontsLoaded, setFontsLoaded] = useState(false);
-  const [user, setUser] = React.useState(null);
-  const auth = React.useContext(AuthContext);
-  const [state] = useAuth();
-  React.useEffect(() => {
-    setUser(auth.getState().user.data);
-    
-  }, []);
+  const {user, update} = useAuth();
   useEffect(() => {
     if (!fontsLoaded) {
       loadFonts();
@@ -24,8 +19,10 @@ export default function IntroductionScreen({ navigation }) {
   });
 
   function handleSubmit() {
-    updateEmployee({new: false}, auth.getState().user.user_id);
-    navigation.navigate("Home");
+    update({new: false}, user.user_id).then(() => {
+      //navigation.navigate("Main");
+    }).catch((err) => {console.log("EROOOOR"+err);});
+    
   }
   const loadFonts = async () => {
     await Font.loadAsync({

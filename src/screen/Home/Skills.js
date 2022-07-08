@@ -17,17 +17,15 @@ import StarSkill from "../../assets/skills/StarSkill.png";
 import StarSkillTwo from "../../assets/skills/StarSkillTwo.png";
 import colors from "../../assets/colors/colors";
 import * as Linking from "expo-linking";
-import { AuthContext } from "../../context/auth-context";
+import { useAuth } from "../../context/auth-context";
 
 function SkillsScreen({ navigation }) {
 
-  const auth = React.useContext(AuthContext);
- 
+  const { user } = useAuth();
   const [skills, setSkills] = React.useState(null);
-
   React.useEffect(() => {
-    showHEmployee(auth.getState().user.data).then(setSkills);
-  }, []);
+    showHEmployee(user.id).then(setSkills);
+  }, [user]);
 
   const URL_ROUTE = () => {
     Linking.openURL("https://www.google.com/");
@@ -38,7 +36,7 @@ function SkillsScreen({ navigation }) {
     <View style={styles.containerListItem}>
       <ListItem key={item} bottomDivider containerStyle={styles.listStyle}>
         <View key={item.id} style={styles.list}>
-          <Image style={{ width: 37, height: 37 }} source={item.icon} />
+          <Image style={{ width: 37, height: 37 }} source={{uri: item.icon}} />
           <View style={styles.containerTextList}>
             <Text style={styles.textList}>{item.hability}</Text>
             <Text style={styles.textDescription}>{item.body}</Text>
@@ -50,14 +48,7 @@ function SkillsScreen({ navigation }) {
               alignItems: "center",
             }}
           >
-            <Stars
-              display={item.score}
-              spacing={8}
-              count={5}
-              starSize={15}
-              fullStar={StarSkill}
-              emptyStar={StarSkillTwo}
-            />
+            
           </View>
         </View>
       </ListItem>
@@ -118,11 +109,28 @@ function SkillsScreen({ navigation }) {
         </View>
         <View style={styles.stylesFlatList}>
           {skills ? (
-            <FlatList
-              keyExtractor={keyExtractor}
-              data={skills}
-              renderItem={renderItem}
-            />
+           skills.map((skill) => (
+            <View style={styles.containerListItem}>
+      <ListItem key={skill.id} bottomDivider containerStyle={styles.listStyle}>
+        <View key={skill.id} style={styles.list}>
+          <Image style={{ width: 37, height: 37 }} source={{uri: skill.icon}} />
+          <View style={styles.containerTextList}>
+            <Text style={styles.textList}>{skill.hability}</Text>
+            <Text style={styles.textDescription}>{skill.body}</Text>
+          </View>
+          <View
+            style={{
+              marginHorizontal: 5,
+              marginTop: 45,
+              alignItems: "center",
+            }}
+          >
+            
+          </View>
+        </View>
+      </ListItem>
+    </View>
+           ))
           ) : (
             <Text>Sin habilidades</Text>
           )}
@@ -145,15 +153,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#E5E5E5",
   },
   containerListItem: {
-    margin: "1rem 0",
-    padding: "1rem",
+    marginVertical: 5,
   },
   listStyle: {
     backgroundColor: "#ffff",
     boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
     borderRadius: 10,
-    margin: "1rem 0",
-    padding: "1rem",
+    marginVertical: 1,
+    padding: 1,
   },
   text: {
     fontWeight: "400",
@@ -178,6 +185,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    marginBottom: 20,
   },
   containerTextList: {
     width: "55%",
