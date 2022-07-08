@@ -12,17 +12,18 @@ import { showHEmployee } from "../../services/hability-employee-services";
 import BackTitledHeader from "../../components/BackTitleHeader";
 import Colors from "../../assets/colors/colors";
 import { AuthContext } from "../../context/auth-context";
+import { vw, vh } from "react-native-expo-viewport-units";
+import getAge from "get-age"
 
 function MyProfileScreen({ navigation }) {
   const [user, setUser] = React.useState(null);
   const auth = React.useContext(AuthContext);
   React.useEffect(() => {
     setUser(auth.getState().user.data)
+    showHEmployee(auth.getState().user.data.id).then(setSkills);
   },[]);
   const [skills, setSkills] = React.useState(null);
-  React.useEffect(() => {
-    showHEmployee(user.id).then(setSkills);
-  }, [user.id]);
+
   const btnStyle = {
     height: 55,
     width: "80%",
@@ -41,7 +42,7 @@ function MyProfileScreen({ navigation }) {
     borderRadius: 3,
     marginBottom: 16,
   };
-  const keyExtractor = (item, index) => index.toString();
+  const keyExtractor = (index) => index.toString();
   const renderItem = ({ item }) => (
     <ListItem key={item} containerStyle={styles.listStyle}>
       <View key={item.id} style={styles.containerSkills}>
@@ -49,7 +50,7 @@ function MyProfileScreen({ navigation }) {
       </View>
     </ListItem>
   );
-
+  
   // return 5 elements of the array
   const firstFive = skills?.slice(0, 5);
   return (
@@ -62,10 +63,12 @@ function MyProfileScreen({ navigation }) {
           backgroundColor: Colors.backgroundMain,
         }}
       >
-        <View style={{ width: "90%" }}>
+      {
+        user ? (
+          <View style={{ width: "90%" }}>
           <View
             style={{
-              height: 75,
+              height: vh(15),
               borderRadius: 6,
               backgroundColor: Colors.white,
               flexDirection: "column",
@@ -75,7 +78,7 @@ function MyProfileScreen({ navigation }) {
           >
             <View style={styles.headerContainer}>
               <View style={styles.containerImage}>
-                <Image style={styles.tinyLogo} source={user.image_url} />
+                <Image style={styles.tinyLogo} source={{uri: user.image_url}} />
               </View>
               <View>
                 <View style={styles.containerUserData}>
@@ -133,9 +136,8 @@ function MyProfileScreen({ navigation }) {
                     {user.email}
                   </Text>
                 </Text>
-                <Text style={styles.textTitle}>Edad</Text>
                 <Text style={styles.textTitle}>
-                  CC{" "}
+                  {user.document_type+" "} 
                   <Text style={[styles.text, { fontWeight: "500" }]}>
                     {user.document_id}
                   </Text>
@@ -153,6 +155,9 @@ function MyProfileScreen({ navigation }) {
             </View>
           </View>
         </View>
+        ) : null
+      }
+        
       </View>
     </>
   );
@@ -168,12 +173,13 @@ const styles = StyleSheet.create({
   tinyLogo: {
     width: 64,
     height: 64,
+    borderRadius: 50,
   },
   headerContainer: {
     flex: 2,
     flexDirection: "row",
     backgroundColor: Colors.white,
-    height: 132,
+    marginTop: 0,
   },
   containerUserData: {
     flex: 1,
