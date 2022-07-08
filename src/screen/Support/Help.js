@@ -12,9 +12,10 @@ import * as React from "react";
 import { Preguntas } from "../../constants/preguntasF";
 import BackTitledHeader from "../../components/BackTitleHeader";
 import colors from "../../assets/colors/colors";
-import BottomNavigation from "../../components/BottomNavigation";
 import Perfil from "../../assets/Profile/Perfil.png";
 import * as Linking from "expo-linking";
+import { showOrderEmployee } from "../../services/order-details-services";
+import { AuthContext } from "../../context/auth-context";
 
 const currentService = [
   {
@@ -53,10 +54,16 @@ const lastService = [
 ];
 
 function Help({ navigation }) {
+  const auth = React.useContext(AuthContext);
+  React.useEffect(() => {
+    showOrderEmployee(auth.getState().user.data.user_id).then(setOrders)
+  },[]);
+  const [orders, setOrders] = React.useState(null);
+
   const URL_ROUTE_SOPORT = () => {
     Linking.openURL("https://wa.me/52618237533");
   };
-  const keyExtractor = (item, index) => index.toString();
+  const keyExtractor = (index) => index.toString();
   const renderItem = ({ item }) => (
     <ListItem key={item} bottomDivider containerStyle={styles.listStyle}>
       <View key={item.id} style={styles.list}>
@@ -106,11 +113,32 @@ function Help({ navigation }) {
           </View>
         </View>
         <View style={styles.stylesFlatList}>
-          <FlatList
-            keyExtractor={keyExtractor}
-            data={currentService}
-            renderItem={renderItem}
-          />
+        {
+          orders ? (
+            orders.length > 0 ? (
+              orders.active ? (
+                orders.map((order)=>(
+                  <>
+                  <ListItem key={order.id} bottomDivider containerStyle={styles.listStyle}>
+                    <View key={order.id} style={styles.list}>
+                      <Image style={{ width: 58, height: 58 }} source={{uri: order.customer.image_url}} />
+                      <View style={{ flex: 1 }}>
+                        <Text style={styles.textList}>{order.customer.full_name}</Text>
+                        <Text style={styles.textListDesc}>{order.category.category_name}</Text>
+                        <Text style={styles.textListWorks}>
+                          Activo
+                          <Text style={styles.textListState}>{item.state}</Text>
+                        </Text>
+                      </View>
+                    </View>
+                  </ListItem>
+                </>
+                ))   
+              ) : <Text style={styles.title}>No hay servicios</Text>
+            ) : <Text style={styles.title}>No hay servicios</Text>
+          ) : <Text style={styles.title}>No hay servicios</Text>
+        }
+        
         </View>
 
         <View style={styles.containerButton}>
@@ -129,14 +157,34 @@ function Help({ navigation }) {
           </View>
         </View>
         <View style={styles.stylesFlatList}>
-          <FlatList
-            keyExtractor={keyExtractor}
-            data={lastService}
-            renderItem={renderItem}
-          />
+        {
+          orders ? (
+            orders.length > 0 ? (
+              !orders.active ? (
+                orders.map((order)=>(
+                  <>
+                  <ListItem key={order.id} bottomDivider containerStyle={styles.listStyle}>
+                    <View key={order.id} style={styles.list}>
+                      <Image style={{ width: 58, height: 58 }} source={{uri: order.customer.image_url}} />
+                      <View style={{ flex: 1 }}>
+                        <Text style={styles.textList}>{order.customer.full_name}</Text>
+                        <Text style={styles.textListDesc}>{order.category.category_name}</Text>
+                        <Text style={styles.textListWorks}>
+                          Finalizado
+                          <Text style={styles.textListState}>{item.state}</Text>
+                        </Text>
+                      </View>
+                    </View>
+                  </ListItem>
+                </>
+                ))   
+              ) : <Text style={styles.title}>No hay servicios</Text>
+            ) : <Text style={styles.title}>No hay servicios</Text>
+          ) : <Text style={styles.title}>No hay servicios</Text>
+        }
         </View>
       </ScrollView>
-      <BottomNavigation />
+      
     </>
   );
 }
@@ -153,7 +201,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: " #E5E5E5",
     width: 367,
-    height: 45,
+    height: 105,
   },
   text: {
     fontWeight: "400",
@@ -182,6 +230,7 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     fontSize: 11,
     lineHeight: 19,
+    paddingLeft: 10 
   },
   textListState: {
     fontStyle: "normal",

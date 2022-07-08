@@ -32,7 +32,7 @@ function LoginScreen() {
     marginBottom: 16,
   };
     const login = async () => {
-      await auth.signIn({email: "teste@mail.com", password: "123456"});
+      await auth.signIn({email: "data@mail.com", password: "123456"});
   }
 
 

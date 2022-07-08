@@ -8,14 +8,13 @@ import * as H from "./src/screen/Home/index-home";
 import * as Supp from "./src/screen/Support/index-support";
 import FaqScreen from "./src/screen/Support/FAQs/Faq";
 import BottomNavigation from "./src/components/BottomNavigation";
-import MyEarnings from "./src/components/earnings/MyEarnings";
-import Profile from "./src/screen/Profile";
+
 import { AuthProvider } from "./src/context/auth-context";
 import { Provider } from 'use-http';
 import { BASE_URI } from "./config";
 import { retrieveToken } from "./src/controllers/tokens";
 import { useAuth } from "./src/services/use-auth";
-import { LocaleConfig } from 'react-native-calendars';
+import Load from "./src/screen/Loading";
 
 
 /* export default function App() {
@@ -36,6 +35,7 @@ function App() {
 
   const [state, functions] = useAuth();
 
+  
   return (
     <Provider 
       url={BASE_URI} 
@@ -55,18 +55,23 @@ function App() {
     >
     <AuthProvider value={functions}>
     <Stack.Navigator screenOptions={{ headerShown: false }}>
+      
       { state.user ? (
+        
               state.user.new ? (
+                
             <>
+            
               <Stack.Screen name="Introduction" component={S.Introduction} />
-              <Stack.Screen name="Home" component={S.Home} />
-              <Stack.Screen name="Profile" component={S.Profile} />
-              <Stack.Screen name="Support" component={S.Support} />
-              <Stack.Screen name="Calendar" component={S.Calendar} />
+              <Stack.Screen name="Main" component={BottomNavigation} />
+              
+              
             </>
+            
           ) : (
             <>
               <Stack.Screen name="Main" component={BottomNavigation} />
+              
               <Stack.Screen name="Home" component={S.Home} />
               <Stack.Screen name="Capacitation" component={H.Capacitation} />
               <Stack.Screen name="Certification" component={H.Certification} />
@@ -95,11 +100,13 @@ function App() {
                 component={Supp.InsurancePolicy}
               />
               <Stack.Screen name="JobSecurity" component={Supp.JobSecurity} />
+              <Stack.Screen name="Login" component={S.Login} />
             </>
           )
        
       ) : (
         <>
+          
           <Stack.Screen name="Login" component={S.Login} />
         </>
       )}

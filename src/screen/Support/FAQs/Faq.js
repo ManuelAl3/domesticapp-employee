@@ -9,37 +9,56 @@ function FaqScreen({ route, navigation }) {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: "#fff",
+      //backgroundColor: "#fff",
       alignItems: "center",
       justifyContent: "center",
-      fontFamily: "Poppins",
+      //fontFamily: "Poppins",
+
+      
     },
     questionContainer: {
       width: "90%",
-      margin: "0 auto 3rem auto",
+      marginTop: 1,
+      marginBottom: 1,
     },
     containerPr: {
-      boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
-      borderRadius: "1rem",
-      margin: "1rem 0",
-      padding: "1rem",
+      marginTop: 1,
+      marginBottom: 1,
+      padding: 10,
     },
     Ptitle: {
-      textAlign: "center",
-      fontSize: "14px",
+      justifyContent: "center",
+      
+      fontSize: 14,
       fontWeight: "bold",
+      backgroundColor: "#fff",
+      padding: 15,
+      shadowColor: '#171717',
+      shadowOffset: {width: -2, height: 4},
+      shadowOpacity: 0.2,
+      shadowRadius: 3,
+      borderRadius: 15,
     },
     Ptext: {
-      textAlign: "Justified",
-      fontSize: "14px",
-      letterSpacing: "1px",
+      textAlign: "justify",
+      fontSize: 14,
+      letterSpacing: 1,
+      padding: 15,
+      backgroundColor: "#fff",
+      shadowColor: '#171717',
+      shadowOffset: {width: -2, height: 4},
+      shadowOpacity: 0.2,
+      shadowRadius: 3,
+      borderRadius: 15,
     },
     Legend: {
+      justifyContent: "center",
       textAlign: "center",
-      fontSize: "14px",
+      fontSize: 14,
       fontWeight: "bold",
       color: "#0bbbef",
-      margin: "1rem 0",
+      marginTop: 15,
+      marginBottom: 1,
     },
   });
 
@@ -50,9 +69,11 @@ function FaqScreen({ route, navigation }) {
           <>
             <BackTitledHeader title={categoria.title} />
             <ScrollView>
-              <View style={styles.container} key={categoria.id}>
+              
                 <Text style={styles.Legend}>{categoria.legend}</Text>
+              <View style={styles.container} key={categoria.id}>  
                 {categoria.preguntas.map((pregunta) => (
+                  
                   <View style={styles.questionContainer} key={pregunta.id}>
                     <View style={styles.containerPr}>
                       <Text style={styles.Ptitle}>{pregunta.pregunta}</Text>
@@ -61,6 +82,7 @@ function FaqScreen({ route, navigation }) {
                       <Text style={styles.Ptext}>{pregunta.respuesta}</Text>
                     </View>
                   </View>
+                  
                 ))}
               </View>
             </ScrollView>

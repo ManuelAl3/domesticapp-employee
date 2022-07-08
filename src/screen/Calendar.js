@@ -88,7 +88,7 @@ export default CalendarScreen;
 export function DayCard() {
   const auth = React.useContext(AuthContext);
   React.useEffect(() => {
-    showOrderEmployee(49).then(setOrders)
+    showOrderEmployee(auth.getState().user.data.id).then(setOrders)
   },[]);
   const [orders, setOrders] = React.useState(null);
   const [count, setCount] = React.useState(0);
@@ -113,7 +113,6 @@ export function DayCard() {
     navigation.navigate("ReportCalendar")
   }
 
- 
   return (
     <>
     <View style={style.card}>
@@ -125,7 +124,7 @@ export function DayCard() {
         <Button title=">" onPress={()=>nextDate()}/>
         <Text style={style.cardTitle}>{orders[count].start_date}</Text>
         <Text style={style.cardTitle}>Jornada: {orders[count].workday}</Text>
-        <Image style={{ width: 30, height: 30 }} source={orders[count].customer.image_url} />
+        <Image style={{ width: 30, height: 30 }} source={{uri: orders[count].customer.image_url}} />
         <Text style={style.text}>{orders[count].customer.full_name}</Text>
 
         

@@ -10,10 +10,9 @@ import { ListItem } from "@rneui/themed";
 import * as React from "react";
 import { Preguntas } from "../../constants/preguntasF";
 import BackTitledHeader from "../../components/BackTitleHeader";
-import BottomNavigation from "../../components/BottomNavigation";
 
 function FaqsScreen({ navigation }) {
-  const keyExtractor = (item, index) => index.toString();
+  const keyExtractor = (index) => index.toString();
   const renderItem = ({ item }) => (
     <ListItem
       key={item}
@@ -22,7 +21,7 @@ function FaqsScreen({ navigation }) {
       onPress={() => navigation.navigate(`${item.ruta}`, { itemId: item.id })}
     >
       <View key={item.id} style={styles.list}>
-        <Image style={{ width: 58, height: 58 }} source={item.img} />
+        <item.img style={{ width: 58, height: 58 }} source={item.img} />
         <Text
           style={styles.textList}
           onPress={() =>
@@ -65,7 +64,6 @@ function FaqsScreen({ navigation }) {
           />
         </View>
       </ScrollView>
-      <BottomNavigation />
     </>
   );
 }
@@ -82,13 +80,14 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: " #E5E5E5",
     width: 367,
-    height: 45,
+    height: 95,
   },
   text: {
     fontWeight: "400",
     fontSize: 18,
     lineHeight: 19,
     color: "#35435E",
+    paddingTop: 20,
   },
   title: {
     fontWeight: "600",

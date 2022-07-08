@@ -67,8 +67,8 @@ export const useAuth = () => {
 
                     dispatch({ type: 'SIGN_IN', user });
                 } catch (err) {
-                    console.log(err);
-                    console.log((err as any).message);
+                    //console.log(err);
+                    //console.log((err as any).message);
                     Alert.alert('Error', ((err as AxiosError).response?.data as any).errors);
                 }
             },
@@ -91,7 +91,7 @@ export const useAuth = () => {
                 } catch (err) {
                     await deleteToken();
 
-                    console.log(err);
+                    //console.log(err);
                 }
             },
             getState() {
@@ -117,7 +117,7 @@ export const useAuth = () => {
                             //console.log(result);
                             dispatch({ type: 'SIGN_IN', user: result });
                         } catch (err) {
-                            console.log(err);
+                            //console.log(err);
                             await AsyncStorage.removeItem('token');
                             dispatch({ type: 'SIGN_OUT' });
                         }

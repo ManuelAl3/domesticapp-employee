@@ -10,21 +10,20 @@ import {
 import { ListItem } from "@rneui/themed";
 import { supportOptions } from "../constants/supportO";
 import BackTitledHeader from "../components/BackTitleHeader";
-import Colors from "../assets/colors/colors";
 import * as Linking from "expo-linking";
 import Sup from "../assets/Support/Sup.svg";
 
 function SupportScreen({ navigation }) {
-  const keyExtractor = (item, index) => index.toString();
+  const keyExtractor = (index) => index.toString();
   const renderItem = ({ item }) => (
     <ListItem
-      key={item}
+      key={item.id}
       bottomDivider
       containerStyle={styles.listStyle}
       onPress={() => navigation.navigate(`${item.ruta}`, { itemId: item.id })}
     >
       <View key={item.id} style={styles.list}>
-        <Image style={{ width: 58, height: 58 }} source={item.img} />
+        <item.img style={{ width: 58, height: 58 }} source={item.img} />
         <Text
           style={styles.textList}
           onPress={() =>
@@ -64,24 +63,26 @@ function SupportScreen({ navigation }) {
           </View>
         </View>
         <View style={styles.stylesFlatList}>
-          <ListItem
-            bottomDivider
-            containerStyle={styles.listStyle}
-            onPress={URL_ROUTE_SOPORT}
-          >
-            <View style={styles.list}>
-              <Image style={{ width: 58, height: 58 }} source={Sup} />
-              <Text style={styles.textList} onPress={URL_ROUTE_SOPORT}>
-                Chat de Soporte
-              </Text>
-            </View>
-          </ListItem>
+        
           <FlatList
             keyExtractor={keyExtractor}
             data={supportOptions}
             renderItem={renderItem}
           />
+          
         </View>
+        <ListItem
+            bottomDivider
+            containerStyle={styles.listStyle}
+            onPress={URL_ROUTE_SOPORT}
+          >
+            <View style={styles.list}>
+              
+              <Sup height="58
+              " width="58"/>
+              <Text style={styles.textList}>Chat de soporte</Text>
+            </View>
+          </ListItem>
       </ScrollView>
     </>
   );
@@ -98,7 +99,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: " #E5E5E5",
     width: 367,
-    height: 45,
+    height: 85,
   },
   text: {
     fontWeight: "400",
@@ -128,9 +129,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   stylesFlatList: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    
   },
 });
 

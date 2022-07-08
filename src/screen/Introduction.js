@@ -6,14 +6,17 @@ import * as Font from "expo-font";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { updateEmployee } from "../services/users-service";
 import { AuthContext } from "../context/auth-context";
+import { useAuth } from "../services/use-auth";
 
 export default function IntroductionScreen({ navigation }) {
   const [fontsLoaded, setFontsLoaded] = useState(false);
   const [user, setUser] = React.useState(null);
   const auth = React.useContext(AuthContext);
+  const [state] = useAuth();
   React.useEffect(() => {
-    setUser(auth.getState().user.data)
-  },[]);
+    setUser(auth.getState().user.data);
+    
+  }, []);
   useEffect(() => {
     if (!fontsLoaded) {
       loadFonts();
@@ -21,7 +24,8 @@ export default function IntroductionScreen({ navigation }) {
   });
 
   function handleSubmit() {
-    updateEmployee({new: false}, user.user_id)
+    updateEmployee({new: false}, auth.getState().user.user_id);
+    navigation.navigate("Home");
   }
   const loadFonts = async () => {
     await Font.loadAsync({

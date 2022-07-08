@@ -17,14 +17,16 @@ import EmptyStar from "../assets/earnings/EmptyStar.svg";
 import Rectangle from "../assets/Profile/Rectangle.png";
 import * as Linking from "expo-linking";
 import Sup from "../assets/Support/Sup.svg";
+import Logout from "../assets/Profile/logout.png";
 import { AuthContext } from "../context/auth-context";
+import {deleteToken} from "../services/tokens"
 
 function ProfileScreen({ navigation }) {
   const [user, setUser] = React.useState(null);
   const auth = React.useContext(AuthContext);
   React.useEffect(() => {
-    setUser(auth.getState().user.data)
-  },[]);
+    setUser(auth.getState().user.data);
+  }, []);
   const keyExtractor = (index) => index.toString();
   const renderItem = ({ item }) => (
     <ListItem
@@ -34,7 +36,7 @@ function ProfileScreen({ navigation }) {
       onPress={() => navigation.navigate(`${item.ruta}`, { itemId: item.id })}
     >
       <View key={item.id} style={styles.list}>
-        <item.icon style={{ width: 30, height: 30 }}/>
+        <item.icon style={{ width: 30, height: 30 }} />
         <Text style={styles.textList}>{item.nombre}</Text>
       </View>
     </ListItem>
@@ -42,87 +44,93 @@ function ProfileScreen({ navigation }) {
   const URL_ROUTE_SOPORT = () => {
     Linking.openURL("https://wa.me/52618237533");
   };
+
+  function logout() {
+    deleteToken()
+    navigation.navigate("Home")
+}
   return (
     <>
       <BackTitledHeader title="Menú" />
       <View style={styles.container}>
         <ScrollView>
           <View>
-          {
-            user ? (
+            {user ? (
               <>
-                 <View
-              style={{
-                flex: 2,
-                flexDirection: "row",
-                marginTop: 16,
-              }}
-            >
-              <View>
-                <Image
+                <View
                   style={{
-                    marginTop: 10,
-                    width: 70,
-                    height: 70,
-                    borderRadius: 50,
+                    flex: 2,
+                    flexDirection: "row",
+                    marginTop: 16,
                   }}
-                  source={{uri: user.image_url}}
-                />
-              </View>
-              <View
-                style={{
-                  paddingLeft: 25,
-                }}
-              >
-                <Text style={styles.textUser}>Hola,</Text>
-                <Text style={[styles.textUser, { fontWeight: "600" }]}>
-                  {user.full_name}
-                </Text>
-              </View>
-            </View>           
-            <View
-              style={{
-                flex: 2,
-                flexDirection: "row",
-                marginTop: 40,
-              }}
-            >
-              <Stars
-                display={4}
-                spacing={10}
-                count={5}
-                starSize={20}
-                fullStar={Star}
-                emptyStar={EmptyStar}
-              />
-              <Text style={styles.textStart}>Asociada Activa y Autorizada</Text>
-            </View>
-            <View>
-              <Text
-                style={{
-                  fontStyle: "normal",
-                  fontWeight: "400",
-                  fontSize: 16,
-                  lineHeight: 26,
-                  color: "#82868D",
-                }}
-              >
-                97% Calificaciones Positivas de todos tus Servicios
-              </Text>
-              <Text
-                style={{
-                  fontStyle: "normal",
-                  fontWeight: "500",
-                  fontSize: 14,
-                  lineHeight: 26,
-                  color: "#696A6A",
-                }}
-              >
-                ID: {user.document_id}
-              </Text>
-            </View>
-            </>) : null
-          }
+                >
+                  <View>
+                    <Image
+                      style={{
+                        marginTop: 10,
+                        width: 70,
+                        height: 70,
+                        borderRadius: 50,
+                      }}
+                      source={{ uri: user.image_url }}
+                    />
+                  </View>
+                  <View
+                    style={{
+                      paddingLeft: 25,
+                    }}
+                  >
+                    <Text style={styles.textUser}>Hola,</Text>
+                    <Text style={[styles.textUser, { fontWeight: "600" }]}>
+                      {user.full_name}
+                    </Text>
+                  </View>
+                </View>
+                <View
+                  style={{
+                    flex: 2,
+                    flexDirection: "row",
+                    marginTop: 40,
+                  }}
+                >
+                  <Stars
+                    display={4}
+                    spacing={10}
+                    count={5}
+                    starSize={20}
+                    fullStar={Star}
+                    emptyStar={EmptyStar}
+                  />
+                  <Text style={styles.textStart}>
+                    Asociada Activa y Autorizada
+                  </Text>
+                </View>
+                <View>
+                  <Text
+                    style={{
+                      fontStyle: "normal",
+                      fontWeight: "400",
+                      fontSize: 16,
+                      lineHeight: 26,
+                      color: "#82868D",
+                    }}
+                  >
+                    97% Calificaciones Positivas de todos tus Servicios
+                  </Text>
+                  <Text
+                    style={{
+                      fontStyle: "normal",
+                      fontWeight: "500",
+                      fontSize: 14,
+                      lineHeight: 26,
+                      color: "#696A6A",
+                    }}
+                  >
+                    ID: {user.document_id}
+                  </Text>
+                </View>
+              </>
+            ) : null}
             <View
               style={{
                 height: 100,
@@ -172,10 +180,23 @@ function ProfileScreen({ navigation }) {
             onPress={URL_ROUTE_SOPORT}
           >
             <View style={styles.list}>
-              
-              <Sup height="30
-              " width="30"/>
+              <Sup
+                height="30"
+                width="30"
+              />
               <Text style={styles.textList}>Chat de soporte</Text>
+            </View>
+          </ListItem>
+          <ListItem
+            bottomDivider
+            containerStyle={styles.listStyle}
+            onPress={logout}
+          >
+            <View style={styles.list}>
+              <Image style={{ width: 30, height: 30 }}
+                source={Logout}
+              />
+              <Text style={styles.textList}>Cerrar sesión</Text>
             </View>
           </ListItem>
         </ScrollView>
@@ -199,6 +220,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.backgroundMain,
     width: 367,
     height: 60,
+    marginBottom: 5,
   },
   textUser: {
     fontStyle: "normal",
