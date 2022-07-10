@@ -12,15 +12,14 @@ import Colors from "../../assets/colors/colors";
 import RectangleDivider from "../../assets/Home/RectangleDivider.svg";
 import IconPlanet from "../../assets/earnings/IconPlanet.svg";
 import IconCard from "../../assets/earnings/IconCard.svg";
-import EmptyStar from "../../assets/earnings/EmptyStar.svg";
-import Star from "../../assets/earnings/Star.svg";
+import EmptyStar from "../../assets/earnings/SingleStar.png";
+import Star from '../../assets/earnings/Star.png';
 import Stars from "react-native-stars";
 import CircularProgress from "react-native-circular-progress-indicator";
 import { showOrderEmployee } from "../../services/order-details-services";
 import { showReviews } from "../../services/reviews-service";
 import { useAuth } from "../../context/auth-context";
-
-
+import NumberFormat from 'react-number-format';
 
 function ProfitsScreen() {
   const { user } = useAuth();
@@ -396,6 +395,7 @@ function ProfitsScreen() {
                 alignItems: "center",
               }}
             >
+            
               <Text
                 style={[styles.titleStyle, { marginBottom: 20, marginTop: 20 }]}
               >
@@ -405,19 +405,21 @@ function ProfitsScreen() {
                 style={{
                   flex: 2,
                   alignItems: "center",
+                  
                 }}
               >
                 {user ? (
                   user.country == "Colombia" ? (
                     <>
-                      <Text
-                        style={[
+                    <NumberFormat
+                      value={Ganancias}
+                      displayType="text"
+                      thousandSeparator
+                      renderText={(value) => <Text style={[
                           styles.titleStyle,
                           { marginBottom: 20, marginTop: 20 },
-                        ]}
-                      >
-                        {Ganancias + " COP"}
-                      </Text>
+                        ]}>{value + " COP"}</Text>}
+                    />
                       <View
                         style={{
                           flex: 1,
@@ -438,14 +440,15 @@ function ProfitsScreen() {
                     </>
                   ) : (
                     <>
-                      <Text
-                        style={[
+                    <NumberFormat
+                      value={Ganancias}
+                      displayType="text"
+                      thousandSeparator
+                      renderText={(value) => <Text style={[
                           styles.titleStyle,
                           { marginBottom: 20, marginTop: 20 },
-                        ]}
-                      >
-                        {Ganancias + " €"}
-                      </Text>
+                        ]}>{value + " €"}</Text>}
+                    />
                       <View
                         style={{
                           flex: 1,
@@ -484,7 +487,7 @@ function ProfitsScreen() {
                         <View style={{ alignItems: "center" }}>
                           {star ? (
                             <Stars
-                              display={star}
+                              display={3}
                               spacing={10}
                               count={5}
                               starSize={20}
@@ -627,8 +630,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: 20,
-    alignItems: "center",
     justifyContent: "center",
+    marginVertical: 10,
+    marginHorizontal: 10,
   },
   containerHorizontal: {
     flex: 2,

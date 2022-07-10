@@ -8,16 +8,20 @@ import {
   FlatList,
   Button,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import { ListItem } from "@rneui/themed";
 import Stars from "react-native-stars";
 import { showReviews } from "../../services/reviews-service";
 import BackTitledHeader from "../../components/BackTitleHeader";
-import faStar from "../../assets/Reviews/faStar.svg";
 import Colors from "../../assets/colors/colors";
-import StarSkill from "../../assets/stars/review.png";
-import StarSkillTwo from "../../assets/stars/reviewTwo.png";
+
 import { useAuth } from "../../context/auth-context";
+import StarSkillTwo from "../../assets/earnings/SingleStar.png";
+import StarSkill from '../../assets/earnings/Star.png';
+import axios, { post } from "axios";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { BASE_URI } from "../../../config";
 
 function ReviewsScreen({ navigation }) {
   const { user } = useAuth();
@@ -46,7 +50,42 @@ function ReviewsScreen({ navigation }) {
     alignItems: "center",
     backgroundColor: "#EC607E",
     borderRadius: 15,
+    
   };
+
+  async function handleReport(customer){
+    console.log(customer)
+    const type = "Empleado";
+    const formData = new FormData();
+    const text = "Estoy inconforme con está calificación de mi servicio."
+
+    formData.append("body", text);
+    formData.append("name", type);
+    formData.append("employee_id", user.id);
+    formData.append("customer_id", customer);
+
+    const token = await AsyncStorage.getItem('token');
+    const url = `${BASE_URI}/reports`;
+    const config = {
+      headers: {
+        "Authorization": `Token token=${token}`,
+        "content-type": "multipart/form-data",
+      },
+    };
+    return post(url, formData, config).then(()=>{
+      createTwoButtonAlert()
+    });
+  }
+
+  const createTwoButtonAlert = () =>
+  Alert.alert(
+    "¡Reporte enviado!",
+    "Se ha abierto un reporte para investigar la razón de esta puntuación, ¡tendrás novedades pronto!",
+    [
+      { text: "OK", onPress: () => navigation.goBack() }
+    ]
+  );
+
 
   const keyExtractor = (index) => index.toString();
   const renderItem = ({ item }) => (
@@ -74,7 +113,7 @@ function ReviewsScreen({ navigation }) {
           />
           <TouchableOpacity
             style={btnStyle}
-            onPress={() => navigation.navigate("Report")}
+            onPress={() => handleReport(item.customer_id)}
           >
             <Text style={styles.textButton}>Reportar</Text>
           </TouchableOpacity>
@@ -166,8 +205,8 @@ const styles = StyleSheet.create({
     fontStyle: "normal",
     fontWeight: "600",
     fontSize: 11,
-    lineHeight: 19,
     color: "#ffff",
+
   },
   containerButton: {
     flex: 1,

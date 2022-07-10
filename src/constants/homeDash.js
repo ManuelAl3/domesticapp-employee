@@ -1,5 +1,4 @@
 import Calendar from "../assets/Home/Calendar.png";
-import Capacitation from "../assets/Home/Capacitation.png";
 import Certification from "../assets/Home/Certification.png";
 import Contract from "../assets/Home/Contract.png";
 import GoodP from "../assets/Home/GoodP.png";

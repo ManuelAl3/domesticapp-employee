@@ -2,8 +2,12 @@ import * as React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import BackTitledHeader from "../../components/BackTitleHeader";
 import colors from "../../assets/colors/colors";
+import * as Linking from 'expo-linking';
+import { useAuth } from "../../context/auth-context";
+
 
 function ContractScreen() {
+  const{user}= useAuth();
   const btnStyle = {
     height: 55,
     width: 300,
@@ -13,6 +17,10 @@ function ContractScreen() {
     borderRadius: 10,
     marginBottom: 16,
   };
+  function MyContract(){
+    const uri = user.contrato_url
+    Linking.openURL(uri);
+  }
 
   return (
     <>
@@ -38,7 +46,7 @@ function ContractScreen() {
           </View>
         </View>
         <View style={styles.containerButton}>
-          <TouchableOpacity style={btnStyle}>
+          <TouchableOpacity style={btnStyle} onPress={MyContract}>
             <Text style={styles.textButton}>Descargar contrato</Text>
           </TouchableOpacity>
         </View>

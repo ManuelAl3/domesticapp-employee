@@ -15,7 +15,7 @@ import colors from "../../assets/colors/colors";
 import Perfil from "../../assets/Profile/Perfil.png";
 import * as Linking from "expo-linking";
 import { showOrderEmployee } from "../../services/order-details-services";
-import { AuthContext } from "../../context/auth-context";
+import { AuthContext, useAuth } from "../../context/auth-context";
 
 const currentService = [
   {
@@ -53,10 +53,10 @@ const lastService = [
   },
 ];
 
-function Help({ navigation }) {
-  const auth = React.useContext(AuthContext);
+function Help() {
+  const { user } = useAuth();
   React.useEffect(() => {
-    showOrderEmployee(auth.getState().user.data.user_id).then(setOrders)
+    showOrderEmployee(user.user_id).then(setOrders)
   },[]);
   const [orders, setOrders] = React.useState(null);
 
