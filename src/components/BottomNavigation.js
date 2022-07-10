@@ -12,6 +12,7 @@ import MenuIcon from "../assets/bottomTab/menu.svg";
 import MyProfileStack from "../components/stacks/MyProfileStack";
 import SupportStack from "../components/stacks/SupportStack";
 import SkillStack from "../components/stacks/SkillStack";
+import HomeStacks from "./stacks/HomeStacks";
 
 const Tab = createBottomTabNavigator();
 
@@ -37,7 +38,7 @@ export default function BottomNavigation() {
               <HomeIcon height="30" width="30"/>
             ),
           }}
-          component={S.Home}
+          component={HomeStacks}
         />
         <Tab.Screen
           name="Skill"

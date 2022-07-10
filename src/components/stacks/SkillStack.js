@@ -8,9 +8,9 @@ export default function SkillStack() {
   return (
     <Stack.Navigator
       screenOptions={{ headerShown: false }}
-      initialRouteName="Skill"
+      initialRouteName="SkillIndex"
     >
-      <Stack.Screen name="Skill" component={H.Skill} />
+      <Stack.Screen name="SkillIndex" component={H.Skill} />
       <Stack.Screen name="GoodP" component={H.GoodP} />
     </Stack.Navigator>
   );

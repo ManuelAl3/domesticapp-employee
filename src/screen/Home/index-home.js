@@ -1,4 +1,4 @@
-import CapacitationScreen from "./Capacitations";
+
 import CertificationScreen from "./Certifications";
 import ContractScreen from "./Contract";
 import GoodPracticesScreen from "./GoodPractices";
@@ -12,7 +12,6 @@ import DataTreatment from "./legalInformation/DataTreatment";
 import PrivacyPolicy from "./legalInformation/PrivacyPolicy";
 
 export {
-  CapacitationScreen as Capacitation,
   CertificationScreen as Certification,
   ContractScreen as Contract,
   GoodPracticesScreen as GoodP,

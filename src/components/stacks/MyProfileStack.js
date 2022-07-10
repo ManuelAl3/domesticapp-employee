@@ -16,8 +16,10 @@ const Stack = createNativeStackNavigator();
 
 export default function MyProfileStack() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Profile" component={Profile} />
+    <Stack.Navigator screenOptions={{ headerShown: false }}
+      initialRouteName="ProfileIndex"
+    >
+      <Stack.Screen name="ProfileIndex" component={Profile} />
       <Stack.Screen name="MyProfile" component={MyProfile} />
       <Stack.Screen name="Review" component={Reviews} />
       <Stack.Screen name="Report" component={ReportReview} />
