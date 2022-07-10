@@ -1,4 +1,3 @@
-import Capacitation from "../assets/Profile/Capacitation.svg";
 import Certify from "../assets/Profile/Certify.svg";
 import Contract from "../assets/Profile/Contract.svg";
 import Legal from "../assets/Profile/Legal.svg";
