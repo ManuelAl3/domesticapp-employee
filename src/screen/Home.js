@@ -34,22 +34,7 @@ function HomeScreen({ navigation }) {
     </View>
   );
 
-  const Menu = ({ item }) => (
-    <View style={styles.containerB}>
-      <ListItem
-        key={item.id}
-        containerStyle={styles.listStyle}
-        onPress={() => navigation.navigate(`${item.ruta}`, { itemId: item.id })}
-      >
-        <View style={styles.containerLogo}>
-          <View style={styles.containerLogo}>
-            <Image style={{ width: 50, height: 50 }} source={item.img} />
-          </View>
-          <Text style={styles.textStyle}>{item.nombre}</Text>
-        </View>
-      </ListItem>
-    </View>
-  );
+
   return (
     <>
       <NavBar />

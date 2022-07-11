@@ -107,9 +107,9 @@ export function DayCard() {
     Linking.openURL(`http://maps.google.com/?q=1200 ${address}`);
   }
 
-  function goReport() {
+  function goReport(id) {
     setModalVisible(!modalVisible)
-    navigation.navigate("ReportCalendar")
+    navigation.navigate("ReportCalendar", { itemId: id })
   }
 
   return (
@@ -189,7 +189,7 @@ export function DayCard() {
             </Pressable>
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => goReport()}>
+              onPress={() => goReport(orders[count].id)}>
               <Text style={styles.textStyle}>Reportar Incapacidad</Text>
             </Pressable>
        </>   

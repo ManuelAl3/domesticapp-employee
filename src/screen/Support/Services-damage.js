@@ -9,6 +9,7 @@ import {
   TextInput,
   Modal,
   Pressable,
+  Alert,
 } from "react-native";
 import BackTitleHeader from "../../components/BackTitleHeader";
 import colors from "../../assets/colors/colors";
@@ -84,9 +85,19 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
       },
     };
     return post(url, formData, config).then(()=>{
-      navigation.goBack()
+      createTwoButtonAlert();
     });
   }
+
+  const createTwoButtonAlert = () =>
+  Alert.alert(
+    "¡Reporte enviado!",
+    "¡Se le ha informado a un administrador su caso!",
+    [
+      { text: "OK", onPress: () => navigation.goBack() }
+    ]
+  );
+
 
   let services = [];
   if (orders && services.length === 0) {

@@ -4,185 +4,224 @@ import {
   StatusBar,StyleSheet,
   TextInput,Image, Platform,
   Animated,
+  Text,
+  TouchableOpacity,
+  Alert,
 } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import { BASE_URI } from '../../../config';
-import axios, {patch} from 'axios';
+import { BASE_URI } from "../../../config";
+import axios, { post } from "axios";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useAuth } from '../../context/auth-context';
+import colors from '../../assets/colors/colors';
 
-const ReportScreen = () => {
+const ReportScreen = ({route, navigation}) => {
+
+const [image, setImage] = React.useState(null);
+const [text, onChangeText] = React.useState("");
   const { user } = useAuth();
+  const { itemId } = route.params;
+  const pickImage = async () => {
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
 
-  useEffect( async ()=>{
-    if(Platform.OS !== 'web'){
-      const {status} = await ImagePicker.requestMediaLibraryPermissionsAsync();
-      if(status !== 'granted'){
-        alert('Permission denied!');
-      }
+    if (!result.cancelled) {
+      setImage(result.uri);
     }
-  }, [])
-  const [value, setValue] = useState(null)
-  const [form, setForm] = useState({
-    name: "",
-  });
-  function handleFormChange(event) {
-    const { name, value } = event.target;
-    setForm({ ...form, [name]: value });
-  }
-const PickImage = async () =>{
-  
-  const url = `${BASE_URI}/employees/${user.id}`
+  };
 
-  
-  const config = {
-    headers: {
-        'content-type': 'multipart/form-data'
-    }
-}
-
-  let result = await ImagePicker.launchImageLibraryAsync({
-    mediaTypes: ImagePicker.MediaTypeOptions.All,
-    allowsEditing: true,
-    aspect: [4,3],
-    quality: 1
-  })
-  //console.log(result);
-  if (!result.cancelled) {
-    let image;
-    image.uri = result.uri;
-    image.name = "TEST.jpg";
-    image.type = image.mime;
-    image.dateModified = new Date();
+  async function onSubmit() {
+    
     const formData = new FormData();
-    formData.append("cover", image, image.uri);
-  
-    //formData.append("cover", result.uri);
-  
-    setValue(result.uri)
-    return  patch(url, formData,config)
+    formData.append("cover", {
+      uri: image,
+      type: "image/jpeg",
+      name: `service_report.jpg`,
+    });
+    formData.append("body", text);
+    formData.append("order_detail_id", itemId);
+    formData.append("employee_id", user.id);
+
+    const token = await AsyncStorage.getItem('token');
+    const url = `${BASE_URI}/service_reports`;
+    const config = {
+      headers: {
+        "Authorization": `Token token=${token}`,
+        "content-type": "multipart/form-data",
+      },
+    };
+    return post(url, formData, config).then(()=>{
+      createTwoButtonAlert()
+    });
   }
-  
-}
+  const btnStyle = {
+    height: 55,
+    width: "80%",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: colors.blue,
+    borderRadius: 10,
+    marginBottom: 16,
+  };
+
+  const createTwoButtonAlert = () =>
+  Alert.alert(
+    "¡Reporte enviado!",
+    "¡Se le ha informado a un administrador su caso!",
+    [
+      { text: "OK", onPress: () => navigation.goBack() }
+    ]
+  );
+
+
+
   return (
     <View style={{ flex: 1, padding: 30, backgroundColor: '#f5fcff' }}>
-      <StatusBar hidden />
-      <FloatingLabelInput
-          id="name"
-          name="name"
-          label="Motivo de incapacidad"
-          value={form.name}
-          onChange={handleFormChange}
+       <View
+          style={{
+            marginLeft: 25,
+          }}
+        >
+        
+          <Text style={styles.title}>Motivo de incapacidad</Text>
+        </View>
+
+        <TextInput
+          multiline
+          numberOfLines={10}
+          style={styles.input}
+          onChangeText={onChangeText}
+          value={text}
+          placeholder="Escribe aquí la descripción del evento que ocasiono el accidente, daño o situación..."
         />
-      <Button title="Choose Image" onPress={PickImage}/>
-      {value && <Image source={{uri: value}} style={{width: 100 , height: 100 }}/>}
+        <View
+          style={{
+            marginLeft: 25,
+          }}
+        >
+          <Text style={styles.title}>Archivos</Text>
+          <View
+            style={{
+              marginLeft: 25,
+            }}
+          >
+            {image && (
+              <Image
+                source={{ uri: image }}
+                style={{ width: 60, height: 60 }}
+              />
+            )}
+          </View>
+        </View>
+        <View style={styles.containerButton}>
+          <TouchableOpacity style={btnStyle} onPress={pickImage}>
+            <Text style={styles.textButton}>Adjuntar Archivos</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.containerButton}>
+          <TouchableOpacity style={btnStyle} onPress={onSubmit}>
+            <Text style={styles.textButton}>Enviar Reporte</Text>
+          </TouchableOpacity>
+        </View>
     </View>
   );
 };
 
-class FloatingLabelInput extends Component {
-  state = {
-    isFocused: false,
-  };
+export default ReportScreen;
 
-  componentWillMount() {
-    this._animatedIsFocused = new Animated.Value(this.props.value === '' ? 0 : 1);
-  }
-
-  handleFocus = () => this.setState({ isFocused: true });
-  handleBlur = () => this.setState({ isFocused: false });
-
-  componentDidUpdate() {
-    Animated.timing(this._animatedIsFocused, {
-      toValue: (this.isFocused || this.props.value !== '') ? 1 : 0,
-      duration: 200,
-    }).start();
-  }
-
-  render() {
-    const { label, ...props } = this.props;
-    const { isFocused } = this.state;
-    const style = defaultStyles;
-    const animatedLabelStyle = {
-      top: this._animatedIsFocused.interpolate({
-        inputRange: [0, 1],
-        outputRange: [18, 0],
-      }),
-      fontSize: this._animatedIsFocused.interpolate({
-        inputRange: [0, 1],
-        outputRange: [15, 12],
-      }),
-      color: this._animatedIsFocused.interpolate({
-        inputRange: [0, 1],
-        outputRange: ['#888', '#888'],
-      }),
-    };
-    return (
-      <View style={{ paddingTop: 18 }}>
-        <Animated.Text style={[style.labelStyle,animatedLabelStyle]}>
-          {label}
-        </Animated.Text>
-        <TextInput
-          {...props}
-          style={[style.textInput,isFocused&&style.focusedTextInput]}
-          onFocus={this.handleFocus}
-          onBlur={this.handleBlur}
-          blurOnSubmit
-          selectionColor={style.selectionColor}
-          underlineColorAndroid="transparent"
-        />
-      </View>
-    );
-  }
-}
-
-const defaultStyles = {
-  labelStyle: {
-    position: 'absolute',
-      left: 0,
-  },
-  textInput: {
-      height: 20, 
-      fontSize: 15, 
-      color: '#000', 
-      borderBottomWidth: 1, 
-      borderBottomColor: '#aaa'
-    },
-    focusedTextInput: {
-      borderBottomWidth: 2, 
-      borderBottomColor: 'red'
-    },
-    selectionColor: 'red',
-}
 const styles = StyleSheet.create({
-  mainBody: {
+  container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: "center",
+    backgroundColor: "#ecf0f1",
+    padding: 8,
+  },
+  paragraph: {
+    margin: 24,
+    fontSize: 18,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  text: {
+    fontWeight: "400",
+    fontSize: 18,
+    lineHeight: 19,
+    color: "#35435E",
+  },
+  title: {
+    fontWeight: "600",
+    fontSize: 18,
+    lineHeight: 26,
+    color: "#3D4451",
+    marginBottom: 20,
+    marginTop: 20,
+  },
+  stylesFlatList: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  textButton: {
+    fontStyle: "normal",
+    fontWeight: "400",
+    fontSize: 17,
+    lineHeight: 26,
+    color: "#ffff",
+  },
+  containerButton: {
+    alignItems: "center",
+    marginTop: 30,
+  },
+  input: {
+    margin: 12,
     padding: 20,
+    backgroundColor: "#f0fcff",
   },
-  buttonStyle: {
-    backgroundColor: '#307ecc',
-    borderWidth: 0,
-    color: '#FFFFFF',
-    borderColor: '#307ecc',
-    height: 40,
-    alignItems: 'center',
-    borderRadius: 30,
-    marginLeft: 35,
-    marginRight: 35,
-    marginTop: 15,
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
   },
-  buttonTextStyle: {
-    color: '#FFFFFF',
-    paddingVertical: 10,
-    fontSize: 16,
+  modalView: {
+    margin: 20,
+    backgroundColor: "#FFF",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    borderRadius: 10,
+    padding: 10,
+    marginVertical: 10,
+    elevation: 2,
+  },
+  buttonOpen: {
+    backgroundColor: "#0BBBEF",
+  },
+  buttonClose: {
+    backgroundColor: "#0BBBEF",
   },
   textStyle: {
-    backgroundColor: '#fff',
-    fontSize: 15,
-    marginTop: 16,
-    marginLeft: 35,
-    marginRight: 35,
-    textAlign: 'center',
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center",
   },
 });
-export default ReportScreen;

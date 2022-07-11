@@ -13,6 +13,7 @@ import MyProfileStack from "../components/stacks/MyProfileStack";
 import SupportStack from "../components/stacks/SupportStack";
 import SkillStack from "../components/stacks/SkillStack";
 import HomeStacks from "./stacks/HomeStacks";
+import CalendarStack from "./stacks/CalendarStacks";
 
 const Tab = createBottomTabNavigator();
 
@@ -58,7 +59,7 @@ export default function BottomNavigation() {
               <CalendarIcon height="30" width="30" />
             ),
           }}
-          component={S.Calendar}
+          component={CalendarStack}
         />
         {
           
