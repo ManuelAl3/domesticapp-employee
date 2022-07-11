@@ -21,6 +21,8 @@ import { showReviews } from "../../services/reviews-service";
 import { useAuth } from "../../context/auth-context";
 import NumberFormat from 'react-number-format';
 
+
+
 function ProfitsScreen() {
   const { user } = useAuth();
   React.useEffect(() => {
@@ -29,6 +31,7 @@ function ProfitsScreen() {
   },[user]);
  
   const [orders, setOrders] = React.useState(null);
+  const [score, setScore] = React.useState(null);
   const [star, setStar] = React.useState(null);
   const [reviews, setReviews] = React.useState(null);
 
@@ -147,26 +150,39 @@ function ProfitsScreen() {
     
   }
 
-  let score = 0;
-  if (reviews) {
-    console.log(score)
+  if (reviews && score) {
+   
     if(reviews.length > 0) {
        reviews.forEach((review) => {
-      score += review.score;
+        setScore(score + review.score);
     });
     }
 
-    if(reviews.length > 0) {
-    score = parseInt(score / reviews.length);
+    if(reviews.length > 0 && score > 0) {
+      setScore(parseInt(score / reviews.length));
     if (!star) {
       setStar(score);
       
     }}
-    if(reviews.length === 0) {
+    if(reviews.length === 0 ) {
       if (!star) {
         setStar(0);
-      }}
+      }
+      if (!score) {
+        setScore(0);
+      }
+    
     }
+      console.log(score)
+      console.log(reviews)
+    }
+
+    if (!score) {
+      if(score !== 0){
+        setScore(0);
+      }
+        
+      }
 
   return (
     <>

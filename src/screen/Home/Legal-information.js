@@ -1,8 +1,10 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import colors from "../../assets/colors/colors";
 import * as React from "react";
 import BackTitledHeader from "../../components/BackTitleHeader";
 import * as Linking from 'expo-linking';
+import LEGAL from "../../assets/Png/LEGAL.png"
+import { vw, vh } from "react-native-expo-viewport-units";
 
 function LegalInforationScreen({ navigation }) {
   const btnStyle = {
@@ -29,7 +31,11 @@ function LegalInforationScreen({ navigation }) {
   return (
     <>
       <BackTitledHeader title="Información legal" />
-      <View style={{ flex: 1, alignItems: "center", marginTop: 100 }}>
+
+      <View style={{alignItems: 'center', marginTop: 30, }}>
+            <Image style={{width: vw(90), height: vh(45),}} source={LEGAL}/>
+            </View>
+      <View style={{ flex: 1, alignItems: "center", marginTop: 40 }}>
         <TouchableOpacity
           style={btnStyle}
           onPress={TermsConditions}

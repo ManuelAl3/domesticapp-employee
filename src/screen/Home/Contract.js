@@ -1,10 +1,11 @@
 import * as React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import BackTitledHeader from "../../components/BackTitleHeader";
 import colors from "../../assets/colors/colors";
 import * as Linking from 'expo-linking';
 import { useAuth } from "../../context/auth-context";
-
+import CONTRATO from "../../assets/Png/CONTRATO.png"
+import { vw, vh } from "react-native-expo-viewport-units";
 
 function ContractScreen() {
   const{user}= useAuth();
@@ -30,21 +31,19 @@ function ContractScreen() {
           <View
             style={{
               marginLeft: 25,
+              marginVertical: 20,
             }}
           >
-            <View
-              style={{
-                marginLeft: 25,
-              }}
-            >
-              <Text style={styles.title}>Contrato</Text>
-            </View>
             <Text style={styles.text}>
               En este apartado puedes encontrar tu contrato para que puedas
               visualizarlo haciendo la descarga del mismo en formato pdf
             </Text>
           </View>
+
         </View>
+        <View style={{alignItems: 'center',  }}>
+            <Image style={{width: vw(90), height: vh(45),}} source={CONTRATO}/>
+            </View>
         <View style={styles.containerButton}>
           <TouchableOpacity style={btnStyle} onPress={MyContract}>
             <Text style={styles.textButton}>Descargar contrato</Text>

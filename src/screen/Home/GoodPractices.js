@@ -1,8 +1,10 @@
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Image, SafeAreaView, ScrollView } from "react-native";
 import * as React from "react";
 import BackTitledHeader from "../../components/BackTitleHeader";
 import colors from "../../assets/colors/colors";
 import * as Linking from 'expo-linking';
+import BP from "../../assets/Png/BUENAS.png"
+import { vw, vh } from "react-native-expo-viewport-units";
 
 function GoodPracticesScreen({ navigation }) {
   const btnStyle = {
@@ -14,6 +16,7 @@ function GoodPracticesScreen({ navigation }) {
     alignItems: "center",
     backgroundColor: colors.blue,
     borderRadius: 10,
+    marginBottom: 10,
   };
 
   function PDF(){
@@ -22,11 +25,13 @@ function GoodPracticesScreen({ navigation }) {
   return (
     <>
       <BackTitledHeader title="Buenas Prácticas" />
+      
       <View>
         <View>
           <View
             style={{
               marginLeft: 25,
+              marginVertical: 20,
             }}
           >
             <Text style={styles.text}>
@@ -36,10 +41,13 @@ function GoodPracticesScreen({ navigation }) {
           </View>
           <View
             style={{
-              marginLeft: 25,
+              marginHorizontal: 25,
             }}
           >
             <Text style={styles.title}>Buenas Prácticas</Text>
+            <View style={{alignItems: 'center', marginTop: 50, }}>
+            <Image style={{width: vw(90), height: vh(45),}} source={BP}/>
+            </View>
           </View>
         </View>
       </View>
@@ -48,16 +56,17 @@ function GoodPracticesScreen({ navigation }) {
           <Text style={styles.textButton}>Descarga manual</Text>
         </TouchableOpacity>
       </View>
-    </>
+      </>
+   
   );
 }
 
 export default GoodPracticesScreen;
 const styles = StyleSheet.create({
   containerButton: {
-    flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    marginVertical: 25,
   },
   text: {
     fontWeight: "400",
@@ -70,8 +79,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     lineHeight: 26,
     color: "#3D4451",
-    marginBottom: 20,
-    marginTop: 20,
+
   },
   textButton: {
     fontStyle: "normal",
