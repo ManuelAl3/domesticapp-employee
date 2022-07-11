@@ -6,22 +6,22 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from "react-native";
-import React, { useContext, useEffect, useState } from "react";
-import { Input } from "@rneui/themed";
+import React, { useState } from "react";
 import loginHome from "../assets/login/loginHome.png";
 import colors from "../assets/colors/colors";
 import { Picker } from "@react-native-picker/picker";
 import { COLORS } from "../../config";
 import { useAuth } from "../context/auth-context";
+import AnimatedInput from "react-native-animated-input";
 
 function LoginScreen() {
-  const [country, setCountry] = useState("col");
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
   const { login } = useAuth();
-  const changeCountry = async (country) => {
-    setCountry(country);
-    // await AsyncStorage.setItem('country', country);
-  };
-
+  const [errors, setErrors] = useState(null)
+  const [isValid, setIsValid] = useState(true)
   const btnStyle = {
     height: 55,
     width: "100%",
@@ -32,10 +32,18 @@ function LoginScreen() {
     marginBottom: 16,
   };
   function handleSubmit() {
-  
-    login({email: "data@mail.com", password: "123456"}).catch((error) => {
-        console.log(error.message);
+    
+    login(form).catch((error) => {
+      setErrors(error.message);
+      setIsValid(!isValid);
     })
+  }
+
+  function handleEmailChange(event) {
+    setForm({ ...form, email: event });
+  }
+  function handlePasswordChange(event) {
+    setForm({ ...form, password: event });
   }
 
   return (
@@ -48,32 +56,7 @@ function LoginScreen() {
         backgroundColor: COLORS.blue,
       }}
     >
-      <View style={styles.countrySelect}>
-        <Picker
-          selectedValue={country}
-          onValueChange={changeCountry}
-          dropdownIconColor="#000"
-        >
-          <Picker.Item
-            fontFamily="Poppins_400Regular"
-            style={styles.countrySelectText}
-            label="Colombia"
-            value="col"
-          />
-          <Picker.Item
-            fontFamily="Poppins_400Regular"
-            style={styles.countrySelectText}
-            label="España"
-            value="es"
-          />
-          <Picker.Item
-            fontFamily="Poppins_400Regular"
-            style={styles.countrySelectText}
-            label="Canadá"
-            value="ca"
-          />
-        </Picker>
-      </View>
+ 
       <View
         style={{
           width: "100%",
@@ -89,15 +72,28 @@ function LoginScreen() {
           backgroundColor: colors.blue,
         }}
       >
-        <View>
-          <View>
-            <Text style={styles.text}>Email addres</Text>
-            <Input placeholder="Email" />
-          </View>
-          <View>
-            <Text style={styles.text}>Password</Text>
-            <Input placeholder="password" />
-          </View>
+      <AnimatedInput
+        placeholder="Correo"
+        valid={isValid}
+        errorText="Error"
+        onChangeText={handleEmailChange}
+        value={form.email}
+        styleLabel={{ fontWeight: "600"}}
+        styleContent= {{marginBottom: 10,}}
+        styleBodyContent={{ borderBottomWidth: 1.5, marginTop: 10 }}
+      />
+      <AnimatedInput
+        placeholder="Contraseña"
+        valid={isValid}
+        errorText={errors}
+        onChangeText={handlePasswordChange}
+        value={form.password}
+        styleContent= {{marginTop: 10, fontSize: 8}}
+        styleLabel={{ fontWeight: "600" }}
+        styleBodyContent={{ borderBottomWidth: 1.5, fontSize: 8, }}
+      />
+        
+        
           <View style={styles.containerButton}>
             <TouchableOpacity style={btnStyle} onPress={handleSubmit}>
               <Text style={styles.textButton}>Iniciar Sesión</Text>
@@ -107,7 +103,7 @@ function LoginScreen() {
             Domesticapp Ver.1.01 2022 Derechos Reservados
           </Text>
         </View>
-      </View>
+      
     </SafeAreaView>
   );
 }
@@ -199,8 +195,7 @@ const styles = StyleSheet.create({
   },
   labelForInput: {
       fontSize: 17,
-      fontFamily: 'Poppins_500Medium',
-      color: '#787B82',
+      color: '#fff',
   },
   pressableImage: {
       marginBottom: 20,
@@ -259,6 +254,6 @@ const styles = StyleSheet.create({
       marginBottom: 5
   },
   textPicker: {
-      fontFamily: 'Poppins_500Medium',
+      backgroundColor: '#D9D9D9',
   }
 });
