@@ -38,20 +38,24 @@ function MyProfileScreen({ navigation }) {
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: Colors.blue,
-    borderRadius: 3,
+    borderRadius: 8,
     marginBottom: 16,
   };
   const keyExtractor = (index) => index.toString();
   const renderItem = ({ item }) => (
     <ListItem key={item} containerStyle={styles.listStyle}>
       <View key={item.id} style={styles.containerSkills}>
-        <Image style={{ width: 27, height: 27 }} source={{uri: item.icon}} />
+        <Image style={{ width: 27, height: 27, marginTop: 30, }} source={{uri: item.icon}} />
       </View>
     </ListItem>
   );
-  
+  let edad= 0;
+  if(user){
+    edad =  getAge(user.birth_date)
+
+  }
   // return 5 elements of the array
-  const firstFive = skills?.slice(0, 5);
+  const firstFive = skills?.slice(0, 9);
 
   return (
     <ScrollView>
@@ -92,16 +96,17 @@ function MyProfileScreen({ navigation }) {
           </View>
           <View>
             {skills ? (
+              <>
               <View style={styles.stylesFlatList}>
                 <FlatList
                   keyExtractor={keyExtractor}
                   data={firstFive}
                   renderItem={renderItem}
-                  numColumns={5}
+                  numColumns={9}
                 />
 
-                
-                <View style={{ width: "90%", alignItems: "flex-end" }}>
+                </View>
+                <View style={{ width: "90%", marginTop: 5}}>
               <TouchableOpacity
                 style={btnTwoStyle}
                 onPress={() => navigation.navigate("Skill")}
@@ -109,18 +114,20 @@ function MyProfileScreen({ navigation }) {
                 <Text style={styles.textButton}>Ver más</Text>
               </TouchableOpacity>
             </View>
-              </View>
+              </>
             ) : (
               <Text>Sin habilidades</Text>
             )}
             
             <View>
-              <View>
+              <View >
                 <Text style={styles.textTitle}>Mi Biografía</Text>
                 <Text style={styles.text}>{user.biografy}</Text>
               </View>
               <View>
+              <View style={{marginBottom: 10,}}>
                 <Text style={styles.textTitle}>Mis Datos Personales</Text>
+                </View>
                 <Text style={styles.textTitle}>
                   Nacionalidad{" "}
                   <Text style={[styles.text, { fontWeight: "500" }]}>
@@ -137,6 +144,12 @@ function MyProfileScreen({ navigation }) {
                   Email{" "}
                   <Text style={[styles.text, { fontWeight: "500" }]}>
                     {user.email}
+                  </Text>
+                </Text>
+                <Text style={styles.textTitle}>
+                  Edad{" "}
+                  <Text style={[styles.text, { fontWeight: "500" }]}>
+                    {edad+" Años"}
                   </Text>
                 </Text>
                 <Text style={styles.textTitle}>
@@ -216,6 +229,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     lineHeight: 26,
     color: Colors.colorUserName,
+    marginBottom: 5,
   },
   text: {
     fontStyle: "normal",
@@ -238,15 +252,21 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   listStyle: {
-    height: 30,
+    height: 1,
     width: 30,
     marginVertical: 10,
     marginRight: 10,
     backgroundColor: Colors.white,
+    
   },
   stylesFlatList: {
     flexDirection: "column",
-    alignItems: "flex-end"
+    alignItems: "flex-start",
+    backgroundColor: "white",
+    borderRadius: 15,
+    elevation: 10,
+    shadowColor: '#52006A',
+    justifyContent: "center",
   },
 });
 
