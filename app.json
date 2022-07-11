@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "demestica-app",
-    "slug": "demestica-app",
-    "version": "1.0.0",
+    "name": "Domesticapp Empleados",
+    "slug": "domesticapp",
+    "version": "1.2.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/splash.jpeg",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -26,7 +26,7 @@
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.domesticapp.domesticapp_employee",
-      "versionCode": 1
+      "versionCode": 2
     },
     "web": {
       "favicon": "./assets/favicon.png"
