@@ -2,6 +2,7 @@ import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import * as React from "react";
 import BackTitledHeader from "../../components/BackTitleHeader";
 import colors from "../../assets/colors/colors";
+import * as Linking from 'expo-linking';
 
 function GoodPracticesScreen({ navigation }) {
   const btnStyle = {
@@ -14,6 +15,10 @@ function GoodPracticesScreen({ navigation }) {
     backgroundColor: colors.blue,
     borderRadius: 10,
   };
+
+  function PDF(){
+    Linking.openURL(`https://domesticapp-storage.s3.us-east-2.amazonaws.com/pdf/Manual+de+Integraci%C3%B3n+y+Buenas+Practicas+Domesticapp+2022.pdf`);
+  }
   return (
     <>
       <BackTitledHeader title="Buenas Prácticas" />
@@ -39,7 +44,7 @@ function GoodPracticesScreen({ navigation }) {
         </View>
       </View>
       <View style={styles.containerButton}>
-        <TouchableOpacity style={btnStyle}>
+        <TouchableOpacity onPress={PDF} style={btnStyle}>
           <Text style={styles.textButton}>Descarga manual</Text>
         </TouchableOpacity>
       </View>
