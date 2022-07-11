@@ -28,6 +28,9 @@
       "package": "com.domesticapp.domesticapp_employee",
       "versionCode": 2
     },
+    "androidNavigationBar": {
+      "visible": "immersive"
+    },
     "web": {
       "favicon": "./assets/favicon.png"
     }
