@@ -123,8 +123,9 @@ const styles = StyleSheet.create({
   textStyle: {
     fontStyle: "normal",
     fontWeight: "600",
-    fontSize: 15,
-    lineHeight: 22,
+    fontSize: 12,
+    lineHeight: 18,
     paddingTop: 20,
+    textAlign: "center",
   },
 });
