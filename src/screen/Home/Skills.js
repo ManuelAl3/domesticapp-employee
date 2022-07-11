@@ -31,29 +31,7 @@ function SkillsScreen({ navigation }) {
     Linking.openURL("https://www.google.com/");
   };
 
-  const keyExtractor = (index) => index.toString();
-  const renderItem = ({ item }) => (
-    <View style={styles.containerListItem}>
-      <ListItem key={item} bottomDivider containerStyle={styles.listStyle}>
-        <View key={item.id} style={styles.list}>
-          <Image style={{ width: 37, height: 37 }} source={{uri: item.icon}} />
-          <View style={styles.containerTextList}>
-            <Text style={styles.textList}>{item.hability}</Text>
-            <Text style={styles.textDescription}>{item.body}</Text>
-          </View>
-          <View
-            style={{
-              marginHorizontal: 5,
-              marginTop: 45,
-              alignItems: "center",
-            }}
-          >
-            
-          </View>
-        </View>
-      </ListItem>
-    </View>
-  );
+  
   const btnStyle = {
     height: 55,
     width: "80%",
@@ -63,6 +41,8 @@ function SkillsScreen({ navigation }) {
     alignItems: "center",
     backgroundColor: colors.blue,
     borderRadius: 10,
+    marginLeft: 30,
+    marginVertical: 15,
   };
   const btnStyleAdd = {
     height: 30,
@@ -182,10 +162,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   stylesFlatList: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    marginBottom: 20,
+  
+    marginHorizontal: 15
   },
   containerTextList: {
     width: "55%",
@@ -211,6 +189,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
     lineHeight: 26,
     color: "#ffff",
+    
   },
   textButtonAdd: {
     fontStyle: "normal",
