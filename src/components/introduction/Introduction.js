@@ -80,7 +80,6 @@ export default function Introduction() {
   };
   return (
     <View style={styles.containerSlider}>
-      <StatusBar translucent backgroundColor="transparent" />
       <AppIntroSlider
         keyExtractor={keyExtractor}
         renderItem={renderItem}
