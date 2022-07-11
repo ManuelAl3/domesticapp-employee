@@ -9,7 +9,7 @@ import {
   Image,
 } from "react-native";
 import Colors from "../../assets/colors/colors";
-import RectangleDivider from "../../assets/Home/RectangleDivider.svg";
+
 import IconPlanet from "../../assets/earnings/IconPlanet.svg";
 import IconCard from "../../assets/earnings/IconCard.svg";
 import EmptyStar from "../../assets/earnings/SingleStar.png";
@@ -177,7 +177,7 @@ function ProfitsScreen() {
           user ? (
             <View>
             <View style={styles.containerHorizontal}>
-              <View style={{ width: "57%" }}>
+              <View style={{ width: "60%" }}>
                 <Text style={styles.titleStyle}>{user.full_name}</Text>
                 <Text style={styles.textSubtitle}>{user.position}</Text>
                 <View>
@@ -226,8 +226,8 @@ function ProfitsScreen() {
               >
                 <Image
                   style={{
-                    width: 120,
-                    height: 120,
+                    width: 90,
+                    height: 90,
                     borderRadius: 90,
                   }}
                   source={{uri: user.image_url}}
@@ -235,16 +235,14 @@ function ProfitsScreen() {
               </View>
             </View>
             <View style={styles.divider}>
-              <RectangleDivider
-                
-              />
             </View>
+
             <View>
               <View style={styles.title}>
                 <Text
                   style={[
                     styles.titleStyle,
-                    { marginBottom: 20, marginRight: 20 },
+                    { marginBottom: 20, marginLeft: 10 },
                   ]}
                 >
                   Registro
@@ -385,8 +383,7 @@ function ProfitsScreen() {
               </View>
             </View>
             <View style={styles.divider}>
-              <RectangleDivider
-              />
+              
             </View>
             <View
               style={{
@@ -637,6 +634,7 @@ const styles = StyleSheet.create({
   containerHorizontal: {
     flex: 2,
     flexDirection: "row",
+    paddingHorizontal: 10,
   },
   containerTextIcon: {
     flex: 1,
@@ -693,6 +691,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 15,
     marginBottom: 15,
+    backgroundColor: "#0BBBEF",
+    opacity: 0.2,
+    height: 3,
   },
   textEarnings: {
     fontStyle: "normal",
