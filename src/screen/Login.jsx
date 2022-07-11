@@ -78,7 +78,7 @@ function LoginScreen() {
           errorText="Error"
           onChangeText={handleEmailChange}
           value={form.email}
-          styleLabel={{ fontWeight: "600" }}
+          styleLabel={{ fontWeight: "600", color: "white" }}
           styleContent={{ marginBottom: 10 }}
           styleBodyContent={{ borderBottomWidth: 1.5, marginTop: 10 }}
         />
@@ -88,8 +88,8 @@ function LoginScreen() {
           errorText={errors}
           onChangeText={handlePasswordChange}
           value={form.password}
-          styleContent={{ marginTop: 10, fontSize: 8 }}
-          styleLabel={{ fontWeight: "600" }}
+          styleContent={{ marginTop: 10, fontSize: 8, backgroundColor: "red" }}
+          styleLabel={{ fontWeight: "600", color: "white", backgroundColor: "blue", marginBottom: 10}}
           styleBodyContent={{ borderBottomWidth: 1.5, fontSize: 8 }}
         />
 
