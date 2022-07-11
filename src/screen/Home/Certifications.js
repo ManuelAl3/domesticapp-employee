@@ -54,11 +54,6 @@ function CertificationScreen({ navigation }) {
         }
          </View>
         
-        <View style={styles.containerButton}>
-          <TouchableOpacity style={btnStyle}>
-            <Text style={styles.textButton}>Descargar mi certificado</Text>
-          </TouchableOpacity>
-        </View>
       </View>
     </SafeAreaView>
   );
