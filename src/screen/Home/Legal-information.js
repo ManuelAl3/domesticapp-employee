@@ -2,6 +2,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import colors from "../../assets/colors/colors";
 import * as React from "react";
 import BackTitledHeader from "../../components/BackTitleHeader";
+import * as Linking from 'expo-linking';
 
 function LegalInforationScreen({ navigation }) {
   const btnStyle = {
@@ -13,7 +14,17 @@ function LegalInforationScreen({ navigation }) {
     borderRadius: 10,
     marginBottom: 16,
   };
-  // <Text>Domesticapp Ver.1.01 2022 Derechos Reservados</Text>
+  function TermsConditions(){
+    Linking.openURL(`https://domesticapp-storage.s3.us-east-2.amazonaws.com/pdf/T%C3%89RMINOS+Y+CONDICIONES+DOMESTICAPP+2022.pdf`);
+  }
+
+  function PyP(){
+    Linking.openURL(`https://domesticapp-storage.s3.us-east-2.amazonaws.com/pdf/POLITICA+DE+PRIVACIDAD+DOMESTICAPP+2022.pdf`);
+  }
+
+  function AyT(){
+    Linking.openURL(`https://domesticapp-storage.s3.us-east-2.amazonaws.com/pdf/AUTORIZACI%C3%93N+Y+TRATAMIENTO+DE+DATOS+DOMESTICAPP+2022.pdf`);
+  }
 
   return (
     <>
@@ -21,19 +32,19 @@ function LegalInforationScreen({ navigation }) {
       <View style={{ flex: 1, alignItems: "center", marginTop: 100 }}>
         <TouchableOpacity
           style={btnStyle}
-          onPress={() => navigation.navigate("TermsConditions")}
+          onPress={TermsConditions}
         >
           <Text style={styles.textButton}>Términos y condiciones</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={btnStyle}
-          onPress={() => navigation.navigate("PrivacyPolicy")}
+          onPress={PyP}
         >
           <Text style={styles.textButton}>Política de Privacidad</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={btnStyle}
-          onPress={() => navigation.navigate("DataTreatment")}
+          onPress={AyT}
         >
           <Text style={styles.textButton}>Autorización y Tratamiento</Text>
         </TouchableOpacity>
