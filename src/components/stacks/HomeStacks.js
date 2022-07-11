@@ -18,12 +18,9 @@ export default function HomeStacks() {
       <HomeStack.Screen name="Certification" component={H.Certification} />
       <HomeStack.Screen name="LegalInfo" component={H.LegalInfo} />
       <HomeStack.Screen name="GoodP" component={H.GoodP} />
-      {/* 
-     
-       */}
-      {/*       <HomeStack.Screen name="Skill" component={H.Skill} />
-       */}
-      {/* <HomeStack.Screen name="Review" component={Profile} /> */}
+      <HomeStack.Screen name="TermsConditions" component={H.TC} />
+      <HomeStack.Screen name="DataTreatment" component={H.DT} />
+      <HomeStack.Screen name="PrivacyPolicy" component={H.PP} />
     </HomeStack.Navigator>
   );
 }
