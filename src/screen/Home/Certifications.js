@@ -20,17 +20,13 @@ function CertificationScreen({ navigation }) {
   return (
     <SafeAreaView>
       <BackTitledHeader title="Mi Certificado Laboral" />
-      <View>
-        <View
-          style={{
-            marginLeft: 25,
-          }}
-        >
+      <View style={{backgroundColor: "#fff", borderRadius: 20, marginTop: 25, marginHorizontal: 10, paddingHorizontal: 25,}}>
+        <View style={{marginVertical: 20}}>
+
          <Text style={styles.title}>Datos de certificado</Text>
          
-        </View>
            <View
-          style={{alignItems: "center", justifyContent: "center",}}
+          style={{textAlign: "justify", paddingHorizontal: 25,}}
         >
        
         {
@@ -52,6 +48,7 @@ function CertificationScreen({ navigation }) {
             </>
           ) : null
         }
+        </View>
          </View>
         
       </View>
@@ -72,18 +69,16 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: "600",
     fontSize: 18,
-    lineHeight: 26,
+    lineHeight: 20,
     color: "#3D4451",
-    marginBottom: 20,
-    marginTop: 20,
+    marginBottom: 10,
+    marginTop: 10,
   },
   titleText: {
     fontWeight: "600",
     fontSize: 18,
-    lineHeight: 14,
+    lineHeight: 30,
     color: "#3D4451",
-    padding: 10,
-    marginTop: 20,
   },
   containerButton: {
     alignItems: "center",
