@@ -6,6 +6,7 @@ import * as S from "./src/screen/index-page";
 import BottomNavigation from "./src/components/BottomNavigation";
 import { AuthProvider, useAuth } from "./src/context/auth-context";
 import NewHomeScreen from "./src/screen/NewHome";
+import { StatusBar } from "react-native";
 
 
 const Stack: any = createNativeStackNavigator();
@@ -38,6 +39,7 @@ export default function ApplicationWrapper() {
     
     <NavigationContainer>
       <AuthProvider>
+      <StatusBar translucent backgroundColor="transparent" />
         <App />
       </AuthProvider>
     </NavigationContainer>
