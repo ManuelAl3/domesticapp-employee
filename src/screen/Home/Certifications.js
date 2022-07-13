@@ -62,7 +62,7 @@ function CertificationScreen({ navigation }) {
       <html>
       <style>
       body {
-        font-size: 22px;
+        font-size: 18px;
         font-family: 'Poppins', sans-serif;
         margin-left: 7vw;
         margin-right: 7vw;
@@ -70,8 +70,8 @@ function CertificationScreen({ navigation }) {
     
       h2 {
         text-align: center;
-        margin-top: 8vh;
-        margin-bottom: 8vh;
+        margin-top: 4vh;
+        margin-bottom: 4vh;
       }
     
       p {
@@ -115,7 +115,7 @@ function CertificationScreen({ navigation }) {
         Para mayor información favor comunicarse a los telefonos 5824585-
         3146242173, WhatsApp empresarial 3137515359.
       </p>
-      <br /><br /><br /><br />
+      <br /><br />
       <span>
         Atentamente,
       </span>
@@ -138,11 +138,15 @@ function CertificationScreen({ navigation }) {
       <span>
         Domesticapp SAS
       </span>
-      <br /><br /><br /><br /><br /><br /><br />
+      <br /><br /><br /><br />
       <div style="text-align: center;">
       <p1>
-        Calle 7 Sur N° 42B-125 Edificio WeWork piso 16 Tel. 3146242173
-        Email: contabilidad@domesticapp.com.co
+      <i> Calle 7 Sur N° 42B-125 Edificio WeWork piso 16 Tel. 3146242173
+      </i>
+      </p1>
+      <p1>
+      <i>
+        Email: contabilidad@domesticapp.com.co</i>
       </p1>
       </div>
     </body>
