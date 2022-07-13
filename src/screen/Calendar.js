@@ -121,12 +121,12 @@ export function DayCard() {
   }
 
   function getServces(id){
-    
+    console.log(id);
     setServicesId(id)
     showService(id).then(setServices);
     setModalVisible(true)
   }
-  let ordenes = [];
+  
   if(orders){
     orders.sort(function(a,b){
       return new Date(a.start_date) - new Date(b.start_date);
@@ -174,7 +174,7 @@ export function DayCard() {
         </View>
         
       </View>
-      <Pressable style={[styles.button, styles.buttonOpen]} onPress={()=>getServces(orders[count].id)}>
+      <Pressable style={[styles.button, styles.buttonOpen]} onPress={()=>getServces(orders[count].category.id)}>
         <Text style={styles.textStyle}>Ver más detalles</Text>
       </Pressable>
           </>
@@ -199,7 +199,8 @@ export function DayCard() {
           {orders ? (
             orders.length > 0 ? (
            <>
-           <View style={{backgroundColor: "#fff", borderRadius: 15, width: vw(60), padding: 10,}}>
+           <View style={{backgroundColor: "#fff", borderRadius: 15, width: vw(70), padding: 10, maxHeight: vh(40)}}>
+           <ScrollView >
         <Text style={style.text}>{"Fecha: "+orders[count].start_date}</Text>
         {
           orders[count].workday === "Completa" ? (
@@ -227,7 +228,7 @@ export function DayCard() {
             ))
           ) : null
         }</View>
-        </View>
+        </ScrollView></View>
         <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={() => GoogleAddres(orders[count].address)}>
