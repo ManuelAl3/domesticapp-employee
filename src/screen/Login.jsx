@@ -73,20 +73,23 @@ function LoginScreen() {
           backgroundColor: colors.blue,
         }}
       >
-      <Text>Correo</Text>
+      <Text style={styles.textInputStyle}>Correo</Text>
       <TextInput 
     style={styles.textInputStyle}
+    textContentType="emailAddress"
     placeholderTextColor='white'
     placeholder="user@mail.com"
     underlineColorAndroid='black'
     value={form.email}
+    keyboardType="email-address"
     onChangeText={handleEmailChange} />
 
-<Text>Contraseña</Text>
+<Text style={styles.textInputStyle}>Contraseña</Text>
       <TextInput 
     style={styles.textInputStyle}
     placeholderTextColor='white'
-    placeholder="password123"
+    placeholder="*****"
+    secureTextEntry={true}
     underlineColorAndroid='black'
     value={form.password}
     onChangeText={handlePasswordChange} />
@@ -107,7 +110,7 @@ function LoginScreen() {
 export default LoginScreen;
 
 const styles = StyleSheet.create({
-  containerButton:{marginTop: 20,},
+  containerButton:{marginTop: 20, marginBottom: 25,},
   textInputStyle: {
     paddingBottom: 5,
     color: 'white',
