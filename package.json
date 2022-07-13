@@ -39,6 +39,7 @@
     "format-currency": "^1.0.0",
     "get-age": "^1.0.1",
     "link": "^1.5.0",
+    "number-to-date-month-name": "^1.0.2",
     "react": "^17.0.2",
     "react-dom": "17.0.2",
     "react-native": "^0.68.2",
