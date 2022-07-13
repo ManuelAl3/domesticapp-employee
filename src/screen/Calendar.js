@@ -16,6 +16,7 @@ import { useNavigation } from "@react-navigation/native";
 import { vw, vh } from "react-native-expo-viewport-units";
 import { useAuth } from "../context/auth-context";
 import { COLORS } from "../../config";
+import { showService } from "../services/services-services";
 
 let date = {};
 
@@ -95,6 +96,8 @@ export function DayCard() {
     showOrderEmployee(user.id).then(setOrders)
   },[]);
   const [orders, setOrders] = React.useState(null);
+  const [services, setServices] = React.useState(null);
+  const [servicesId, setServicesId] = React.useState(null);
   const [count, setCount] = React.useState(0);
   const [modalVisible, setModalVisible] = React.useState(false);
   const navigation = useNavigation();
@@ -117,12 +120,20 @@ export function DayCard() {
     navigation.navigate("ReportCalendar", { itemId: id })
   }
 
+  function getServces(id){
+    
+    setServicesId(id)
+    showService(id).then(setServices);
+    setModalVisible(true)
+  }
   return (
     <>
     <View style={style.card}>
     {
       orders ? (
         orders.length > 0 ? (
+          <>
+
           <View >
           
         <View style={{  flexDirection: "row", alignItems: 'center' }}>
@@ -155,8 +166,12 @@ export function DayCard() {
             
           </View>
         </View>
+        
       </View>
-   
+      <Pressable style={[styles.button, styles.buttonOpen]} onPress={()=>getServces(orders[count].id)}>
+        <Text style={styles.textStyle}>Ver más detalles</Text>
+      </Pressable>
+          </>
         
         ) : <Text style={style.text}>No se han añadido servicios</Text>
         
@@ -164,6 +179,7 @@ export function DayCard() {
         <Text style={style.text}>No se han añadido servicios</Text>
       )
     }
+
     <Modal
         animationType="slide"
         transparent={true}
@@ -177,21 +193,35 @@ export function DayCard() {
           {orders ? (
             orders.length > 0 ? (
            <>
-        <Text style={style.cardTitle}>{orders[count].start_date}</Text>
+           <View style={{backgroundColor: "#fff", borderRadius: 15, width: vw(60), padding: 10,}}>
+        <Text style={style.text}>{"Fecha: "+orders[count].start_date}</Text>
         {
           orders[count].workday === "Completa" ? (
-            <Text style={style.cardTitle}>{orders[count].service_time} - {parseInt((orders[count].service_time.split(":")[0]))+9+":"+(orders[count].service_time.split(":")[1])}</Text>
+            <Text style={style.text}>Hora: {orders[count].service_time} - {parseInt((orders[count].service_time.split(":")[0]))+9+":"+(orders[count].service_time.split(":")[1])}</Text>
           ) : orders[count].workday === "Media" ? (
-            <Text style={style.cardTitle}>{orders[count].service_time} - {(parseInt((orders[count].service_time.split(":")[0]))+4)+":"+(parseInt((orders[count].service_time.split(":")[1]))+30)}</Text>
+            <Text style={style.text}>{orders[count].service_time} - {(parseInt((orders[count].service_time.split(":")[0]))+4)+":"+(parseInt((orders[count].service_time.split(":")[1]))+30)}</Text>
           ) : orders[count].workday === "Hora" ? (
-            <Text style={style.cardTitle}>{orders[count].service_time} - {(parseInt((orders[count].service_time.split(":")[0]))+parseInt(orders[count].hours))+":"+(orders[count].service_time.split(":")[1])}</Text>
+            <Text style={style.text}>{orders[count].service_time} - {(parseInt((orders[count].service_time.split(":")[0]))+parseInt(orders[count].hours))+":"+(orders[count].service_time.split(":")[1])}</Text>
           ) : null
         }
-        <Text style={style.cardTitle}>Jornada: {orders[count].workday}</Text>
-        <Image style={{ width: 30, height: 30 }} source={orders[count].customer.image_url} />
-        <Text style={style.text}>{orders[count].customer.full_name}</Text>
-        <Text style={style.text}>{orders[count].category.category_name}</Text>
-        <Text style={style.text}>{orders[count].address}</Text>
+        <Text style={style.text}>Jornada: {orders[count].workday}</Text>
+        <Text style={style.text}>Brindar Alimento: {orders[count].supply_food}</Text>
+        
+        <Text style={style.text}>{"Cliente: "+orders[count].customer.full_name}</Text>
+        <Text style={style.text}>{"Servicio: "+orders[count].category.category_name}</Text>
+        <Text style={style.text}>{"Dirección: "+orders[count].address}</Text>
+        <Text style={style.text}>Tareas: </Text>
+        <View style={{marginVertical: 5, paddingLeft: 10,}}>
+        {
+          services ? (
+            services.map((service)=>(
+              <>
+              <Text style={style.text}>{"- "+service.service_name}</Text>
+              </>
+            ))
+          ) : null
+        }</View>
+        </View>
         <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={() => GoogleAddres(orders[count].address)}>
@@ -217,12 +247,13 @@ export function DayCard() {
           </View>
         </View>
       </Modal>
-      <Pressable style={[styles.button, styles.buttonOpen]} onPress={() => setModalVisible(true)}>
-        <Text style={styles.textStyle}>Ver más detalles</Text>
-      </Pressable>
+      
     </View>
+   
     </>
   );
+
+  
 }
 
 const style = StyleSheet.create({
