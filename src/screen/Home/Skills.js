@@ -28,7 +28,7 @@ function SkillsScreen({ navigation }) {
   }, [user]);
 
   const URL_ROUTE = () => {
-    Linking.openURL("https://www.google.com/");
+    Linking.openURL("https://domesticapp.com.co/nuevas-habilidades-del-empleado/");
   };
 
   
