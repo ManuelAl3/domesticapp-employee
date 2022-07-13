@@ -22,6 +22,7 @@ import { BASE_URI } from "../../../config";
 import axios, { post } from "axios";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+
  function  ServiceDamageScreen({ navigation}) {
   const { user } = useAuth();
   
@@ -35,7 +36,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
   const [image, setImage] = React.useState(null);
   const [text, onChangeText] = React.useState("");
   const URL_ROUTE_SOPORT = () => {
-    Linking.openURL("https://wa.me/52618237533");
+    Linking.openURL("https://wa.me/+18444684329?text=Hola,%20nececito%20ayuda");
   };
   const btnStyle = {
     height: 55,
@@ -89,6 +90,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
     });
   }
 
+  
+
   const createTwoButtonAlert = () =>
   Alert.alert(
     "¡Reporte enviado!",
@@ -122,6 +125,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
     setFecha(service.start_date)
     setModalVisible(!modalVisible);
   }
+
+  function MyContract(){
+    
+    Linking.openURL("https://domesticapp-storage.s3.us-east-2.amazonaws.com/pdf/Poliza.pdf");
+  }
+
   return (
     <>
       <BackTitleHeader title="Daños y Accidentes" />
@@ -168,21 +177,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
         <View style={styles.containerButton}>
           <TouchableOpacity
             style={btnStyle}
-            onPress={() => navigation.navigate("Insurance")}
+            onPress={MyContract}
           >
             <Text style={styles.textButton}>Ver Poliza de Seguros</Text>
           </TouchableOpacity>
         </View>
-        <View style={styles.containerButton}>
-          <TouchableOpacity
-            style={btnStyle}
-            onPress={() => navigation.navigate("JobSecurity")}
-          >
-            <Text style={styles.textButton}>
-              Ver Seguridad Laboral Empleados
-            </Text>
-          </TouchableOpacity>
-        </View>
+        
         <View style={styles.container}>
           <Pressable
             style={[styles.button, styles.buttonOpen]}

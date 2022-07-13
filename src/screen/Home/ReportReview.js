@@ -14,7 +14,7 @@ import * as Linking from "expo-linking";
 function ReportReview({ navigation }) {
   const [text, onChangeText] = React.useState("");
   const URL_ROUTE_SOPORT = () => {
-    Linking.openURL("https://wa.me/52618237533");
+    Linking.openURL("https://wa.me/+18444684329?text=Hola,%20nececito%20ayuda");
   };
   // Styles component UI Button
   const btnStyle = {
