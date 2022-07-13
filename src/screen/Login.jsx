@@ -5,6 +5,7 @@ import {
   Image,
   SafeAreaView,
   TouchableOpacity,
+  TextInput,
 } from "react-native";
 import React, { useState } from "react";
 import loginHome from "../assets/login/loginHome.png";
@@ -72,26 +73,23 @@ function LoginScreen() {
           backgroundColor: colors.blue,
         }}
       >
-        <AnimatedInput
-          placeholder="Correo"
-          valid={isValid}
-          errorText="Error"
-          onChangeText={handleEmailChange}
-          value={form.email}
-          styleLabel={{ fontWeight: "600", color: "white" }}
-          styleContent={{ marginBottom: 10 }}
-          styleBodyContent={{ borderBottomWidth: 1.5, marginTop: 10 }}
-        />
-        <AnimatedInput
-          placeholder="Contraseña"
-          valid={isValid}
-          errorText={errors}
-          onChangeText={handlePasswordChange}
-          value={form.password}
-          styleContent={{ marginTop: 10, fontSize: 8 }}
-          styleLabel={{ fontWeight: "600", color: "white"}}
-          styleBodyContent={{ borderBottomWidth: 1.5, fontSize: 8 }}
-        />
+      <Text>Correo</Text>
+      <TextInput 
+    style={styles.textInputStyle}
+    placeholderTextColor='white'
+    placeholder="user@mail.com"
+    underlineColorAndroid='black'
+    value={form.email}
+    onChangeText={handleEmailChange} />
+
+<Text>Contraseña</Text>
+      <TextInput 
+    style={styles.textInputStyle}
+    placeholderTextColor='white'
+    placeholder="password123"
+    underlineColorAndroid='black'
+    value={form.password}
+    onChangeText={handlePasswordChange} />
 
         <View style={styles.containerButton}>
           <TouchableOpacity style={btnStyle} onPress={handleSubmit}>
@@ -109,6 +107,11 @@ function LoginScreen() {
 export default LoginScreen;
 
 const styles = StyleSheet.create({
+  containerButton:{marginTop: 20,},
+  textInputStyle: {
+    paddingBottom: 5,
+    color: 'white',
+    },
   mainContainer: {
     flex: 1,
     backgroundColor: COLORS.lightGray,
