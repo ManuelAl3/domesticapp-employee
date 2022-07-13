@@ -5,5 +5,5 @@ export async function indexEmployeecategories() {
 }
 
 export async function showEmployeecategory(EmployeecategoryID) {
-  return await apiFetch(`employee_categories/${EmployeecategoryID}`);
+  return await apiFetch(`employee_cat/${EmployeecategoryID}`);
 }
