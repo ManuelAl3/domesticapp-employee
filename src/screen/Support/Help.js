@@ -56,29 +56,14 @@ const lastService = [
 function Help() {
   const { user } = useAuth();
   React.useEffect(() => {
-    showOrderEmployee(user.user_id).then(setOrders)
+    showOrderEmployee(user.id).then(setOrders)
   },[]);
   const [orders, setOrders] = React.useState(null);
 
   const URL_ROUTE_SOPORT = () => {
     Linking.openURL("https://wa.me/52618237533");
   };
-  const keyExtractor = (index) => index.toString();
-  const renderItem = ({ item }) => (
-    <ListItem key={item} bottomDivider containerStyle={styles.listStyle}>
-      <View key={item.id} style={styles.list}>
-        <Image style={{ width: 58, height: 58 }} source={item.img} />
-        <View style={{ flex: 1 }}>
-          <Text style={styles.textList}>{item.nombre}</Text>
-          <Text style={styles.textListDesc}>{item.descripcion}</Text>
-          <Text style={styles.textListWorks}>
-            {item.trabajos}{" "}
-            <Text style={styles.textListState}>{item.state}</Text>
-          </Text>
-        </View>
-      </View>
-    </ListItem>
-  );
+  
   const btnStyle = {
     height: 55,
     width: "80%",
@@ -97,6 +82,7 @@ function Help() {
           <View
             style={{
               marginLeft: 25,
+              marginTop: 20,
             }}
           >
             <Text style={styles.text}>
@@ -116,27 +102,27 @@ function Help() {
         {
           orders ? (
             orders.length > 0 ? (
-              orders.active ? (
+      
                 orders.map((order)=>(
-                  <>
+                  order.active ? (<>
                   <ListItem key={order.id} bottomDivider containerStyle={styles.listStyle}>
                     <View key={order.id} style={styles.list}>
-                      <Image style={{ width: 58, height: 58 }} source={{uri: order.customer.image_url}} />
+                      <Image style={{ width: 58, height: 58, borderRadius: 50, }} source={{uri: order.customer.image_url}} />
                       <View style={{ flex: 1 }}>
                         <Text style={styles.textList}>{order.customer.full_name}</Text>
                         <Text style={styles.textListDesc}>{order.category.category_name}</Text>
                         <Text style={styles.textListWorks}>
                           Activo
-                          <Text style={styles.textListState}>{item.state}</Text>
+                        
                         </Text>
                       </View>
                     </View>
                   </ListItem>
-                </>
+                </>) : null
+                  
                 ))   
               ) : <Text style={styles.title}>No hay servicios</Text>
             ) : <Text style={styles.title}>No hay servicios</Text>
-          ) : <Text style={styles.title}>No hay servicios</Text>
         }
         
         </View>
@@ -151,6 +137,7 @@ function Help() {
           <View
             style={{
               marginLeft: 25,
+              marginBottom: 10,
             }}
           >
             <Text style={styles.title}>Ultimos Servicios</Text>
@@ -160,25 +147,25 @@ function Help() {
         {
           orders ? (
             orders.length > 0 ? (
-              !orders.active ? (
                 orders.map((order)=>(
-                  <>
+                  !order.active ? ( <>
                   <ListItem key={order.id} bottomDivider containerStyle={styles.listStyle}>
                     <View key={order.id} style={styles.list}>
-                      <Image style={{ width: 58, height: 58 }} source={{uri: order.customer.image_url}} />
+                      <Image style={{ width: 58, height: 58, borderRadius: 50,}} source={{uri: order.customer.image_url}} />
                       <View style={{ flex: 1 }}>
                         <Text style={styles.textList}>{order.customer.full_name}</Text>
                         <Text style={styles.textListDesc}>{order.category.category_name}</Text>
                         <Text style={styles.textListWorks}>
                           Finalizado
-                          <Text style={styles.textListState}>{item.state}</Text>
+                          
                         </Text>
                       </View>
                     </View>
                   </ListItem>
-                </>
+                </>) : null
+                 
                 ))   
-              ) : <Text style={styles.title}>No hay servicios</Text>
+
             ) : <Text style={styles.title}>No hay servicios</Text>
           ) : <Text style={styles.title}>No hay servicios</Text>
         }
@@ -198,7 +185,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#E5E5E5",
   },
   listStyle: {
-    flex: 1,
+    
     backgroundColor: " #E5E5E5",
     width: 367,
     height: 105,
@@ -253,7 +240,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   stylesFlatList: {
-    flex: 1,
+  
     justifyContent: "center",
     alignItems: "center",
   },
