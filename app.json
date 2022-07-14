@@ -2,7 +2,7 @@
   "expo": {
     "name": "Domesticapp Empleados",
     "slug": "domesticapp",
-    "version": "2.1.782022",
+    "version": "2.2.07132022",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -26,7 +26,7 @@
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.domesticapp.domesticapp_employee",
-      "versionCode": 6
+      "versionCode": 7
     },
     "androidNavigationBar": {
       "visible": "immersive"
