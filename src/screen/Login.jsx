@@ -34,6 +34,7 @@ function LoginScreen() {
     backgroundColor: "#EC607E",
     borderRadius: 10,
     marginBottom: 16,
+    
   };
   function handleSubmit() {
     login(form).catch((error) => {
@@ -79,7 +80,7 @@ function LoginScreen() {
     textContentType="emailAddress"
     placeholderTextColor='white'
     placeholder="user@mail.com"
-    underlineColorAndroid='black'
+    underlineColorAndroid='white'
     value={form.email}
     keyboardType="email-address"
     onChangeText={handleEmailChange} />
@@ -90,13 +91,13 @@ function LoginScreen() {
     placeholderTextColor='white'
     placeholder="*****"
     secureTextEntry={true}
-    underlineColorAndroid='black'
+    underlineColorAndroid='white'
     value={form.password}
     onChangeText={handlePasswordChange} />
 
         <View style={styles.containerButton}>
           <TouchableOpacity style={btnStyle} onPress={handleSubmit}>
-            <Text style={styles.textButton}>Iniciar Sesión</Text>
+            <Text style={{color: 'white',}}>Iniciar Sesión</Text>
           </TouchableOpacity>
         </View>
         <Text style={styles.textFooter}>
@@ -110,6 +111,12 @@ function LoginScreen() {
 export default LoginScreen;
 
 const styles = StyleSheet.create({
+  textFooter:{
+    paddingBottom: 5,
+    color: 'white',
+    fontSize: 10,
+    fontWeight: '300'
+  },
   containerButton:{marginTop: 20, marginBottom: 25,},
   textInputStyle: {
     paddingBottom: 5,
