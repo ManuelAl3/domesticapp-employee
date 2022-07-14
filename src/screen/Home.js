@@ -25,7 +25,7 @@ function HomeScreen({ navigation }) {
         onPress={() => navigation.navigate(`${item.ruta}`, { itemId: item.id })}
       >
         <View style={styles.containerLogo}>
-          <View style={styles.containerLogo}>
+          <View >
             <Image style={{ width: 50, height: 50 }} source={item.img} />
           </View>
           <Text style={styles.textStyle}>{item.nombre}</Text>
@@ -69,6 +69,7 @@ function HomeScreen({ navigation }) {
               keyExtractor={keyExtractor}
               data={Dashboard}
               renderItem={renderItem}
+              
             />
           </View>
         </ScrollView>
@@ -88,37 +89,48 @@ const styles = StyleSheet.create({
     color: Colors.colorUserName,
   },
   stylesFlatList: {
-    alignItems: "center",
+    
     marginBottom: 10,
+    display: "flex",
+    justifyContent: "flex-start",
+    alignItems: "flex-start"
   },
   row: {
     flexWrap: "wrap",
     flexDirection: "row",
     width: "90%",
-    justifyContent: "space-between",
+    display: "flex",
+    justifyContent: "flex-start",
     marginLeft: 20,
+    alignItems: "flex-start"
   },
   containerLogo: {
     flex: 1,
-    justifyContent: "center",
+    display: "flex",
+    justifyContent: "flex-start",
     alignItems: "center",
+
   },
   logoContainer: {
     height: "30vh",
   },
   divider: {
     flex: 1,
-    alignItems: "center",
+    
   },
   containerB: {
-    flex: 1,
-    textAlign: "center",
-    backgroundColor: Colors.backgroundMain,
-    borderColor: Colors.black,
+    flex:1/3,
+    flexDirection: "column",
+    display: "flex",
+    justifyContent: "flex-start",
   },
   listStyle: {
     flex: 1,
     backgroundColor: Colors.backgroundMain,
+   
+    display: "flex",
+    justifyContent: "flex-start",
+    alignItems: "flex-start"
   },
   textStyle: {
     fontStyle: "normal",
