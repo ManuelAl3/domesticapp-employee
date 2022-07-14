@@ -115,7 +115,8 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
     color: 'white',
     fontSize: 10,
-    fontWeight: '300'
+    fontWeight: '300',
+    textAlign: 'center'
   },
   containerButton:{marginTop: 20, marginBottom: 25,},
   textInputStyle: {
