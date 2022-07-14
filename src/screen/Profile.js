@@ -19,10 +19,15 @@ import * as Linking from "expo-linking";
 import Sup from "../assets/Support/Sup.svg";
 import Logout from "../assets/Profile/logout.png";
 import { useAuth } from "../context/auth-context";
-
+import { showReviews } from "../services/reviews-service";
+import { vw, vh } from "react-native-expo-viewport-units";
 
 function ProfileScreen({ navigation }) {
   const {user, logout} = useAuth();
+  const [scores, setScores] = React.useState(null);
+  React.useEffect(()=>{
+    showReviews(user.id).then(setScores)
+  },[])
 
   const keyExtractor = (index) => index.toString();
   const renderItem = ({ item }) => (
@@ -45,12 +50,26 @@ function ProfileScreen({ navigation }) {
   function handleLogout() {
     logout();
 }
+
+let cal = 0;
+  if(scores){
+    if(scores.length > 0){
+
+    
+    scores.forEach((score)=>{
+      cal = score.score + cal
+    })
+    cal = cal / scores.length
+    cal = cal / 5
+    cal = cal*100;}
+  }
+
   return (
     <>
       <BackTitledHeader title="Menú" />
       <View style={styles.container}>
         <ScrollView>
-          <View>
+          <View >
             {user ? (
               <>
                 <View
@@ -101,18 +120,25 @@ function ProfileScreen({ navigation }) {
                     Asociada Activa y Autorizada
                   </Text>
                 </View>
-                <View>
-                  <Text
+                <View >
+                {
+                  scores ? (
+                    <Text
                     style={{
                       fontStyle: "normal",
                       fontWeight: "400",
                       fontSize: 16,
                       lineHeight: 26,
                       color: "#82868D",
+                      width: vw(100),
+                      
                     }}
                   >
-                    97% Calificaciones Positivas de todos tus Servicios
+                    {cal}% Calificaciones Positivas de todos tus Servicios
                   </Text>
+                  ) : null
+                }
+                 
                   <Text
                     style={{
                       fontStyle: "normal",
@@ -206,6 +232,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: Colors.backgroundMain,
+    
   },
   tinyLogo: {
     width: 50,
